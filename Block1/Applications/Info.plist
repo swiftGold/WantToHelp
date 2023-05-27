@@ -5,6 +5,7 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>sf-ui-text-regular.ttf</string>
+		<string>OfficinaSans-ExtraBold.ttf</string>
 	</array>
 	<key>CFBundleDisplayName</key>
 	<string>Хочу помочь</string>

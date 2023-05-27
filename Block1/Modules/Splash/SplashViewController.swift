@@ -7,8 +7,13 @@
 
 import UIKit
 
-class SplashViewController: UIViewController {
+protocol SplashViewControllerProtocol: AnyObject {
   
+}
+
+class SplashViewController: UIViewController {
+ 
+  // MARK: - UI
   private let logoImageView: UIImageView = {
     let imageView = UIImageView()
     imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -20,8 +25,9 @@ class SplashViewController: UIViewController {
   private let loadLabel: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
-    label.font = UIFont(name: "SFUIText-Regular", size: 13)
+    label.font = UIFont(name: Fonts.SFUIReg, size: 13)
     label.textAlignment = .center
+    label.textColor = .specialTitleGreyColor
     label.text = "Загрузка..."
     return label
   }()
@@ -33,32 +39,34 @@ class SplashViewController: UIViewController {
     return imageView
   }()
   
+  // MARK: - Variables
+  var presenter: SplashPresenterProtocol?
+  
+  // MARK: - Lifecycles
   override func viewDidLoad() {
     super.viewDidLoad()
     setupViewController()
-    routeAfterLoad()
     LoadingOverlay.shared.showOverlay(view: self.view)
     
     // TODO: - delete after
-    for family in UIFont.familyNames.sorted() {
-      let names = UIFont.fontNames(forFamilyName: family)
-      print("family : \(family) Font names : \(names)")
-    }
+//    for family in UIFont.familyNames.sorted() {
+//      let names = UIFont.fontNames(forFamilyName: family)
+//      print("family : \(family) Font names : \(names)")
+//    }
   }
 }
 
-private extension SplashViewController {
-  func routeAfterLoad() {
-    DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
-      guard let strongSelf = self else { return }
-      let viewController = ViewController()
-      viewController.modalPresentationStyle = .fullScreen
-      strongSelf.present(viewController, animated: true)
-    }
-  }
+// MARK: - SplashViewControllerProtocol impl
+extension SplashViewController: SplashViewControllerProtocol {
   
+}
+
+// MARK: - Private methods
+private extension SplashViewController {
   func setupViewController() {
-    view.backgroundColor = .splashScreenBackgroundColor
+    view.backgroundColor = .specialLightBlueBGColor
+    
+    presenter?.present()
     
     addSubviews()
     addConstraints()
