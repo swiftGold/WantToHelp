@@ -7,17 +7,12 @@
 
 import UIKit
 
-protocol SplashViewControllerProtocol: AnyObject {
-  
-}
-
 class SplashViewController: UIViewController {
- 
   // MARK: - UI
   private let logoImageView: UIImageView = {
     let imageView = UIImageView()
     imageView.translatesAutoresizingMaskIntoConstraints = false
-    imageView.image = UIImage(named: "logo")
+    imageView.image = UIImage(named: Images.logo)
     imageView.contentMode = .scaleAspectFit
     return imageView
   }()
@@ -35,38 +30,37 @@ class SplashViewController: UIViewController {
   private let simbirSoftLogoImageView: UIImageView = {
     let imageView = UIImageView()
     imageView.translatesAutoresizingMaskIntoConstraints = false
-    imageView.image = UIImage(named: "simbirSoft")
+    imageView.image = UIImage(named: Images.simbirSoft)
     return imageView
   }()
-  
-  // MARK: - Variables
-  var presenter: SplashPresenterProtocol?
   
   // MARK: - Lifecycles
   override func viewDidLoad() {
     super.viewDidLoad()
     setupViewController()
+    routeAfterLoad()
     LoadingOverlay.shared.showOverlay(view: self.view)
-    
     // TODO: - delete after
-//    for family in UIFont.familyNames.sorted() {
-//      let names = UIFont.fontNames(forFamilyName: family)
-//      print("family : \(family) Font names : \(names)")
-//    }
+    //    for family in UIFont.familyNames.sorted() {
+    //      let names = UIFont.fontNames(forFamilyName: family)
+    //      print("family : \(family) Font names : \(names)")
+    //    }
   }
-}
-
-// MARK: - SplashViewControllerProtocol impl
-extension SplashViewController: SplashViewControllerProtocol {
-  
 }
 
 // MARK: - Private methods
 private extension SplashViewController {
+  func routeAfterLoad() {
+    DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+      guard let strongSelf = self else { return }
+      let viewController = MainTabBarController()
+      viewController.modalPresentationStyle = .fullScreen
+      strongSelf.present(viewController, animated: false)
+    }
+  }
+  
   func setupViewController() {
     view.backgroundColor = .specialLightBlueBGColor
-    
-    presenter?.present()
     
     addSubviews()
     addConstraints()

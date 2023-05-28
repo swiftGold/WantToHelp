@@ -7,18 +7,19 @@
 
 import UIKit
 
-protocol CategoriesViewControllerProtocol: AnyObject {
-  func setupCollectionView(with models: [CategoryModel])
-}
-
 final class CategoriesViewController: UIViewController {
   // MARK: - UI
+  private lazy var barButtonItem = UIBarButtonItem(
+    image: UIImage(named: Images.tabBarBackButton),
+    style: .plain, target: self, action: #selector(didTapBarButton)
+  )
+  
   private lazy var collectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
     let collectionView = UICollectionView(frame: .zero,
                                           collectionViewLayout: layout
     )
-    layout.itemSize = CGSize(width: (UIScreen.main.bounds.width - 27) / 2 ,
+    layout.itemSize = CGSize(width: (UIScreen.main.bounds.width - 27) / 2,
                              height: 160
     )
     layout.minimumLineSpacing = 9
@@ -48,14 +49,28 @@ final class CategoriesViewController: UIViewController {
   }()
   
   // MARK: - Variables
-  var presenter: CategoriesPresenterProtocol?
   private var categoriesModel: [CategoryModel] = []
+  private let categoriesArray: [(String, String)] = [
+    (Images.childrens, "Дети"),
+    (Images.adult, "Взрослые"),
+    (Images.elderly, "Пожилые"),
+    (Images.animals, "Животные"),
+    (Images.events, "Мероприятия")
+  ]
   
   // MARK: - LifeCycles
   override func viewDidLoad() {
     super.viewDidLoad()
-    setupViewController()
+    navigationController?.isNavigationBarHidden = false
     setupNavBar()
+    setupViewController()
+    arrayMapping()
+  }
+  
+  // MARK: - Objc methods
+  @objc
+  private func didTapBarButton() {
+    exit(0)
   }
 }
 
@@ -69,18 +84,13 @@ extension CategoriesViewController: UICollectionViewDataSource {
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoriesCollectionViewCell", for: indexPath) as? CategoriesCollectionViewCell else { return UICollectionViewCell() }
+    guard let cell = collectionView.dequeueReusableCell(
+      withReuseIdentifier: "CategoriesCollectionViewCell",
+      for: indexPath) as? CategoriesCollectionViewCell else {
+      return UICollectionViewCell()
+    }
     cell.configureCell(with: categoriesModel[indexPath.row])
     return cell
-  }
-}
-
-// MARK: - CategoriesViewControllerProtocol impl
-extension CategoriesViewController: CategoriesViewControllerProtocol {
-  func setupCollectionView(with models: [CategoryModel]) {
-    print(#function)
-    categoriesModel = models
-    collectionView.reloadData()
   }
 }
 
@@ -88,20 +98,22 @@ extension CategoriesViewController: CategoriesViewControllerProtocol {
 private extension CategoriesViewController {
   func setupNavBar() {
     customNavBarTitle()
-    
+    navigationItem.leftBarButtonItem = barButtonItem
     let appearance = UINavigationBarAppearance()
-    appearance.configureWithOpaqueBackground()
     appearance.backgroundColor = UIColor.specialNavBarBGColor
-    navigationController?.navigationBar.barStyle = .black
     navigationController?.navigationBar.standardAppearance = appearance
     navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
-    navigationController?.navigationBar.tintColor = .white
-    navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+  }
+  
+  func arrayMapping() {
+    categoriesModel = categoriesArray.map {
+      CategoryModel(image: $0.0, title: $0.1)
+    }
   }
   
   func customNavBarTitle() {
     let label = UILabel()
-    label.text = "Помочь"
+    label.text = TabBarNames.categories
     label.font = UIFont(name: Fonts.OfficSanExtraBold, size: 21)
     label.textColor = .white
     navigationItem.titleView = label
@@ -109,8 +121,6 @@ private extension CategoriesViewController {
   
   func setupViewController() {
     view.backgroundColor = .white
-
-    presenter?.viewDidLoad()
     addSubviews()
     addConstraints()
   }
@@ -126,7 +136,7 @@ private extension CategoriesViewController {
       titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
       
-      collectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 17),
+      collectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
       collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
       collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)

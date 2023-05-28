@@ -4,5 +4,6 @@ target 'Block1' do
   use_frameworks!
 	
 	pod 'Alamofire'
+	pod 'SwiftLint'
 
 end

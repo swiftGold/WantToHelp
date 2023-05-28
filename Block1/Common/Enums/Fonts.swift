@@ -6,6 +6,6 @@
 //
 
 enum Fonts {
-    static let SFUIReg = "SFUIText-Regular"
-    static let OfficSanExtraBold = "OfficinaSansExtraBoldC"
+  static let SFUIReg = "SFUIText-Regular"
+  static let OfficSanExtraBold = "OfficinaSansExtraBoldC"
 }

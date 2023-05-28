@@ -7,8 +7,6 @@
 		<string>sf-ui-text-regular.ttf</string>
 		<string>OfficinaSans-ExtraBold.ttf</string>
 	</array>
-	<key>CFBundleDisplayName</key>
-	<string>Хочу помочь</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -26,5 +24,7 @@
 			</array>
 		</dict>
 	</dict>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>

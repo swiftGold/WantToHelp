@@ -8,7 +8,7 @@
 import UIKit
 
 final class CategoriesCollectionViewCell: UICollectionViewCell {
-// MARK: - UI
+  // MARK: - UI
   private let imageView: UIImageView = {
     let imageView = UIImageView()
     imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -34,7 +34,7 @@ final class CategoriesCollectionViewCell: UICollectionViewCell {
     fatalError("init(coder:) has not been implemented")
   }
   
-// MARK: - Methods
+  // MARK: - Methods
   func configureCell(with model: CategoryModel) {
     imageView.image = UIImage(named: model.image)
     titleLabel.text = model.title
@@ -58,7 +58,6 @@ private extension CategoriesCollectionViewCell {
     NSLayoutConstraint.activate([
       imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
       imageView.bottomAnchor.constraint(equalTo: titleLabel.topAnchor, constant: -32),
-      
       titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
       titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
       titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -14)
