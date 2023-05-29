@@ -1,7 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,10 +13,32 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="2wp-dX-5R2">
+                                <rect key="frame" x="73" y="197" width="247" height="74"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="74" id="Mmg-7I-xgF"/>
+                                    <constraint firstAttribute="width" constant="247" id="kM4-gP-kNF"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="simbirSoft" translatesAutoresizingMaskIntoConstraints="NO" id="jf3-Fk-cj4">
+                                <rect key="frame" x="138.66666666666666" y="788" width="116" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="16" id="aQs-74-elA"/>
+                                    <constraint firstAttribute="width" constant="116" id="w1p-Ai-Yie"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" red="0.93578702209999998" green="0.95209294560000002" blue="0.96680086850000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="jf3-Fk-cj4" secondAttribute="bottom" constant="48" id="0Gs-AW-NNN"/>
+                            <constraint firstItem="2wp-dX-5R2" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="1Id-HY-qXS"/>
+                            <constraint firstItem="jf3-Fk-cj4" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="6Zs-Z9-NaV"/>
+                            <constraint firstItem="2wp-dX-5R2" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" constant="197" id="dZZ-iW-hjD"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -22,4 +46,8 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="logo" width="251" height="77"/>
+        <image name="simbirSoft" width="116" height="16"/>
+    </resources>
 </document>
