@@ -39,7 +39,7 @@ final class MainTabBarController: UITabBarController {
     generateTabBar()
     setTabBarAppearance()
     setupController()
-//    self.selectedIndex = 2
+    self.selectedIndex = 2
     self.delegate = self
   }
   

@@ -41,10 +41,10 @@ class SplashViewController: UIViewController {
     routeAfterLoad()
     LoadingOverlay.shared.showOverlay(view: self.view)
     // TODO: - delete after
-    //    for family in UIFont.familyNames.sorted() {
-    //      let names = UIFont.fontNames(forFamilyName: family)
-    //      print("family : \(family) Font names : \(names)")
-    //    }
+//        for family in UIFont.familyNames.sorted() {
+//          let names = UIFont.fontNames(forFamilyName: family)
+//          print("family : \(family) Font names : \(names)")
+//        }
   }
 }
 

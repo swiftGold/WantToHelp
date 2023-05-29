@@ -28,6 +28,14 @@
 		1EDEC2002A22670F00339FF9 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDEC1FF2A22670F00339FF9 /* MainTabBarController.swift */; };
 		1EDEC2042A23AA4200339FF9 /* TabBarNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDEC2032A23AA4100339FF9 /* TabBarNames.swift */; };
 		1EDEC2062A23AB7000339FF9 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDEC2052A23AB7000339FF9 /* Images.swift */; };
+		1EDEC20A2A24971200339FF9 /* ChildsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDEC2092A24971200339FF9 /* ChildsViewController.swift */; };
+		1EDEC2132A24A00500339FF9 /* AdultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDEC2122A24A00500339FF9 /* AdultViewController.swift */; };
+		1EDEC2152A24A00E00339FF9 /* ElderlyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDEC2142A24A00E00339FF9 /* ElderlyViewController.swift */; };
+		1EDEC2172A24A01600339FF9 /* AnimalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDEC2162A24A01600339FF9 /* AnimalsViewController.swift */; };
+		1EDEC2192A24A01D00339FF9 /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDEC2182A24A01D00339FF9 /* EventsViewController.swift */; };
+		1EDEC21B2A24A80300339FF9 /* sf-ui-text-medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1EDEC21A2A24A80300339FF9 /* sf-ui-text-medium.ttf */; };
+		1EDEC21E2A24AF5400339FF9 /* ChildsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDEC21D2A24AF5400339FF9 /* ChildsCollectionViewCell.swift */; };
+		1EDEC2212A24C74B00339FF9 /* FullEventDescriptionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDEC2202A24C74B00339FF9 /* FullEventDescriptionVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +61,14 @@
 		1EDEC1FF2A22670F00339FF9 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		1EDEC2032A23AA4100339FF9 /* TabBarNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarNames.swift; sourceTree = "<group>"; };
 		1EDEC2052A23AB7000339FF9 /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
+		1EDEC2092A24971200339FF9 /* ChildsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildsViewController.swift; sourceTree = "<group>"; };
+		1EDEC2122A24A00500339FF9 /* AdultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdultViewController.swift; sourceTree = "<group>"; };
+		1EDEC2142A24A00E00339FF9 /* ElderlyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElderlyViewController.swift; sourceTree = "<group>"; };
+		1EDEC2162A24A01600339FF9 /* AnimalsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalsViewController.swift; sourceTree = "<group>"; };
+		1EDEC2182A24A01D00339FF9 /* EventsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
+		1EDEC21A2A24A80300339FF9 /* sf-ui-text-medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sf-ui-text-medium.ttf"; sourceTree = "<group>"; };
+		1EDEC21D2A24AF5400339FF9 /* ChildsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildsCollectionViewCell.swift; sourceTree = "<group>"; };
+		1EDEC2202A24C74B00339FF9 /* FullEventDescriptionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullEventDescriptionVC.swift; sourceTree = "<group>"; };
 		6A20C710CD9A151A63C120CD /* Pods-Block1.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Block1.debug.xcconfig"; path = "Target Support Files/Pods-Block1/Pods-Block1.debug.xcconfig"; sourceTree = "<group>"; };
 		8DD254E81BD3387B0EFC8003 /* Pods-Block1.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Block1.release.xcconfig"; path = "Target Support Files/Pods-Block1/Pods-Block1.release.xcconfig"; sourceTree = "<group>"; };
 		A634B7E3463693E8FE9E048F /* Pods_Block1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Block1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				1EDEC1A52A1F9D6700339FF9 /* sf-ui-text-regular.ttf */,
+				1EDEC21A2A24A80300339FF9 /* sf-ui-text-medium.ttf */,
 				1EDEC1D12A22014300339FF9 /* OfficinaSans-ExtraBold.ttf */,
 			);
 			path = Fonts;
@@ -143,6 +160,7 @@
 				1EDEC1EE2A2265C200339FF9 /* News */,
 				1EDEC1F52A22660600339FF9 /* Search */,
 				1EDEC1B52A20A0D100339FF9 /* Categories */,
+				1EDEC2112A249FE000339FF9 /* CategoryItems */,
 				1EDEC1F42A2265F500339FF9 /* History */,
 				1EDEC1F32A2265E200339FF9 /* Profile */,
 			);
@@ -244,6 +262,76 @@
 			path = MainTabBar;
 			sourceTree = "<group>";
 		};
+		1EDEC2082A2496F100339FF9 /* Childs */ = {
+			isa = PBXGroup;
+			children = (
+				1EDEC2092A24971200339FF9 /* ChildsViewController.swift */,
+				1EDEC21C2A24AF3C00339FF9 /* Cells */,
+			);
+			path = Childs;
+			sourceTree = "<group>";
+		};
+		1EDEC20D2A249F9E00339FF9 /* Adult */ = {
+			isa = PBXGroup;
+			children = (
+				1EDEC2122A24A00500339FF9 /* AdultViewController.swift */,
+			);
+			path = Adult;
+			sourceTree = "<group>";
+		};
+		1EDEC20E2A249FA800339FF9 /* Elderly */ = {
+			isa = PBXGroup;
+			children = (
+				1EDEC2142A24A00E00339FF9 /* ElderlyViewController.swift */,
+			);
+			path = Elderly;
+			sourceTree = "<group>";
+		};
+		1EDEC20F2A249FB300339FF9 /* Animals */ = {
+			isa = PBXGroup;
+			children = (
+				1EDEC2162A24A01600339FF9 /* AnimalsViewController.swift */,
+			);
+			path = Animals;
+			sourceTree = "<group>";
+		};
+		1EDEC2102A249FBC00339FF9 /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				1EDEC2182A24A01D00339FF9 /* EventsViewController.swift */,
+			);
+			path = Events;
+			sourceTree = "<group>";
+		};
+		1EDEC2112A249FE000339FF9 /* CategoryItems */ = {
+			isa = PBXGroup;
+			children = (
+				1EDEC2082A2496F100339FF9 /* Childs */,
+				1EDEC21F2A24C72700339FF9 /* FullEventDescription */,
+				1EDEC20D2A249F9E00339FF9 /* Adult */,
+				1EDEC20E2A249FA800339FF9 /* Elderly */,
+				1EDEC20F2A249FB300339FF9 /* Animals */,
+				1EDEC2102A249FBC00339FF9 /* Events */,
+			);
+			path = CategoryItems;
+			sourceTree = "<group>";
+		};
+		1EDEC21C2A24AF3C00339FF9 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				1EDEC21D2A24AF5400339FF9 /* ChildsCollectionViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		1EDEC21F2A24C72700339FF9 /* FullEventDescription */ = {
+			isa = PBXGroup;
+			children = (
+				1EDEC2202A24C74B00339FF9 /* FullEventDescriptionVC.swift */,
+			);
+			path = FullEventDescription;
+			sourceTree = "<group>";
+		};
 		4649130639467E1461E5C18C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -273,7 +361,6 @@
 				1E4913A02A17A92200ABF6B6 /* Frameworks */,
 				1E4913A12A17A92200ABF6B6 /* Resources */,
 				17AAC9137DF9A8E5BDF3C645 /* [CP] Embed Pods Frameworks */,
-				1EDEC2072A23CF1600339FF9 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -324,6 +411,7 @@
 			files = (
 				1EDEC1D22A22014300339FF9 /* OfficinaSans-ExtraBold.ttf in Resources */,
 				1E4913B32A17A92700ABF6B6 /* LaunchScreen.storyboard in Resources */,
+				1EDEC21B2A24A80300339FF9 /* sf-ui-text-medium.ttf in Resources */,
 				1EDEC1A62A1F9D6700339FF9 /* sf-ui-text-regular.ttf in Resources */,
 				1E4913B02A17A92700ABF6B6 /* Assets.xcassets in Resources */,
 			);
@@ -348,23 +436,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Block1/Pods-Block1-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
-		};
-		1EDEC2072A23CF1600339FF9 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "SWIFT_LINT=/usr/local/bin/swiftlint\n\nif [[ -e \"${SWIFT_LINT}\" ]]; then\n    echo \"[I] Found SwiftLint at ${SWIFT_LINT}\"\nelse\n    echo \"[!] Local SwiftLint not found at ${SWIFT_LINT}\"\n    export SWIFT_LINT=${PWD}/Pods/SwiftLint/swiftlint\n    echo \"[I] Try to using SwiftLint from cocoapods at ${SWIFT_LINT}\"\nfi\n\nif [[ ! -e \"${SWIFT_LINT}\" ]]; then\n    echo \"[!] SwifLint is not installed.\"\n    echo \"[!] Expected location is '${SWIFT_LINT}'\"\n    echo \"[!] Please install it. eg. 'brew install swiftlint'\"\n    exit 1\nfi\n\necho \"[I] SwiftLint version: $(${SWIFT_LINT} version)\"\n\ngit ls-files --other --modified --exclude-standard -- \"*.swift\" | while read filename; do\n    $SWIFT_LINT lint --path \"$filename\";\n    $SWIFT_LINT autocorrect --path \"$filename\";\ndone\n";
 		};
 		A91BF8E1161B0855E4366D6B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -397,12 +468,19 @@
 			files = (
 				1EDEC1B02A1FB17E00339FF9 /* CategoriesViewController.swift in Sources */,
 				1EDEC1F92A22663100339FF9 /* SearchViewController.swift in Sources */,
+				1EDEC2212A24C74B00339FF9 /* FullEventDescriptionVC.swift in Sources */,
 				1EDEC1C32A20A9E700339FF9 /* CategoryModel.swift in Sources */,
+				1EDEC2132A24A00500339FF9 /* AdultViewController.swift in Sources */,
 				1EDEC1FB2A22664400339FF9 /* NewsViewController.swift in Sources */,
 				1EDEC1CC2A21FDE500339FF9 /* Fonts.swift in Sources */,
 				1EDEC2042A23AA4200339FF9 /* TabBarNames.swift in Sources */,
 				1EDEC1F72A22662600339FF9 /* HistoryViewController.swift in Sources */,
 				1EDEC1FD2A22665000339FF9 /* ProfileViewController.swift in Sources */,
+				1EDEC2152A24A00E00339FF9 /* ElderlyViewController.swift in Sources */,
+				1EDEC2172A24A01600339FF9 /* AnimalsViewController.swift in Sources */,
+				1EDEC2192A24A01D00339FF9 /* EventsViewController.swift in Sources */,
+				1EDEC20A2A24971200339FF9 /* ChildsViewController.swift in Sources */,
+				1EDEC21E2A24AF5400339FF9 /* ChildsCollectionViewCell.swift in Sources */,
 				1E4913AB2A17A92200ABF6B6 /* SplashViewController.swift in Sources */,
 				1E4913A72A17A92200ABF6B6 /* AppDelegate.swift in Sources */,
 				1E4913A92A17A92200ABF6B6 /* SceneDelegate.swift in Sources */,

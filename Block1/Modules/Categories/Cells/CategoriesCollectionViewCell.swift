@@ -50,17 +50,17 @@ private extension CategoriesCollectionViewCell {
   }
   
   func addSubviews() {
-    addSubview(imageView)
-    addSubview(titleLabel)
+    contentView.addSubview(imageView)
+    contentView.addSubview(titleLabel)
   }
   
   func setConstraints() {
     NSLayoutConstraint.activate([
-      imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+      imageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
       imageView.bottomAnchor.constraint(equalTo: titleLabel.topAnchor, constant: -32),
-      titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-      titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-      titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -14)
+      titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+      titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+      titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -14)
     ])
   }
 }

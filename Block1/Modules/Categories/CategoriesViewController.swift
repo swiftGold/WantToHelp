@@ -58,6 +58,14 @@ final class CategoriesViewController: UIViewController {
     (Images.events, "Мероприятия")
   ]
   
+  private let CategoryViewsControllers = [
+    ChildsViewController(),
+    AdultViewController(),
+    ElderlyViewController(),
+    AnimalsViewController(),
+    EventsViewController()
+  ]
+  
   // MARK: - LifeCycles
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -75,7 +83,14 @@ final class CategoriesViewController: UIViewController {
 }
 
 // MARK: - UICollectionViewDelegate impl
-extension CategoriesViewController: UICollectionViewDelegate {}
+extension CategoriesViewController: UICollectionViewDelegate {
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    let index = indexPath.row
+    let viewController = CategoryViewsControllers[index]
+    navigationController?.modalPresentationStyle = .fullScreen
+    navigationController?.pushViewController(viewController, animated: true)
+  }
+}
 
 // MARK: - UICollectionViewDataSource impl
 extension CategoriesViewController: UICollectionViewDataSource {
