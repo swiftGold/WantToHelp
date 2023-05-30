@@ -11,7 +11,6 @@ class SplashViewController: UIViewController {
   // MARK: - UI
   private let logoImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.translatesAutoresizingMaskIntoConstraints = false
     imageView.image = UIImage(named: Images.logo)
     imageView.contentMode = .scaleAspectFit
     return imageView
@@ -19,7 +18,6 @@ class SplashViewController: UIViewController {
   
   private let loadLabel: UILabel = {
     let label = UILabel()
-    label.translatesAutoresizingMaskIntoConstraints = false
     label.font = UIFont(name: Fonts.SFUIReg, size: 13)
     label.textAlignment = .center
     label.textColor = .specialTitleGreyColor
@@ -29,7 +27,6 @@ class SplashViewController: UIViewController {
   
   private let simbirSoftLogoImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.translatesAutoresizingMaskIntoConstraints = false
     imageView.image = UIImage(named: Images.simbirSoft)
     return imageView
   }()
@@ -67,9 +64,9 @@ private extension SplashViewController {
   }
   
   func addSubviews() {
-    view.addSubview(logoImageView)
-    view.addSubview(loadLabel)
-    view.addSubview(simbirSoftLogoImageView)
+    view.myAddSubView(logoImageView)
+    view.myAddSubView(loadLabel)
+    view.myAddSubView(simbirSoftLogoImageView)
   }
   
   func addConstraints() {

@@ -39,4 +39,5 @@ enum Images {
   static let hands = "hands"
   static let tools = "tools"
   static let coins = "coins"
+  static let verticalSeparator = "separator2"
 }

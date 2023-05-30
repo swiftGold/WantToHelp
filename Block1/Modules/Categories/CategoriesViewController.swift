@@ -31,7 +31,6 @@ final class CategoriesViewController: UIViewController {
     collectionView.delegate = self
     collectionView.dataSource = self
     collectionView.showsVerticalScrollIndicator = false
-    collectionView.translatesAutoresizingMaskIntoConstraints = false
     collectionView.register(CategoriesCollectionViewCell.self,
                             forCellWithReuseIdentifier: "CategoriesCollectionViewCell"
     )
@@ -40,7 +39,6 @@ final class CategoriesViewController: UIViewController {
   
   private let titleLabel: UILabel = {
     let label = UILabel()
-    label.translatesAutoresizingMaskIntoConstraints = false
     label.font = UIFont(name: Fonts.SFUIReg, size: 17)
     label.text = "Выберите категорию помощи"
     label.textAlignment = .center
@@ -141,8 +139,8 @@ private extension CategoriesViewController {
   }
   
   func addSubviews() {
-    view.addSubview(collectionView)
-    view.addSubview(titleLabel)
+    view.myAddSubView(collectionView)
+    view.myAddSubView(titleLabel)
   }
   
   func addConstraints() {

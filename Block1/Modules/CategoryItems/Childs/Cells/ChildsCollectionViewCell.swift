@@ -11,7 +11,6 @@ final class ChildsCollectionViewCell: UICollectionViewCell {
   // MARK: - UI
   private let mainImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.translatesAutoresizingMaskIntoConstraints = false
     imageView.image = UIImage(named: "childImage1")
     imageView.contentMode = .scaleToFill
     return imageView
@@ -19,14 +18,12 @@ final class ChildsCollectionViewCell: UICollectionViewCell {
   
   private let shapeFormImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.translatesAutoresizingMaskIntoConstraints = false
     imageView.image = UIImage(named: Images.shapeForm)
     return imageView
   }()
   
   private let titleLabel: UILabel = {
     let label = UILabel()
-    label.translatesAutoresizingMaskIntoConstraints = false
     label.font = UIFont(name: Fonts.OfficSanExtraBold, size: 21)
     label.text = "Текст заголовка"
     label.textAlignment = .center
@@ -37,14 +34,12 @@ final class ChildsCollectionViewCell: UICollectionViewCell {
   
   private let separatorImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.translatesAutoresizingMaskIntoConstraints = false
     imageView.image = UIImage(named: Images.heartSeparator)
     return imageView
   }()
   
   private let descriptionLabel: UILabel = {
     let label = UILabel()
-    label.translatesAutoresizingMaskIntoConstraints = false
     label.font = UIFont(name: Fonts.SFUIReg, size: 15)
     label.text = "Текст описания"
     label.textAlignment = .center
@@ -55,7 +50,6 @@ final class ChildsCollectionViewCell: UICollectionViewCell {
   
   private let bottomView: UIView = {
     let view = UIView()
-    view.translatesAutoresizingMaskIntoConstraints = false
     view.backgroundColor = .specialNavBarBGColor
     view.layer.cornerRadius = 5
     view.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
@@ -64,14 +58,12 @@ final class ChildsCollectionViewCell: UICollectionViewCell {
   
   private let diaryImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.translatesAutoresizingMaskIntoConstraints = false
     imageView.image = UIImage(named: Images.diary)
     return imageView
   }()
   
   private let diaryLabel: UILabel = {
     let label = UILabel()
-    label.translatesAutoresizingMaskIntoConstraints = false
     label.font = UIFont(name: Fonts.SFUIMed, size: 11)
     label.text = "Текст рассписания"
     label.textAlignment = .left
@@ -81,7 +73,6 @@ final class ChildsCollectionViewCell: UICollectionViewCell {
   
   private let diaryStackView: UIStackView = {
     let stackView = UIStackView()
-    stackView.translatesAutoresizingMaskIntoConstraints = false
     stackView.spacing = 10
     stackView.distribution = .fill
     stackView.alignment = .center
@@ -115,13 +106,13 @@ private extension ChildsCollectionViewCell {
     diaryStackView.addArrangedSubview(diaryImageView)
     diaryStackView.addArrangedSubview(diaryLabel)
     
-    contentView.addSubview(mainImageView)
-    mainImageView.addSubview(shapeFormImageView)
-    contentView.addSubview(titleLabel)
-    contentView.addSubview(separatorImageView)
-    contentView.addSubview(descriptionLabel)
-    contentView.addSubview(bottomView)
-    bottomView.addSubview(diaryStackView)
+    contentView.myAddSubView(mainImageView)
+    mainImageView.myAddSubView(shapeFormImageView)
+    contentView.myAddSubView(titleLabel)
+    contentView.myAddSubView(separatorImageView)
+    contentView.myAddSubView(descriptionLabel)
+    contentView.myAddSubView(bottomView)
+    bottomView.myAddSubView(diaryStackView)
   }
   
   func setConstraints() {

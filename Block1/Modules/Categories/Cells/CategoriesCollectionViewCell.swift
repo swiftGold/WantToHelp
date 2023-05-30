@@ -11,14 +11,12 @@ final class CategoriesCollectionViewCell: UICollectionViewCell {
   // MARK: - UI
   private let imageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.translatesAutoresizingMaskIntoConstraints = false
     imageView.clipsToBounds = true
     return imageView
   }()
   
   private let titleLabel: UILabel = {
     let label = UILabel()
-    label.translatesAutoresizingMaskIntoConstraints = false
     label.font = UIFont(name: Fonts.OfficSanExtraBold, size: 15)
     label.textAlignment = .center
     label.textColor = .specialGreenColor
@@ -50,8 +48,8 @@ private extension CategoriesCollectionViewCell {
   }
   
   func addSubviews() {
-    contentView.addSubview(imageView)
-    contentView.addSubview(titleLabel)
+    contentView.myAddSubView(imageView)
+    contentView.myAddSubView(titleLabel)
   }
   
   func setConstraints() {

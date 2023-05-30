@@ -35,7 +35,6 @@ class ChildsViewController: UIViewController {
   
   private let toggleStackView: UIStackView = {
     let stackView = UIStackView()
-    stackView.translatesAutoresizingMaskIntoConstraints = false
     stackView.spacing = 0
     stackView.distribution = .fillEqually
     stackView.layer.borderWidth = 1
@@ -61,7 +60,6 @@ class ChildsViewController: UIViewController {
     collectionView.delegate = self
     collectionView.dataSource = self
     collectionView.showsVerticalScrollIndicator = false
-    collectionView.translatesAutoresizingMaskIntoConstraints = false
     collectionView.register(ChildsCollectionViewCell.self,
                             forCellWithReuseIdentifier: "ChildsCollectionViewCell"
     )
@@ -136,8 +134,8 @@ private extension ChildsViewController {
   func addSubviews() {
     toggleStackView.addArrangedSubview(currentEventsButton)
     toggleStackView.addArrangedSubview(finishedEventsButton)
-    view.addSubview(toggleStackView)
-    view.addSubview(collectionView)
+    view.myAddSubView(toggleStackView)
+    view.myAddSubView(collectionView)
   }
   
   func addConstraints() {

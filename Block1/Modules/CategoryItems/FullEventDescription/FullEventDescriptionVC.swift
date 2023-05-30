@@ -11,9 +11,20 @@ class FullEventDescriptionVC: UIViewController {
   //MARK: - UI
   private lazy var barButtonItem = UIBarButtonItem(image: UIImage(named: Images.share), style: .plain, target: self, action: #selector(didTapBarButton))
   
+  private let scrollView: UIScrollView = {
+    let scrollView = UIScrollView()
+    scrollView.backgroundColor = .clear
+    return scrollView
+  }()
+  
+  private let backgroundView: UIView = {
+    let backgroundView = UIView()
+    backgroundView.backgroundColor = .clear
+    return backgroundView
+  }()
+  
   private let titleLabel: UILabel = {
     let label = UILabel()
-    label.translatesAutoresizingMaskIntoConstraints = false
     label.font = UIFont(name: Fonts.OfficSanExtraBold, size: 21)
     label.text = "Спонсоры отремонтируют школу-интернат"
     label.textAlignment = .left
@@ -24,14 +35,12 @@ class FullEventDescriptionVC: UIViewController {
   
   private let diaryImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.translatesAutoresizingMaskIntoConstraints = false
     imageView.image = UIImage(named: Images.greyDiary)
     return imageView
   }()
   
   private let diaryLabel: UILabel = {
     let label = UILabel()
-    label.translatesAutoresizingMaskIntoConstraints = false
     label.font = UIFont(name: Fonts.SFUIMed, size: 11)
     label.text = "Текст рассписания"
     label.textAlignment = .left
@@ -41,7 +50,6 @@ class FullEventDescriptionVC: UIViewController {
   
   private let diaryStackView: UIStackView = {
     let stackView = UIStackView()
-    stackView.translatesAutoresizingMaskIntoConstraints = false
     stackView.spacing = 10
     stackView.distribution = .fill
     stackView.alignment = .leading
@@ -50,7 +58,6 @@ class FullEventDescriptionVC: UIViewController {
   
   private let organizationNameLabel: UILabel = {
     let label = UILabel()
-    label.translatesAutoresizingMaskIntoConstraints = false
     label.font = UIFont(name: Fonts.SFUIReg, size: 11)
     label.text = "Благотворительный фонд «Счастливый Мир»"
     label.textAlignment = .left
@@ -61,7 +68,6 @@ class FullEventDescriptionVC: UIViewController {
   
   private let adressLabel: UILabel = {
     let label = UILabel()
-    label.translatesAutoresizingMaskIntoConstraints = false
     label.font = UIFont(name: Fonts.SFUIReg, size: 15)
     label.text = "Санкт-Петербург, Кирочная улица, д. 50А, каб. 208"
     label.textAlignment = .left
@@ -72,14 +78,12 @@ class FullEventDescriptionVC: UIViewController {
   
   private let adressImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.translatesAutoresizingMaskIntoConstraints = false
     imageView.image = UIImage(named: Images.nav)
     return imageView
   }()
   
   private let adressStackView: UIStackView = {
     let stackView = UIStackView()
-    stackView.translatesAutoresizingMaskIntoConstraints = false
     stackView.spacing = 10
     stackView.distribution = .fill
     stackView.alignment = .leading
@@ -88,7 +92,6 @@ class FullEventDescriptionVC: UIViewController {
   
   private let firstPhoneLabel: UILabel = {
     let label = UILabel()
-    label.translatesAutoresizingMaskIntoConstraints = false
     label.font = UIFont(name: Fonts.SFUIReg, size: 15)
     label.text = "+7 (937) 037 37-73"
     label.textAlignment = .left
@@ -98,7 +101,6 @@ class FullEventDescriptionVC: UIViewController {
   
   private let secondPhoneLabel: UILabel = {
     let label = UILabel()
-    label.translatesAutoresizingMaskIntoConstraints = false
     label.font = UIFont(name: Fonts.SFUIReg, size: 15)
     label.text = "+7 (937) 016 16-16"
     label.textAlignment = .left
@@ -108,7 +110,6 @@ class FullEventDescriptionVC: UIViewController {
   
   private let phoneNumbersStackView: UIStackView = {
     let stackView = UIStackView()
-    stackView.translatesAutoresizingMaskIntoConstraints = false
     stackView.axis = .vertical
     stackView.spacing = 3
     stackView.distribution = .fill
@@ -118,14 +119,12 @@ class FullEventDescriptionVC: UIViewController {
   
   private let phoneImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.translatesAutoresizingMaskIntoConstraints = false
     imageView.image = UIImage(named: Images.phone)
     return imageView
   }()
   
   private let phoneStackView: UIStackView = {
     let stackView = UIStackView()
-    stackView.translatesAutoresizingMaskIntoConstraints = false
     stackView.spacing = 10
     stackView.distribution = .fill
     stackView.alignment = .leading
@@ -134,14 +133,12 @@ class FullEventDescriptionVC: UIViewController {
   
   private let mailImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.translatesAutoresizingMaskIntoConstraints = false
     imageView.image = UIImage(named: Images.mail)
     return imageView
   }()
   
   private let mailLabel: UILabel = {
     let label = UILabel()
-    label.translatesAutoresizingMaskIntoConstraints = false
     label.font = UIFont(name: Fonts.SFUIReg, size: 15)
     label.text = "У вас есть вопросы?"
     label.textAlignment = .left
@@ -160,7 +157,6 @@ class FullEventDescriptionVC: UIViewController {
   
   private let mailStackView: UIStackView = {
     let stackView = UIStackView()
-    stackView.translatesAutoresizingMaskIntoConstraints = false
     stackView.spacing = 10
     stackView.distribution = .fill
     stackView.alignment = .leading
@@ -169,7 +165,6 @@ class FullEventDescriptionVC: UIViewController {
   
   private let bigPhotoImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.translatesAutoresizingMaskIntoConstraints = false
     imageView.image = UIImage(named: "image1")
     imageView.contentMode = .scaleToFill
     return imageView
@@ -177,7 +172,6 @@ class FullEventDescriptionVC: UIViewController {
   
   private let firstSmallPhotoImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.translatesAutoresizingMaskIntoConstraints = false
     imageView.image = UIImage(named: "image2")
     imageView.contentMode = .scaleToFill
     return imageView
@@ -185,7 +179,6 @@ class FullEventDescriptionVC: UIViewController {
   
   private let secondSmallPhotoImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.translatesAutoresizingMaskIntoConstraints = false
     imageView.image = UIImage(named: "image3")
     imageView.contentMode = .scaleToFill
     return imageView
@@ -193,7 +186,6 @@ class FullEventDescriptionVC: UIViewController {
   
   private let smallPhotosStackView: UIStackView = {
     let stackView = UIStackView()
-    stackView.translatesAutoresizingMaskIntoConstraints = false
     stackView.axis = .vertical
     stackView.spacing = 10
     stackView.distribution = .fillEqually
@@ -202,7 +194,6 @@ class FullEventDescriptionVC: UIViewController {
   
   private let photosStackView: UIStackView = {
     let stackView = UIStackView()
-    stackView.translatesAutoresizingMaskIntoConstraints = false
     stackView.spacing = 10
     stackView.distribution = .fill
     return stackView
@@ -210,7 +201,6 @@ class FullEventDescriptionVC: UIViewController {
   
   private let descriptionLabel: UILabel = {
     let label = UILabel()
-    label.translatesAutoresizingMaskIntoConstraints = false
     label.font = UIFont(name: Fonts.SFUIReg, size: 15)
     label.text = "Участники и болельщики смогли весело и активно провести время на «Петербургском благотворительном марафоне» и при этом финансово поучаствовать в помощи детям. Участники и болельщики смогли весело и активно провести время на «Петербургском благотворительном марафоне» и при этом финансово поучаствовать в помощи детям."
     label.textAlignment = .left
@@ -230,59 +220,51 @@ class FullEventDescriptionVC: UIViewController {
   
   private let mainStackView: UIStackView = {
     let stackView = UIStackView()
-    stackView.spacing = 1
+    stackView.spacing = 10
     stackView.axis = .vertical
     stackView.alignment = .top
     stackView.distribution = .fillProportionally
-    stackView.translatesAutoresizingMaskIntoConstraints = false
     return stackView
   }()
   
   private let bottomParticipantsView: UIView = {
     let view = UIView()
-    view.translatesAutoresizingMaskIntoConstraints = false
     view.backgroundColor = .specialCollectionViewBGColor
     return view
   }()
   
   private let photo1ImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.translatesAutoresizingMaskIntoConstraints = false
     imageView.image = UIImage(named: Images.photo1)
     return imageView
   }()
   
   private let photo2ImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.translatesAutoresizingMaskIntoConstraints = false
     imageView.image = UIImage(named: Images.photo2)
     return imageView
   }()
   
   private let photo3ImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.translatesAutoresizingMaskIntoConstraints = false
     imageView.image = UIImage(named: Images.photo3)
     return imageView
   }()
   
   private let photo4ImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.translatesAutoresizingMaskIntoConstraints = false
     imageView.image = UIImage(named: Images.photo4)
     return imageView
   }()
   
   private let photo5ImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.translatesAutoresizingMaskIntoConstraints = false
     imageView.image = UIImage(named: Images.photo5)
     return imageView
   }()
   
   private let bottomPhotosStackView: UIStackView = {
     let stackView = UIStackView()
-    stackView.translatesAutoresizingMaskIntoConstraints = false
     stackView.spacing = -5
     stackView.distribution = .fillEqually
     return stackView
@@ -290,7 +272,6 @@ class FullEventDescriptionVC: UIViewController {
   
   private let participantCountLabel: UILabel = {
     let label = UILabel()
-    label.translatesAutoresizingMaskIntoConstraints = false
     label.font = UIFont(name: Fonts.SFUIMed, size: 13)
     label.text = "+102"
     label.textAlignment = .left
@@ -298,143 +279,193 @@ class FullEventDescriptionVC: UIViewController {
     return label
   }()
   
-  private let bottomButtonsView: UIView = {
-    let view = UIView()
-    view.translatesAutoresizingMaskIntoConstraints = false
-    view.backgroundColor = .specialBottomViewColor
-    return view
-  }()
+//  private let bottomButtonsView: UIView = {
+//    let view = UIView()
+//    view.backgroundColor = .specialBottomViewColor
+//    return view
+//  }()
+//
+//  private let shirtImageView: UIImageView = {
+//    let imageView = UIImageView()
+//    imageView.image = UIImage(named: Images.shirt)?.withRenderingMode(.alwaysTemplate)
+//    imageView.tintColor = .specialNavBarBGColor
+//    return imageView
+//  }()
+//
+//  private let shirtLabel: UILabel = {
+//    let label = UILabel()
+//    label.font = UIFont(name: Fonts.SFUIMed, size: 10)
+//    label.text = "Помочь \n вещами"
+//    label.textAlignment = .center
+//    label.textColor = .specialSublabelColor
+//    label.numberOfLines = 0
+//    return label
+//  }()
+//
+//  private let shirtStackView: UIStackView = {
+//    let stackView = UIStackView()
+//    stackView.spacing = 5
+//    stackView.axis = .vertical
+//    stackView.distribution = .fill
+//    stackView.alignment = .center
+//    return stackView
+//  }()
+//
+//  private let handsImageView: UIImageView = {
+//    let imageView = UIImageView()
+//    imageView.image = UIImage(named: Images.hands)?.withRenderingMode(.alwaysTemplate)
+//    imageView.tintColor = .specialNavBarBGColor
+//    return imageView
+//  }()
+//
+//  private let handsLabel: UILabel = {
+//    let label = UILabel()
+//    label.font = UIFont(name: Fonts.SFUIMed, size: 10)
+//    label.text = "Стать \n волонтером"
+//    label.textAlignment = .center
+//    label.textColor = .specialSublabelColor
+//    label.numberOfLines = 0
+//    return label
+//  }()
+//
+//  private let handsStackView: UIStackView = {
+//    let stackView = UIStackView()
+//    stackView.spacing = 5
+//    stackView.axis = .vertical
+//    stackView.distribution = .fill
+//    stackView.alignment = .center
+//    return stackView
+//  }()
+//
+//  private let toolsImageView: UIImageView = {
+//    let imageView = UIImageView()
+//    imageView.image = UIImage(named: Images.tools)?.withRenderingMode(.alwaysTemplate)
+//    imageView.tintColor = .specialNavBarBGColor
+//    return imageView
+//  }()
+//
+//  private let toolsLabel: UILabel = {
+//    let label = UILabel()
+//    label.font = UIFont(name: Fonts.SFUIMed, size: 10)
+//    label.text = "Проф.\n помощь"
+//    label.textAlignment = .center
+//    label.textColor = .specialSublabelColor
+//    label.numberOfLines = 0
+//    return label
+//  }()
+//
+//  private let toolsStackView: UIStackView = {
+//    let stackView = UIStackView()
+//    stackView.spacing = 5
+//    stackView.axis = .vertical
+//    stackView.distribution = .fill
+//    stackView.alignment = .center
+//    return stackView
+//  }()
+//
+//  private let cashImageView: UIImageView = {
+//    let imageView = UIImageView()
+//    imageView.image = UIImage(named: Images.coins)?.withRenderingMode(.alwaysTemplate)
+//    imageView.tintColor = .specialNavBarBGColor
+//    return imageView
+//  }()
+//
+//  private let cashLabel: UILabel = {
+//    let label = UILabel()
+//    label.font = UIFont(name: Fonts.SFUIMed, size: 10)
+//    label.text = "Помочь \n деньгами"
+//    label.textAlignment = .center
+//    label.textColor = .specialSublabelColor
+//    label.numberOfLines = 0
+//    return label
+//  }()
+//
+//  private let cashStackView: UIStackView = {
+//    let stackView = UIStackView()
+//    stackView.spacing = 5
+//    stackView.axis = .vertical
+//    stackView.distribution = .fill
+//    stackView.alignment = .center
+//    return stackView
+//  }()
+//
+//  private let bottomIconsStackView: UIStackView = {
+//    let stackView = UIStackView()
+//    stackView.spacing = 0
+//    stackView.distribution = .fillEqually
+//    return stackView
+//  }()
+//
+//  private lazy var shirtButton: UIButton = {
+//    let button = UIButton(type: .system)
+//    button.addTarget(self, action: #selector(shirtButtonTapped), for: .touchUpInside)
+//    button.backgroundColor = .clear
+//    return button
+//  }()
+//
+//  private lazy var handsButton: UIButton = {
+//    let button = UIButton(type: .system)
+//    button.addTarget(self, action: #selector(handsButtonTapped), for: .touchUpInside)
+//    button.backgroundColor = .clear
+//    return button
+//  }()
+//
+//  private lazy var toolsButton: UIButton = {
+//    let button = UIButton(type: .system)
+//    button.addTarget(self, action: #selector(toolsButtonTapped), for: .touchUpInside)
+//    button.backgroundColor = .clear
+//    return button
+//  }()
+//
+//  private lazy var cashButton: UIButton = {
+//    let button = UIButton(type: .system)
+//    button.addTarget(self, action: #selector(cashButtonTapped), for: .touchUpInside)
+//    button.backgroundColor = .clear
+//    return button
+//  }()
+//
+//  private let bottomButtonsStackView: UIStackView = {
+//    let stackView = UIStackView()
+//    stackView.spacing = 3
+//    stackView.distribution = .fillEqually
+//    return stackView
+//  }()
+//
+//  private let separatorImageView1: UIImageView = {
+//    let imageView = UIImageView()
+//    imageView.image = UIImage(named: Images.verticalSeparator)
+//    return imageView
+//  }()
+//
+//  private let separatorImageView2: UIImageView = {
+//    let imageView = UIImageView()
+//    imageView.image = UIImage(named: Images.verticalSeparator)
+//    return imageView
+//  }()
+//
+//  private let separatorImageView3: UIImageView = {
+//    let imageView = UIImageView()
+//    imageView.image = UIImage(named: Images.verticalSeparator)
+//    return imageView
+//  }()
   
-  private let shirtImageView: UIImageView = {
-    let imageView = UIImageView()
-    imageView.translatesAutoresizingMaskIntoConstraints = false
-    imageView.image = UIImage(named: Images.shirt)?.withRenderingMode(.alwaysTemplate)
-    imageView.tintColor = .specialNavBarBGColor
-    return imageView
-  }()
-  
-  private let shirtLabel: UILabel = {
-    let label = UILabel()
-    label.translatesAutoresizingMaskIntoConstraints = false
-    label.font = UIFont(name: Fonts.SFUIMed, size: 10)
-    label.text = "Помочь \n вещами"
-    label.textAlignment = .center
-    label.textColor = .specialSublabelColor
-    label.numberOfLines = 0
-    return label
-  }()
-  
-  private let shirtStackView: UIStackView = {
-    let stackView = UIStackView()
-    stackView.spacing = 5
-    stackView.axis = .vertical
-    stackView.distribution = .fill
-    stackView.alignment = .center
-    stackView.translatesAutoresizingMaskIntoConstraints = false
-    return stackView
-  }()
-  
-  private let handsImageView: UIImageView = {
-    let imageView = UIImageView()
-    imageView.translatesAutoresizingMaskIntoConstraints = false
-    imageView.image = UIImage(named: Images.hands)?.withRenderingMode(.alwaysTemplate)
-    imageView.tintColor = .specialNavBarBGColor
-    return imageView
-  }()
-  
-  private let handsLabel: UILabel = {
-    let label = UILabel()
-    label.translatesAutoresizingMaskIntoConstraints = false
-    label.font = UIFont(name: Fonts.SFUIMed, size: 10)
-    label.text = "Стать \n волонтером"
-    label.textAlignment = .center
-    label.textColor = .specialSublabelColor
-    label.numberOfLines = 0
-    return label
-  }()
-  
-  private let handsStackView: UIStackView = {
-    let stackView = UIStackView()
-    stackView.spacing = 5
-    stackView.axis = .vertical
-    stackView.distribution = .fill
-    stackView.alignment = .center
-    stackView.translatesAutoresizingMaskIntoConstraints = false
-    return stackView
-  }()
-  
-  private let toolsImageView: UIImageView = {
-    let imageView = UIImageView()
-    imageView.translatesAutoresizingMaskIntoConstraints = false
-    imageView.image = UIImage(named: Images.tools)?.withRenderingMode(.alwaysTemplate)
-    imageView.tintColor = .specialNavBarBGColor
-    return imageView
-  }()
-  
-  private let toolsLabel: UILabel = {
-    let label = UILabel()
-    label.translatesAutoresizingMaskIntoConstraints = false
-    label.font = UIFont(name: Fonts.SFUIMed, size: 10)
-    label.text = "Проф.\n помощь"
-    label.textAlignment = .center
-    label.textColor = .specialSublabelColor
-    label.numberOfLines = 0
-    return label
-  }()
-  
-  private let toolsStackView: UIStackView = {
-    let stackView = UIStackView()
-    stackView.spacing = 5
-    stackView.axis = .vertical
-    stackView.distribution = .fill
-    stackView.alignment = .center
-    stackView.translatesAutoresizingMaskIntoConstraints = false
-    return stackView
-  }()
-  
-  private let cashImageView: UIImageView = {
-    let imageView = UIImageView()
-    imageView.translatesAutoresizingMaskIntoConstraints = false
-    imageView.image = UIImage(named: Images.coins)?.withRenderingMode(.alwaysTemplate)
-    imageView.tintColor = .specialNavBarBGColor
-    return imageView
-  }()
-  
-  private let cashLabel: UILabel = {
-    let label = UILabel()
-    label.translatesAutoresizingMaskIntoConstraints = false
-    label.font = UIFont(name: Fonts.SFUIMed, size: 10)
-    label.text = "Помочь \n деньгами"
-    label.textAlignment = .center
-    label.textColor = .specialSublabelColor
-    label.numberOfLines = 0
-    return label
-  }()
-  
-  private let cashStackView: UIStackView = {
-    let stackView = UIStackView()
-    stackView.spacing = 5
-    stackView.axis = .vertical
-    stackView.distribution = .fill
-    stackView.alignment = .center
-    stackView.translatesAutoresizingMaskIntoConstraints = false
-    return stackView
-  }()
-  
-  private let bottomIconsStackView: UIStackView = {
-    let stackView = UIStackView()
-    stackView.translatesAutoresizingMaskIntoConstraints = false
-    stackView.spacing = 0
-    stackView.distribution = .fillEqually
-    return stackView
-  }()
+  private let bottomButtonsView = BottomButtonsView()
   
   // MARK: - Lifecycles
   override func viewDidLoad() {
     super.viewDidLoad()
     setupViewController()
     setupNavBar()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
     tabBarController?.tabBar.isHidden = true
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    tabBarController?.tabBar.isHidden = false
   }
   
   // MARK: - Objc methods
@@ -450,6 +481,26 @@ class FullEventDescriptionVC: UIViewController {
   
   @objc
   private func routeToSiteButtonTapped() {
+    print(#function)
+  }
+  
+  @objc
+  private func shirtButtonTapped() {
+    print(#function)
+  }
+  
+  @objc
+  private func handsButtonTapped() {
+    print(#function)
+  }
+  
+  @objc
+  private func toolsButtonTapped() {
+    print(#function)
+  }
+  
+  @objc
+  private func cashButtonTapped() {
     print(#function)
   }
 }
@@ -491,22 +542,27 @@ private extension FullEventDescriptionVC {
     bottomPhotosStackView.addArrangedSubview(photo4ImageView)
     bottomPhotosStackView.addArrangedSubview(photo5ImageView)
     
-    shirtStackView.addArrangedSubview(shirtImageView)
-    shirtStackView.addArrangedSubview(shirtLabel)
-    
-    handsStackView.addArrangedSubview(handsImageView)
-    handsStackView.addArrangedSubview(handsLabel)
-    
-    toolsStackView.addArrangedSubview(toolsImageView)
-    toolsStackView.addArrangedSubview(toolsLabel)
-
-    cashStackView.addArrangedSubview(cashImageView)
-    cashStackView.addArrangedSubview(cashLabel)
-    
-    bottomIconsStackView.addArrangedSubview(shirtStackView)
-    bottomIconsStackView.addArrangedSubview(handsStackView)
-    bottomIconsStackView.addArrangedSubview(toolsStackView)
-    bottomIconsStackView.addArrangedSubview(cashStackView)
+//    shirtStackView.addArrangedSubview(shirtImageView)
+//    shirtStackView.addArrangedSubview(shirtLabel)
+//
+//    handsStackView.addArrangedSubview(handsImageView)
+//    handsStackView.addArrangedSubview(handsLabel)
+//
+//    toolsStackView.addArrangedSubview(toolsImageView)
+//    toolsStackView.addArrangedSubview(toolsLabel)
+//
+//    cashStackView.addArrangedSubview(cashImageView)
+//    cashStackView.addArrangedSubview(cashLabel)
+//
+//    bottomIconsStackView.addArrangedSubview(shirtStackView)
+//    bottomIconsStackView.addArrangedSubview(handsStackView)
+//    bottomIconsStackView.addArrangedSubview(toolsStackView)
+//    bottomIconsStackView.addArrangedSubview(cashStackView)
+//
+//    bottomButtonsStackView.addArrangedSubview(shirtButton)
+//    bottomButtonsStackView.addArrangedSubview(handsButton)
+//    bottomButtonsStackView.addArrangedSubview(toolsButton)
+//    bottomButtonsStackView.addArrangedSubview(cashButton)
     
     mainStackView.addArrangedSubview(titleLabel)
     mainStackView.addArrangedSubview(diaryStackView)
@@ -517,20 +573,41 @@ private extension FullEventDescriptionVC {
     mainStackView.addArrangedSubview(photosStackView)
     mainStackView.addArrangedSubview(descriptionLabel)
     mainStackView.addArrangedSubview(routeToSiteButton)
-    view.addSubview(mainStackView)
-    view.addSubview(bottomParticipantsView)
-    bottomParticipantsView.addSubview(bottomPhotosStackView)
-    bottomParticipantsView.addSubview(participantCountLabel)
-    view.addSubview(bottomButtonsView)
-    bottomButtonsView.addSubview(bottomIconsStackView)
+    
+    view.myAddSubView(scrollView)
+    scrollView.myAddSubView(backgroundView)
+    backgroundView.myAddSubView(mainStackView)
+    
+    view.myAddSubView(bottomParticipantsView)
+    bottomParticipantsView.myAddSubView(bottomPhotosStackView)
+    bottomParticipantsView.myAddSubView(participantCountLabel)
+    
+    view.myAddSubView(bottomButtonsView)
+    
+//    view.myAddSubView(bottomButtonsView)
+//    bottomButtonsView.myAddSubView(bottomIconsStackView)
+//    bottomButtonsView.myAddSubView(bottomButtonsStackView)
+//    bottomButtonsView.myAddSubView(separatorImageView1)
+//    bottomButtonsView.myAddSubView(separatorImageView2)
+//    bottomButtonsView.myAddSubView(separatorImageView3)
   }
   
   func addConstraints() {
     NSLayoutConstraint.activate([
-      mainStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-      mainStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-      mainStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-      mainStackView.bottomAnchor.constraint(equalTo: bottomParticipantsView.topAnchor, constant: -32),
+      scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+      scrollView.widthAnchor.constraint(equalTo: view.widthAnchor),
+      scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+      scrollView.bottomAnchor.constraint(equalTo: bottomParticipantsView.topAnchor, constant: -32),
+      
+      backgroundView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+      backgroundView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+      backgroundView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+      backgroundView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+      
+      mainStackView.topAnchor.constraint(equalTo: backgroundView.topAnchor),
+      mainStackView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -20),
+      mainStackView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 20),
+      mainStackView.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor),
       
       bottomParticipantsView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       bottomParticipantsView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -550,9 +627,27 @@ private extension FullEventDescriptionVC {
       bottomButtonsView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
       bottomButtonsView.heightAnchor.constraint(equalToConstant: 70),
       
-      bottomIconsStackView.centerYAnchor.constraint(equalTo: bottomButtonsView.centerYAnchor),
-      bottomIconsStackView.leadingAnchor.constraint(equalTo: bottomButtonsView.leadingAnchor),
-      bottomIconsStackView.trailingAnchor.constraint(equalTo: bottomButtonsView.trailingAnchor)
+//      bottomButtonsView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//      bottomButtonsView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+//      bottomButtonsView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+//      bottomButtonsView.heightAnchor.constraint(equalToConstant: 70),
+//
+//      bottomIconsStackView.centerYAnchor.constraint(equalTo: bottomButtonsView.centerYAnchor),
+//      bottomIconsStackView.leadingAnchor.constraint(equalTo: bottomButtonsView.leadingAnchor),
+//      bottomIconsStackView.trailingAnchor.constraint(equalTo: bottomButtonsView.trailingAnchor),
+//
+//      bottomButtonsStackView.centerYAnchor.constraint(equalTo: bottomButtonsView.centerYAnchor),
+//      bottomButtonsStackView.leadingAnchor.constraint(equalTo: bottomButtonsView.leadingAnchor),
+//      bottomButtonsStackView.trailingAnchor.constraint(equalTo: bottomButtonsView.trailingAnchor),
+//
+//      separatorImageView1.centerYAnchor.constraint(equalTo: bottomButtonsView.centerYAnchor),
+//      separatorImageView1.leadingAnchor.constraint(equalTo: bottomButtonsView.leadingAnchor, constant: UIScreen.main.bounds.width / 4),
+//
+//      separatorImageView2.centerYAnchor.constraint(equalTo: bottomButtonsView.centerYAnchor),
+//      separatorImageView2.trailingAnchor.constraint(equalTo: bottomButtonsView.trailingAnchor, constant: -(UIScreen.main.bounds.width / 4)),
+//
+//      separatorImageView3.centerYAnchor.constraint(equalTo: bottomButtonsView.centerYAnchor),
+//      separatorImageView3.centerXAnchor.constraint(equalTo: bottomButtonsView.centerXAnchor)
     ])
   }
   
