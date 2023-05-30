@@ -25,13 +25,13 @@ final class MainTabBarController: UITabBarController {
     return middleButton
   }()
   
-  private let bgTabBarImageView: UIImageView = {
-    let imageView = UIImageView()
-    imageView.translatesAutoresizingMaskIntoConstraints = false
-    imageView.image = UIImage(named: Images.plate)
-    imageView.contentMode = .scaleToFill
-    return imageView
-  }()
+//  private let bgTabBarImageView: UIImageView = {
+//    let imageView = UIImageView()
+//    imageView.translatesAutoresizingMaskIntoConstraints = false
+//    imageView.image = UIImage(named: Images.plate)
+//    imageView.contentMode = .scaleToFill
+//    return imageView
+//  }()
   
   // MARK: - Lifecycles
   override func viewDidLoad() {
@@ -85,16 +85,16 @@ private extension MainTabBarController {
   
   func addSubviews() {
     tabBar.addSubview(middleButton)
-    tabBar.addSubview(bgTabBarImageView)
-    tabBar.sendSubviewToBack(bgTabBarImageView)
+//    tabBar.addSubview(bgTabBarImageView)
+//    tabBar.sendSubviewToBack(bgTabBarImageView)
   }
   
   func setConstraints() {
     NSLayoutConstraint.activate([
-      bgTabBarImageView.heightAnchor.constraint(equalToConstant: 105),
-      bgTabBarImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      bgTabBarImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-      bgTabBarImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+//      bgTabBarImageView.heightAnchor.constraint(equalToConstant: 105),
+//      bgTabBarImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//      bgTabBarImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+//      bgTabBarImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
     ])
   }
   
@@ -144,10 +144,10 @@ private extension MainTabBarController {
     appearance.shadowColor = nil
     tabBar.standardAppearance = appearance
     
-//    let bgView = UIImageView(image: UIImage(named: Images.plate))
-//    // TODO: - доработать отображение на разных экранах
-//    bgView.frame = CGRect(x: 0, y: 50, width: self.tabBar.bounds.width, height: -67)
-//    tabBar.addSubview(bgView)
-//    tabBar.sendSubviewToBack(bgView)
+    let bgView = UIImageView(image: UIImage(named: Images.plate))
+    // TODO: - доработать отображение на разных экранах
+    bgView.frame = CGRect(x: 0, y: 50, width: self.tabBar.bounds.width, height: -67)
+    tabBar.addSubview(bgView)
+    tabBar.sendSubviewToBack(bgView)
   }
 }
