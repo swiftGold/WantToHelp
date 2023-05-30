@@ -38,6 +38,8 @@
 		1EDEC2212A24C74B00339FF9 /* FullEventDescriptionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDEC2202A24C74B00339FF9 /* FullEventDescriptionVC.swift */; };
 		1EDEC2232A25F37500339FF9 /* UIView + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDEC2222A25F37500339FF9 /* UIView + Extensions.swift */; };
 		1EDEC2262A25F94B00339FF9 /* BottomButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDEC2252A25F94B00339FF9 /* BottomButtonsView.swift */; };
+		1EDEC2282A25FCEB00339FF9 /* BottomParticipantsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDEC2272A25FCEB00339FF9 /* BottomParticipantsView.swift */; };
+		1EDEC22A2A25FE4E00339FF9 /* FullEventDescriptionMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDEC2292A25FE4E00339FF9 /* FullEventDescriptionMainView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +75,8 @@
 		1EDEC2202A24C74B00339FF9 /* FullEventDescriptionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullEventDescriptionVC.swift; sourceTree = "<group>"; };
 		1EDEC2222A25F37500339FF9 /* UIView + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extensions.swift"; sourceTree = "<group>"; };
 		1EDEC2252A25F94B00339FF9 /* BottomButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButtonsView.swift; sourceTree = "<group>"; };
+		1EDEC2272A25FCEB00339FF9 /* BottomParticipantsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomParticipantsView.swift; sourceTree = "<group>"; };
+		1EDEC2292A25FE4E00339FF9 /* FullEventDescriptionMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullEventDescriptionMainView.swift; sourceTree = "<group>"; };
 		6A20C710CD9A151A63C120CD /* Pods-Block1.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Block1.debug.xcconfig"; path = "Target Support Files/Pods-Block1/Pods-Block1.debug.xcconfig"; sourceTree = "<group>"; };
 		8DD254E81BD3387B0EFC8003 /* Pods-Block1.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Block1.release.xcconfig"; path = "Target Support Files/Pods-Block1/Pods-Block1.release.xcconfig"; sourceTree = "<group>"; };
 		A634B7E3463693E8FE9E048F /* Pods_Block1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Block1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -342,6 +346,8 @@
 			isa = PBXGroup;
 			children = (
 				1EDEC2252A25F94B00339FF9 /* BottomButtonsView.swift */,
+				1EDEC2272A25FCEB00339FF9 /* BottomParticipantsView.swift */,
+				1EDEC2292A25FE4E00339FF9 /* FullEventDescriptionMainView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -484,7 +490,9 @@
 				1EDEC1B02A1FB17E00339FF9 /* CategoriesViewController.swift in Sources */,
 				1EDEC1F92A22663100339FF9 /* SearchViewController.swift in Sources */,
 				1EDEC2212A24C74B00339FF9 /* FullEventDescriptionVC.swift in Sources */,
+				1EDEC22A2A25FE4E00339FF9 /* FullEventDescriptionMainView.swift in Sources */,
 				1EDEC1C32A20A9E700339FF9 /* CategoryModel.swift in Sources */,
+				1EDEC2282A25FCEB00339FF9 /* BottomParticipantsView.swift in Sources */,
 				1EDEC2132A24A00500339FF9 /* AdultViewController.swift in Sources */,
 				1EDEC1FB2A22664400339FF9 /* NewsViewController.swift in Sources */,
 				1EDEC1CC2A21FDE500339FF9 /* Fonts.swift in Sources */,
