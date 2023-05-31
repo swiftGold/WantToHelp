@@ -30,7 +30,7 @@ class SplashViewController: UIViewController {
     imageView.image = UIImage(named: Images.simbirSoft)
     return imageView
   }()
-  
+    
   // MARK: - Lifecycles
   override func viewDidLoad() {
     super.viewDidLoad()

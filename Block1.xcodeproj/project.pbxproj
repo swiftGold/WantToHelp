@@ -40,6 +40,16 @@
 		1EDEC2262A25F94B00339FF9 /* BottomButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDEC2252A25F94B00339FF9 /* BottomButtonsView.swift */; };
 		1EDEC2282A25FCEB00339FF9 /* BottomParticipantsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDEC2272A25FCEB00339FF9 /* BottomParticipantsView.swift */; };
 		1EDEC22A2A25FE4E00339FF9 /* FullEventDescriptionMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDEC2292A25FE4E00339FF9 /* FullEventDescriptionMainView.swift */; };
+		1EDEC22D2A2637E600339FF9 /* Categories.json in Resources */ = {isa = PBXBuildFile; fileRef = 1EDEC22C2A2637E600339FF9 /* Categories.json */; };
+		1EDEC2302A263B7400339FF9 /* JSONService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDEC22F2A263B7400339FF9 /* JSONService.swift */; };
+		1EDEC2322A26422400339FF9 /* UIImageView + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDEC2312A26422400339FF9 /* UIImageView + Extensions.swift */; };
+		1EDEC2342A2740DF00339FF9 /* Events.json in Resources */ = {isa = PBXBuildFile; fileRef = 1EDEC2332A2740DF00339FF9 /* Events.json */; };
+		1EDEC2372A274CBC00339FF9 /* ShortEventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDEC2362A274CBC00339FF9 /* ShortEventModel.swift */; };
+		1EDEC23A2A274DFA00339FF9 /* FullEventDescriptionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDEC2392A274DFA00339FF9 /* FullEventDescriptionModel.swift */; };
+		1EDEC23D2A2767FA00339FF9 /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDEC23C2A2767F900339FF9 /* CalendarManager.swift */; };
+		1EDEC23F2A277B3900339FF9 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDEC23E2A277B3900339FF9 /* String+Extensions.swift */; };
+		1EDEC2412A2780F700339FF9 /* ShortEventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDEC2402A2780F700339FF9 /* ShortEventViewModel.swift */; };
+		1EDEC2432A27829D00339FF9 /* FullEventDescriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDEC2422A27829D00339FF9 /* FullEventDescriptionViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +87,16 @@
 		1EDEC2252A25F94B00339FF9 /* BottomButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButtonsView.swift; sourceTree = "<group>"; };
 		1EDEC2272A25FCEB00339FF9 /* BottomParticipantsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomParticipantsView.swift; sourceTree = "<group>"; };
 		1EDEC2292A25FE4E00339FF9 /* FullEventDescriptionMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullEventDescriptionMainView.swift; sourceTree = "<group>"; };
+		1EDEC22C2A2637E600339FF9 /* Categories.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Categories.json; sourceTree = "<group>"; };
+		1EDEC22F2A263B7400339FF9 /* JSONService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONService.swift; sourceTree = "<group>"; };
+		1EDEC2312A26422400339FF9 /* UIImageView + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView + Extensions.swift"; sourceTree = "<group>"; };
+		1EDEC2332A2740DF00339FF9 /* Events.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Events.json; sourceTree = "<group>"; };
+		1EDEC2362A274CBC00339FF9 /* ShortEventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortEventModel.swift; sourceTree = "<group>"; };
+		1EDEC2392A274DFA00339FF9 /* FullEventDescriptionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullEventDescriptionModel.swift; sourceTree = "<group>"; };
+		1EDEC23C2A2767F900339FF9 /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
+		1EDEC23E2A277B3900339FF9 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		1EDEC2402A2780F700339FF9 /* ShortEventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortEventViewModel.swift; sourceTree = "<group>"; };
+		1EDEC2422A27829D00339FF9 /* FullEventDescriptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullEventDescriptionViewModel.swift; sourceTree = "<group>"; };
 		6A20C710CD9A151A63C120CD /* Pods-Block1.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Block1.debug.xcconfig"; path = "Target Support Files/Pods-Block1/Pods-Block1.debug.xcconfig"; sourceTree = "<group>"; };
 		8DD254E81BD3387B0EFC8003 /* Pods-Block1.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Block1.release.xcconfig"; path = "Target Support Files/Pods-Block1/Pods-Block1.release.xcconfig"; sourceTree = "<group>"; };
 		A634B7E3463693E8FE9E048F /* Pods_Block1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Block1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -149,6 +169,8 @@
 			children = (
 				1EDEC1AA2A1FA99C00339FF9 /* UIColor+Extensions.swift */,
 				1EDEC2222A25F37500339FF9 /* UIView + Extensions.swift */,
+				1EDEC2312A26422400339FF9 /* UIImageView + Extensions.swift */,
+				1EDEC23E2A277B3900339FF9 /* String+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -213,6 +235,9 @@
 		1EDEC1C92A21FDC900339FF9 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				1EDEC23B2A2767E900339FF9 /* Managers */,
+				1EDEC22E2A263B6400339FF9 /* Services */,
+				1EDEC22B2A2637B300339FF9 /* JSONFiles */,
 				1EDEC1CA2A21FDCF00339FF9 /* Enums */,
 				1EDEC1A12A1F9CF500339FF9 /* Fonts */,
 				1EDEC1A72A1FA96C00339FF9 /* Extensions */,
@@ -274,6 +299,7 @@
 		1EDEC2082A2496F100339FF9 /* Childs */ = {
 			isa = PBXGroup;
 			children = (
+				1EDEC2352A274C8E00339FF9 /* Models */,
 				1EDEC2092A24971200339FF9 /* ChildsViewController.swift */,
 				1EDEC21C2A24AF3C00339FF9 /* Cells */,
 			);
@@ -336,6 +362,7 @@
 		1EDEC21F2A24C72700339FF9 /* FullEventDescription */ = {
 			isa = PBXGroup;
 			children = (
+				1EDEC2382A274DE700339FF9 /* Models */,
 				1EDEC2242A25F92600339FF9 /* Views */,
 				1EDEC2202A24C74B00339FF9 /* FullEventDescriptionVC.swift */,
 			);
@@ -350,6 +377,49 @@
 				1EDEC2292A25FE4E00339FF9 /* FullEventDescriptionMainView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		1EDEC22B2A2637B300339FF9 /* JSONFiles */ = {
+			isa = PBXGroup;
+			children = (
+				1EDEC22C2A2637E600339FF9 /* Categories.json */,
+				1EDEC2332A2740DF00339FF9 /* Events.json */,
+			);
+			path = JSONFiles;
+			sourceTree = "<group>";
+		};
+		1EDEC22E2A263B6400339FF9 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				1EDEC22F2A263B7400339FF9 /* JSONService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		1EDEC2352A274C8E00339FF9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1EDEC2362A274CBC00339FF9 /* ShortEventModel.swift */,
+				1EDEC2402A2780F700339FF9 /* ShortEventViewModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1EDEC2382A274DE700339FF9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1EDEC2392A274DFA00339FF9 /* FullEventDescriptionModel.swift */,
+				1EDEC2422A27829D00339FF9 /* FullEventDescriptionViewModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1EDEC23B2A2767E900339FF9 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				1EDEC23C2A2767F900339FF9 /* CalendarManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		4649130639467E1461E5C18C /* Frameworks */ = {
@@ -432,7 +502,9 @@
 				1EDEC1D22A22014300339FF9 /* OfficinaSans-ExtraBold.ttf in Resources */,
 				1E4913B32A17A92700ABF6B6 /* LaunchScreen.storyboard in Resources */,
 				1EDEC21B2A24A80300339FF9 /* sf-ui-text-medium.ttf in Resources */,
+				1EDEC22D2A2637E600339FF9 /* Categories.json in Resources */,
 				1EDEC1A62A1F9D6700339FF9 /* sf-ui-text-regular.ttf in Resources */,
+				1EDEC2342A2740DF00339FF9 /* Events.json in Resources */,
 				1E4913B02A17A92700ABF6B6 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -487,20 +559,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				1EDEC2262A25F94B00339FF9 /* BottomButtonsView.swift in Sources */,
+				1EDEC23F2A277B3900339FF9 /* String+Extensions.swift in Sources */,
 				1EDEC1B02A1FB17E00339FF9 /* CategoriesViewController.swift in Sources */,
 				1EDEC1F92A22663100339FF9 /* SearchViewController.swift in Sources */,
 				1EDEC2212A24C74B00339FF9 /* FullEventDescriptionVC.swift in Sources */,
 				1EDEC22A2A25FE4E00339FF9 /* FullEventDescriptionMainView.swift in Sources */,
+				1EDEC23D2A2767FA00339FF9 /* CalendarManager.swift in Sources */,
 				1EDEC1C32A20A9E700339FF9 /* CategoryModel.swift in Sources */,
 				1EDEC2282A25FCEB00339FF9 /* BottomParticipantsView.swift in Sources */,
 				1EDEC2132A24A00500339FF9 /* AdultViewController.swift in Sources */,
+				1EDEC2432A27829D00339FF9 /* FullEventDescriptionViewModel.swift in Sources */,
+				1EDEC23A2A274DFA00339FF9 /* FullEventDescriptionModel.swift in Sources */,
 				1EDEC1FB2A22664400339FF9 /* NewsViewController.swift in Sources */,
 				1EDEC1CC2A21FDE500339FF9 /* Fonts.swift in Sources */,
 				1EDEC2042A23AA4200339FF9 /* TabBarNames.swift in Sources */,
 				1EDEC1F72A22662600339FF9 /* HistoryViewController.swift in Sources */,
 				1EDEC1FD2A22665000339FF9 /* ProfileViewController.swift in Sources */,
+				1EDEC2412A2780F700339FF9 /* ShortEventViewModel.swift in Sources */,
 				1EDEC2152A24A00E00339FF9 /* ElderlyViewController.swift in Sources */,
 				1EDEC2172A24A01600339FF9 /* AnimalsViewController.swift in Sources */,
+				1EDEC2322A26422400339FF9 /* UIImageView + Extensions.swift in Sources */,
 				1EDEC2192A24A01D00339FF9 /* EventsViewController.swift in Sources */,
 				1EDEC20A2A24971200339FF9 /* ChildsViewController.swift in Sources */,
 				1EDEC21E2A24AF5400339FF9 /* ChildsCollectionViewCell.swift in Sources */,
@@ -510,9 +588,11 @@
 				1E4913A92A17A92200ABF6B6 /* SceneDelegate.swift in Sources */,
 				1EDEC2002A22670F00339FF9 /* MainTabBarController.swift in Sources */,
 				1EDEC1C02A20A7CF00339FF9 /* CategoriesCollectionViewCell.swift in Sources */,
+				1EDEC2372A274CBC00339FF9 /* ShortEventModel.swift in Sources */,
 				1EDEC2062A23AB7000339FF9 /* Images.swift in Sources */,
 				1EDEC1AE2A1FB07200339FF9 /* LoadingOverlay.swift in Sources */,
 				1EDEC1AB2A1FA99C00339FF9 /* UIColor+Extensions.swift in Sources */,
+				1EDEC2302A263B7400339FF9 /* JSONService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

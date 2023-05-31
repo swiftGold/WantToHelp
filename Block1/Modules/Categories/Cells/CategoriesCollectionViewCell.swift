@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class CategoriesCollectionViewCell: UICollectionViewCell {
   // MARK: - UI
@@ -34,8 +35,12 @@ final class CategoriesCollectionViewCell: UICollectionViewCell {
   
   // MARK: - Methods
   func configureCell(with model: CategoryModel) {
-    imageView.image = UIImage(named: model.image)
+    imageView.loadImage(from: model.image)
     titleLabel.text = model.title
+  }
+  
+  func configurePlaceholder() {
+    imageView.image = UIImage(named: Images.placeHolder)
   }
 }
 
@@ -48,17 +53,17 @@ private extension CategoriesCollectionViewCell {
   }
   
   func addSubviews() {
-    contentView.myAddSubView(imageView)
-    contentView.myAddSubView(titleLabel)
+    myAddSubView(imageView)
+    myAddSubView(titleLabel)
   }
   
   func setConstraints() {
     NSLayoutConstraint.activate([
-      imageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+      imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
       imageView.bottomAnchor.constraint(equalTo: titleLabel.topAnchor, constant: -32),
-      titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-      titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-      titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -14)
+      titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+      titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+      titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -14)
     ])
   }
 }

@@ -67,11 +67,18 @@ class ChildsViewController: UIViewController {
     return collectionView
   }()
   
+  // MARK: - Variables
+  private var jsonService = JSONService()
+  private let calendarManager = CalendarManager()
+  private var eventViewModels: [ShortEventViewModel] = []
+  private var fullDescriptionViewModels: [FullEventDescriptionViewModel] = []
+  
   // MARK: - Lifecycles
   override func viewDidLoad() {
     super.viewDidLoad()
     setupViewController()
     setupNavBar()
+    fetchDataFromJson()
   }
   
   // MARK: - Objc methods
@@ -100,7 +107,10 @@ class ChildsViewController: UIViewController {
 // MARK: - UICollectionViewDelegate impl
 extension ChildsViewController: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    let index = indexPath.row
+    let viewModel = fullDescriptionViewModels[index]
     let viewController = FullEventDescriptionVC()
+    viewController.configureViewController(with: viewModel)
     navigationController?.modalPresentationStyle = .fullScreen
     navigationController?.pushViewController(viewController, animated: true)
   }
@@ -109,7 +119,7 @@ extension ChildsViewController: UICollectionViewDelegate {
 // MARK: - UICollectionViewDataSource impl
 extension ChildsViewController: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 5
+    return eventViewModels.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -119,12 +129,78 @@ extension ChildsViewController: UICollectionViewDataSource {
       return UICollectionViewCell()
     }
     cell.layer.cornerRadius = 5
+    cell.configureCell(with: eventViewModels[indexPath.row])
     return cell
   }
 }
 
 // MARK: - Private Methods
 private extension ChildsViewController {
+  func fetchDataFromJson() {
+    jsonService.fetchFullEventDescriptionFromJSON(completion: { [weak self] result in
+      guard let strongSelf = self else { return }
+      switch result {
+      case .success(let response):
+        strongSelf.fullDescriptionViewModels = response.map({ model -> FullEventDescriptionViewModel in
+          let diaryString = strongSelf.calculateDaysToEvent(with: model)
+          let viewModel = FullEventDescriptionViewModel(title: model.title,
+                                                        description: model.description,
+                                                        dateStart: model.dateStart,
+                                                        dateFinish: model.dateFinish,
+                                                        organizationName: model.organizationName,
+                                                        adress: model.adress,
+                                                        phone1: model.phone1,
+                                                        phone2: model.phone2,
+                                                        mainImage: model.mainImage,
+                                                        detailImage1: model.detailImage1,
+                                                        detailImage2: model.detailImage2,
+                                                        detailImage3: model.detailImage3,
+                                                        photo1: model.photo1,
+                                                        photo2: model.photo2,
+                                                        photo3: model.photo3,
+                                                        photo4: model.photo4,
+                                                        photo5: model.photo5,
+                                                        participantsCount: model.participantsCount,
+                                                        diaryString: diaryString
+          )
+          return viewModel
+        })
+        strongSelf.eventViewModels = strongSelf.mappingToViewModels(with: strongSelf.fullDescriptionViewModels)
+        strongSelf.collectionView.reloadData()
+      case .failure(let error):
+        print(error.localizedDescription)
+      }
+    })
+    collectionView.reloadData()
+  }
+  
+  func mappingToViewModels(with models: [FullEventDescriptionViewModel]) -> [ShortEventViewModel] {
+    let viewModels = models.map { model in
+      ShortEventViewModel(title: model.title,
+                          description: model.description,
+                          dateStart: model.dateStart,
+                          dateFinish: model.dateFinish,
+                          mainImage: model.mainImage,
+                          diaryString: model.diaryString
+      )
+    }
+    return viewModels
+  }
+  
+  func calculateDaysToEvent(with model: FullEventDescriptionModel) -> String {
+    let startDateString = calendarManager.fetchStringDateFromTimeStamp(ti: model.dateStart)
+    let finishDateString = calendarManager.fetchStringDateFromTimeStamp(ti: model.dateFinish)
+    let startDate = calendarManager.fetchDateFromTimeStamp(ti: model.dateStart)
+    let currentDate = Date()
+    let howMuchDaysLeft = calendarManager.howMuchdaysLeft(currentDate: currentDate, eventDate: startDate)
+    let eventFinished = calendarManager.fetchFullStringDateFromTimeStamp(ti: model.dateFinish)
+    if howMuchDaysLeft >= 0 {
+      return "Осталось: \(howMuchDaysLeft) дней (\(startDateString) - \(finishDateString))"
+    } else {
+      return "Завершено: " + "\(eventFinished)".firstCharOnly()
+    }
+  }
+  
   func setupViewController() {
     view.backgroundColor = .white
     addSubviews()
@@ -170,7 +246,3 @@ private extension ChildsViewController {
     navigationItem.titleView = label
   }
 }
-
-
-
-

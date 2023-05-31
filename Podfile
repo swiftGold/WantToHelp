@@ -4,6 +4,8 @@ target 'Block1' do
   use_frameworks!
 	
 	pod 'Alamofire'
+  pod 'SwiftyJSON'
+  pod 'Kingfisher'
 	#pod 'SwiftLint'
 
 end

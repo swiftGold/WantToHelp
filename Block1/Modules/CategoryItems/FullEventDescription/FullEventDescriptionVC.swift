@@ -23,6 +23,13 @@ class FullEventDescriptionVC: UIViewController {
     return backgroundView
   }()
   
+  private let customNavBarTitle: UILabel = {
+    let label = UILabel()
+    label.font = UIFont(name: Fonts.OfficSanExtraBold, size: 21)
+    label.textColor = .white
+    return label
+  }()
+  
   private let fullEventDescriptionMainView = FullEventDescriptionMainView()
   private let bottomParticipantsView = BottomParticipantsView()
   private let bottomButtonsView = BottomButtonsView()
@@ -42,6 +49,12 @@ class FullEventDescriptionVC: UIViewController {
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     tabBarController?.tabBar.isHidden = false
+  }
+  
+  func configureViewController(with model: FullEventDescriptionViewModel) {
+    customNavBarTitle.text = model.title
+    fullEventDescriptionMainView.configureView(with: model)
+    bottomParticipantsView.configureView(with: model)
   }
   
   // MARK: - Objc methods
@@ -97,20 +110,12 @@ private extension FullEventDescriptionVC {
   }
   
   func setupNavBar() {
-    customNavBarTitle()
+    navigationItem.titleView = customNavBarTitle
     navigationItem.rightBarButtonItem = barButtonItem
     let appearance = UINavigationBarAppearance()
     appearance.backgroundColor = UIColor.specialNavBarBGColor
     navigationController?.navigationBar.standardAppearance = appearance
     navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
     navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-  }
-  
-  func customNavBarTitle() {
-    let label = UILabel()
-    label.text = "Тут будет название события"
-    label.font = UIFont(name: Fonts.OfficSanExtraBold, size: 21)
-    label.textColor = .white
-    navigationItem.titleView = label
   }
 }

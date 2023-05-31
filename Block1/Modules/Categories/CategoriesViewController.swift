@@ -47,14 +47,10 @@ final class CategoriesViewController: UIViewController {
   }()
   
   // MARK: - Variables
+  private let jsonService = JSONService()
+  
   private var categoriesModel: [CategoryModel] = []
-  private let categoriesArray: [(String, String)] = [
-    (Images.childrens, "Дети"),
-    (Images.adult, "Взрослые"),
-    (Images.elderly, "Пожилые"),
-    (Images.animals, "Животные"),
-    (Images.events, "Мероприятия")
-  ]
+  private var isPlaceholder = false
   
   private let CategoryViewsControllers = [
     ChildsViewController(),
@@ -70,7 +66,8 @@ final class CategoriesViewController: UIViewController {
     navigationController?.isNavigationBarHidden = false
     setupNavBar()
     setupViewController()
-    arrayMapping()
+    showPlaceholders()
+    fetchDataFromJson()
   }
   
   // MARK: - Objc methods
@@ -93,7 +90,8 @@ extension CategoriesViewController: UICollectionViewDelegate {
 // MARK: - UICollectionViewDataSource impl
 extension CategoriesViewController: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return categoriesModel.count
+//    return categoriesModel.count
+    return isPlaceholder ? 10 : categoriesModel.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -102,7 +100,13 @@ extension CategoriesViewController: UICollectionViewDataSource {
       for: indexPath) as? CategoriesCollectionViewCell else {
       return UICollectionViewCell()
     }
-    cell.configureCell(with: categoriesModel[indexPath.row])
+    
+    if isPlaceholder {
+        cell.configurePlaceholder()
+    } else {
+      cell.configureCell(with: categoriesModel[indexPath.row])
+    }
+//    cell.configureCell(with: categoriesModel[indexPath.row])
     return cell
   }
 }
@@ -118,10 +122,23 @@ private extension CategoriesViewController {
     navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
   }
   
-  func arrayMapping() {
-    categoriesModel = categoriesArray.map {
-      CategoryModel(image: $0.0, title: $0.1)
-    }
+  func fetchDataFromJson() {
+    jsonService.fetchCategoriesFromJSON(completion: { [weak self] result in
+      guard let strongSelf = self else { return }
+      switch result {
+      case .success(let response):
+        strongSelf.categoriesModel = response
+        strongSelf.isPlaceholder = false
+      case .failure(let error):
+        print(error.localizedDescription)
+      }
+    })
+    collectionView.reloadData()
+  }
+  
+  func showPlaceholders() {
+      isPlaceholder = true
+      collectionView.reloadData()
   }
   
   func customNavBarTitle() {

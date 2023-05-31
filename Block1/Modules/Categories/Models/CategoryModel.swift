@@ -5,7 +5,7 @@
 //  Created by Сергей Золотухин on 26.05.2023.
 //
 
-struct CategoryModel {
+struct CategoryModel: Codable {
   let image: String
   let title: String
 }

@@ -17,31 +17,26 @@ final class BottomParticipantsView: UIView {
   
   private let photo1ImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.image = UIImage(named: Images.photo1)
     return imageView
   }()
   
   private let photo2ImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.image = UIImage(named: Images.photo2)
     return imageView
   }()
   
   private let photo3ImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.image = UIImage(named: Images.photo3)
     return imageView
   }()
   
   private let photo4ImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.image = UIImage(named: Images.photo4)
     return imageView
   }()
   
   private let photo5ImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.image = UIImage(named: Images.photo5)
     return imageView
   }()
   
@@ -55,7 +50,6 @@ final class BottomParticipantsView: UIView {
   private let participantCountLabel: UILabel = {
     let label = UILabel()
     label.font = UIFont(name: Fonts.SFUIMed, size: 13)
-    label.text = "+102"
     label.textAlignment = .left
     label.textColor = .specialDiaryLightGreyColor
     return label
@@ -68,6 +62,16 @@ final class BottomParticipantsView: UIView {
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  func configureView(with model: FullEventDescriptionViewModel) {
+    photo1ImageView.loadImage(from: model.photo1)
+    photo2ImageView.loadImage(from: model.photo2)
+    photo3ImageView.loadImage(from: model.photo3)
+    photo4ImageView.loadImage(from: model.photo4)
+    photo5ImageView.loadImage(from: model.photo5)
+    let participantsCount = model.participantsCount - 5
+    participantCountLabel.text = "+\(participantsCount)"
   }
 }
 

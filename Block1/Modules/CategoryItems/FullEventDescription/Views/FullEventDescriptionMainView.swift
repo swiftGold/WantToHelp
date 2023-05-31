@@ -8,11 +8,10 @@
 import UIKit
 
 final class FullEventDescriptionMainView: UIView {
-  // MARK: - UI\
+  // MARK: - UI
   private let titleLabel: UILabel = {
     let label = UILabel()
     label.font = UIFont(name: Fonts.OfficSanExtraBold, size: 21)
-    label.text = "Спонсоры отремонтируют школу-интернат"
     label.textAlignment = .left
     label.textColor = .specialTitleColor
     label.numberOfLines = 0
@@ -28,7 +27,6 @@ final class FullEventDescriptionMainView: UIView {
   private let diaryLabel: UILabel = {
     let label = UILabel()
     label.font = UIFont(name: Fonts.SFUIMed, size: 11)
-    label.text = "Текст рассписания"
     label.textAlignment = .left
     label.textColor = .specialDiaryLightGreyColor
     return label
@@ -45,7 +43,6 @@ final class FullEventDescriptionMainView: UIView {
   private let organizationNameLabel: UILabel = {
     let label = UILabel()
     label.font = UIFont(name: Fonts.SFUIReg, size: 11)
-    label.text = "Благотворительный фонд «Счастливый Мир»"
     label.textAlignment = .left
     label.textColor = .specialTitleGreyColor
     label.numberOfLines = 0
@@ -55,7 +52,6 @@ final class FullEventDescriptionMainView: UIView {
   private let adressLabel: UILabel = {
     let label = UILabel()
     label.font = UIFont(name: Fonts.SFUIReg, size: 15)
-    label.text = "Санкт-Петербург, Кирочная улица, д. 50А, каб. 208"
     label.textAlignment = .left
     label.textColor = .specialTitleGreyColor
     label.numberOfLines = 0
@@ -79,7 +75,6 @@ final class FullEventDescriptionMainView: UIView {
   private let firstPhoneLabel: UILabel = {
     let label = UILabel()
     label.font = UIFont(name: Fonts.SFUIReg, size: 15)
-    label.text = "+7 (937) 037 37-73"
     label.textAlignment = .left
     label.textColor = .specialTitleGreyColor
     return label
@@ -88,7 +83,6 @@ final class FullEventDescriptionMainView: UIView {
   private let secondPhoneLabel: UILabel = {
     let label = UILabel()
     label.font = UIFont(name: Fonts.SFUIReg, size: 15)
-    label.text = "+7 (937) 016 16-16"
     label.textAlignment = .left
     label.textColor = .specialTitleGreyColor
     return label
@@ -151,21 +145,18 @@ final class FullEventDescriptionMainView: UIView {
   
   private let bigPhotoImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.image = UIImage(named: "image1")
     imageView.contentMode = .scaleToFill
     return imageView
   }()
   
   private let firstSmallPhotoImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.image = UIImage(named: "image2")
     imageView.contentMode = .scaleToFill
     return imageView
   }()
   
   private let secondSmallPhotoImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.image = UIImage(named: "image3")
     imageView.contentMode = .scaleToFill
     return imageView
   }()
@@ -188,7 +179,6 @@ final class FullEventDescriptionMainView: UIView {
   private let descriptionLabel: UILabel = {
     let label = UILabel()
     label.font = UIFont(name: Fonts.SFUIReg, size: 15)
-    label.text = "Участники и болельщики смогли весело и активно провести время на «Петербургском благотворительном марафоне» и при этом финансово поучаствовать в помощи детям. Участники и болельщики смогли весело и активно провести время на «Петербургском благотворительном марафоне» и при этом финансово поучаствовать в помощи детям."
     label.textAlignment = .left
     label.textColor = .specialTitleGreyColor
     label.numberOfLines = 0
@@ -220,6 +210,19 @@ final class FullEventDescriptionMainView: UIView {
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  func configureView(with model: FullEventDescriptionViewModel) {
+    titleLabel.text = model.title
+    organizationNameLabel.text = model.organizationName
+    adressLabel.text = model.adress
+    firstPhoneLabel.text = model.phone1
+    secondPhoneLabel.text = model.phone2
+    bigPhotoImageView.loadImage(from: model.detailImage1)
+    firstSmallPhotoImageView.loadImage(from: model.detailImage2)
+    secondSmallPhotoImageView.loadImage(from: model.detailImage3)
+    descriptionLabel.text = model.description
+    diaryLabel.text = model.diaryString
   }
   
   // MARK: - Objc methods
