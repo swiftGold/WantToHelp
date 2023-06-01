@@ -42,14 +42,16 @@ final class BottomParticipantsView: UIView {
   
   private let bottomPhotosStackView: UIStackView = {
     let stackView = UIStackView()
-    stackView.spacing = -5
+    stackView.spacing = Constants.bottomPhotosStackViewSpacing
     stackView.distribution = .fillEqually
     return stackView
   }()
   
   private let participantCountLabel: UILabel = {
     let label = UILabel()
-    label.font = UIFont(name: Fonts.SFUIMed, size: 13)
+    label.font = UIFont(name: Fonts.SFUIMed,
+                        size: Constants.participantCountLabelFontSize
+    )
     label.textAlignment = .left
     label.textColor = .specialDiaryLightGreyColor
     return label
@@ -70,7 +72,7 @@ final class BottomParticipantsView: UIView {
     photo3ImageView.loadImage(from: model.photo3)
     photo4ImageView.loadImage(from: model.photo4)
     photo5ImageView.loadImage(from: model.photo5)
-    let participantsCount = model.participantsCount - 5
+    let participantsCount = model.participantsCount - Constants.numberOfParticipantsInImages
     participantCountLabel.text = "+\(participantsCount)"
   }
 }
@@ -88,7 +90,6 @@ private extension BottomParticipantsView {
     bottomPhotosStackView.addArrangedSubview(photo3ImageView)
     bottomPhotosStackView.addArrangedSubview(photo4ImageView)
     bottomPhotosStackView.addArrangedSubview(photo5ImageView)
-    
     myAddSubView(bottomParticipantsView)
     bottomParticipantsView.myAddSubView(bottomPhotosStackView)
     bottomParticipantsView.myAddSubView(participantCountLabel)
@@ -99,16 +100,25 @@ private extension BottomParticipantsView {
       bottomParticipantsView.leadingAnchor.constraint(equalTo: leadingAnchor),
       bottomParticipantsView.trailingAnchor.constraint(equalTo: trailingAnchor),
       bottomParticipantsView.bottomAnchor.constraint(equalTo: bottomAnchor),
-      bottomParticipantsView.heightAnchor.constraint(equalToConstant: 68),
-      
+      bottomParticipantsView.heightAnchor.constraint(equalToConstant: Constants.bottomParticipantsViewHeight),
       bottomPhotosStackView.centerYAnchor.constraint(equalTo: bottomParticipantsView.centerYAnchor),
-      bottomPhotosStackView.leadingAnchor.constraint(equalTo: bottomParticipantsView.leadingAnchor, constant: 20),
-      bottomPhotosStackView.widthAnchor.constraint(equalToConstant: 180),
-      bottomPhotosStackView.heightAnchor.constraint(equalToConstant: 36),
-      
+      bottomPhotosStackView.leadingAnchor.constraint(equalTo: bottomParticipantsView.leadingAnchor, constant: Constants.bottomPhotosStackViewLeadingInset),
+      bottomPhotosStackView.widthAnchor.constraint(equalToConstant: Constants.bottomPhotosStackViewWidth),
+      bottomPhotosStackView.heightAnchor.constraint(equalToConstant: Constants.bottomPhotosStackViewHeight),
       participantCountLabel.centerYAnchor.constraint(equalTo: bottomParticipantsView.centerYAnchor),
-      participantCountLabel.leadingAnchor.constraint(equalTo: bottomPhotosStackView.trailingAnchor, constant: 10),
+      participantCountLabel.leadingAnchor.constraint(equalTo: bottomPhotosStackView.trailingAnchor, constant: Constants.participantCountLabelLeadingInset),
     ])
+  }
+  
+  enum Constants {
+    static let participantCountLabelFontSize: CGFloat = 13
+    static let bottomPhotosStackViewSpacing: CGFloat = -5
+    static let numberOfParticipantsInImages = 5
+    static let bottomParticipantsViewHeight: CGFloat = 68
+    static let bottomPhotosStackViewLeadingInset: CGFloat = 20
+    static let bottomPhotosStackViewWidth: CGFloat = 180
+    static let bottomPhotosStackViewHeight: CGFloat = 36
+    static let participantCountLabelLeadingInset: CGFloat = 10
   }
 }
 

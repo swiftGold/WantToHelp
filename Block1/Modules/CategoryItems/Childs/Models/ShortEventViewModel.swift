@@ -14,4 +14,5 @@ struct ShortEventViewModel {
   let dateFinish: Double
   let mainImage: String
   let diaryString: String
+  let isFinished: Bool
 }

@@ -14,9 +14,11 @@ class ChildsViewController: UIViewController {
   private lazy var currentEventsButton: UIButton = {
     let button = UIButton(type: .system)
     button.setTitle("Текущие", for: .normal)
-    button.titleLabel?.font = UIFont(name: Fonts.SFUIMed, size: 13)
+    button.titleLabel?.font = UIFont(name: Fonts.SFUIMed,
+                                     size: Constants.currentEventsButtonFontSize
+    )
     button.addTarget(self, action: #selector(currentEventsButtonTapped), for: .touchUpInside)
-    button.layer.cornerRadius = 4
+    button.layer.cornerRadius = Constants.currentEventsButtonCorner
     button.backgroundColor = .specialNavBarBGColor
     button.tintColor = .white
     return button
@@ -25,9 +27,11 @@ class ChildsViewController: UIViewController {
   private lazy var finishedEventsButton: UIButton = {
     let button = UIButton(type: .system)
     button.setTitle("Завершенные", for: .normal)
-    button.titleLabel?.font = UIFont(name: Fonts.SFUIMed, size: 13)
+    button.titleLabel?.font = UIFont(name: Fonts.SFUIMed,
+                                     size: Constants.finishedEventsButtonFontSize
+    )
     button.addTarget(self, action: #selector(finishedEventsButtonTapped), for: .touchUpInside)
-    button.layer.cornerRadius = 4
+    button.layer.cornerRadius = Constants.finishedEventsButtonCorner
     button.backgroundColor = .clear
     button.tintColor = .specialNavBarBGColor
     return button
@@ -35,10 +39,10 @@ class ChildsViewController: UIViewController {
   
   private let toggleStackView: UIStackView = {
     let stackView = UIStackView()
-    stackView.spacing = 0
+    stackView.spacing = Constants.toggleStackBorderWidth
     stackView.distribution = .fillEqually
-    stackView.layer.borderWidth = 1
-    stackView.layer.cornerRadius = 4
+    stackView.layer.borderWidth = Constants.toggleStackViewSpacing
+    stackView.layer.cornerRadius = Constants.toggleStackViewCorner
     stackView.layer.borderColor = UIColor.specialNavBarBGColor.cgColor
     return stackView
   }()
@@ -48,13 +52,17 @@ class ChildsViewController: UIViewController {
     let collectionView = UICollectionView(frame: .zero,
                                           collectionViewLayout: layout
     )
-    layout.itemSize = CGSize(width: UIScreen.main.bounds.width - 24,
-                             height: 413
+    layout.itemSize = CGSize(width: Constants.cellSizeWidth,
+                             height: Constants.cellSizeHeight
     )
-    layout.minimumLineSpacing = 8
-    layout.minimumInteritemSpacing = 0
+    layout.minimumLineSpacing = Constants.sizeBetweenCells
+    layout.minimumInteritemSpacing = Constants.sizeBetweenCellsInSameRow
     layout.scrollDirection = .vertical
-    layout.sectionInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+    layout.sectionInset = UIEdgeInsets(top: Constants.sectionInsetTop,
+                                       left: Constants.sectionInsetLeft,
+                                       bottom: Constants.sectionInsetBottom,
+                                       right: Constants.sectionInsetRight
+    )
     collectionView.contentInsetAdjustmentBehavior = .always
     collectionView.bounces = false
     collectionView.delegate = self
@@ -71,7 +79,10 @@ class ChildsViewController: UIViewController {
   private var jsonService = JSONService()
   private let calendarManager = CalendarManager()
   private var eventViewModels: [ShortEventViewModel] = []
+  private var sortedViewModels: [ShortEventViewModel] = []
   private var fullDescriptionViewModels: [FullEventDescriptionViewModel] = []
+  private var sortedDescriptionViewModels: [FullEventDescriptionViewModel] = []
+  private var isCurrent = true
   
   // MARK: - Lifecycles
   override func viewDidLoad() {
@@ -79,23 +90,20 @@ class ChildsViewController: UIViewController {
     setupViewController()
     setupNavBar()
     fetchDataFromJson()
+    isCurrentEvents()
   }
   
   // MARK: - Objc methods
   @objc
   private func currentEventsButtonTapped() {
-    currentEventsButton.backgroundColor = .specialNavBarBGColor
-    currentEventsButton.tintColor = .white
-    finishedEventsButton.backgroundColor = .clear
-    finishedEventsButton.tintColor = .specialNavBarBGColor
+    isCurrent = true
+    isCurrentEvents()
   }
   
   @objc
   private func finishedEventsButtonTapped() {
-    currentEventsButton.backgroundColor = .clear
-    currentEventsButton.tintColor = .specialNavBarBGColor
-    finishedEventsButton.backgroundColor = .specialNavBarBGColor
-    finishedEventsButton.tintColor = .white
+    isCurrent = false
+    isCurrentEvents()
   }
   
   @objc
@@ -108,7 +116,7 @@ class ChildsViewController: UIViewController {
 extension ChildsViewController: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     let index = indexPath.row
-    let viewModel = fullDescriptionViewModels[index]
+    let viewModel = sortedDescriptionViewModels[index]
     let viewController = FullEventDescriptionVC()
     viewController.configureViewController(with: viewModel)
     navigationController?.modalPresentationStyle = .fullScreen
@@ -119,7 +127,7 @@ extension ChildsViewController: UICollectionViewDelegate {
 // MARK: - UICollectionViewDataSource impl
 extension ChildsViewController: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return eventViewModels.count
+    return sortedViewModels.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -128,8 +136,8 @@ extension ChildsViewController: UICollectionViewDataSource {
       for: indexPath) as? ChildsCollectionViewCell else {
       return UICollectionViewCell()
     }
-    cell.layer.cornerRadius = 5
-    cell.configureCell(with: eventViewModels[indexPath.row])
+    cell.layer.cornerRadius = Constants.cellCornerRadius
+    cell.configureCell(with: sortedViewModels[indexPath.row])
     return cell
   }
 }
@@ -142,7 +150,8 @@ private extension ChildsViewController {
       switch result {
       case .success(let response):
         strongSelf.fullDescriptionViewModels = response.map({ model -> FullEventDescriptionViewModel in
-          let diaryString = strongSelf.calculateDaysToEvent(with: model)
+          let diaryString = strongSelf.calculateDaysToEvent(with: model).0
+          let isFinished = strongSelf.calculateDaysToEvent(with: model).1
           let viewModel = FullEventDescriptionViewModel(title: model.title,
                                                         description: model.description,
                                                         dateStart: model.dateStart,
@@ -161,12 +170,11 @@ private extension ChildsViewController {
                                                         photo4: model.photo4,
                                                         photo5: model.photo5,
                                                         participantsCount: model.participantsCount,
-                                                        diaryString: diaryString
+                                                        diaryString: diaryString,
+                                                        isFinished: isFinished
           )
           return viewModel
         })
-        strongSelf.eventViewModels = strongSelf.mappingToViewModels(with: strongSelf.fullDescriptionViewModels)
-        strongSelf.collectionView.reloadData()
       case .failure(let error):
         print(error.localizedDescription)
       }
@@ -181,24 +189,56 @@ private extension ChildsViewController {
                           dateStart: model.dateStart,
                           dateFinish: model.dateFinish,
                           mainImage: model.mainImage,
-                          diaryString: model.diaryString
+                          diaryString: model.diaryString,
+                          isFinished: model.isFinished
       )
     }
     return viewModels
   }
   
-  func calculateDaysToEvent(with model: FullEventDescriptionModel) -> String {
+  func calculateDaysToEvent(with model: FullEventDescriptionModel) -> (String, Bool) {
     let startDateString = calendarManager.fetchStringDateFromTimeStamp(ti: model.dateStart)
     let finishDateString = calendarManager.fetchStringDateFromTimeStamp(ti: model.dateFinish)
     let startDate = calendarManager.fetchDateFromTimeStamp(ti: model.dateStart)
     let currentDate = Date()
     let howMuchDaysLeft = calendarManager.howMuchdaysLeft(currentDate: currentDate, eventDate: startDate)
     let eventFinished = calendarManager.fetchFullStringDateFromTimeStamp(ti: model.dateFinish)
-    if howMuchDaysLeft >= 0 {
-      return "Осталось: \(howMuchDaysLeft) дней (\(startDateString) - \(finishDateString))"
+    if howMuchDaysLeft >= Constants.zeroDays {
+      return ("Осталось: \(howMuchDaysLeft) дней (\(startDateString) - \(finishDateString))", false)
     } else {
-      return "Завершено: " + "\(eventFinished)".firstCharOnly()
+      return ("Завершено: " + "\(eventFinished)".firstCharOnly(), true)
     }
+  }
+  
+  func isCurrentEvents() {
+    if isCurrent {
+      currentEventsButton.backgroundColor = .specialNavBarBGColor
+      currentEventsButton.tintColor = .white
+      finishedEventsButton.backgroundColor = .clear
+      finishedEventsButton.tintColor = .specialNavBarBGColor
+      
+      fullDescriptionViewModels.forEach { model in
+        if !model.isFinished {
+          sortedDescriptionViewModels.removeAll()
+          sortedDescriptionViewModels.append(model)
+          sortedViewModels = mappingToViewModels(with: sortedDescriptionViewModels)
+        }
+      }
+    } else {
+      currentEventsButton.backgroundColor = .clear
+      currentEventsButton.tintColor = .specialNavBarBGColor
+      finishedEventsButton.backgroundColor = .specialNavBarBGColor
+      finishedEventsButton.tintColor = .white
+      
+      fullDescriptionViewModels.forEach { model in
+        if model.isFinished {
+          sortedDescriptionViewModels.removeAll()
+          sortedDescriptionViewModels.append(model)
+          sortedViewModels = mappingToViewModels(with: sortedDescriptionViewModels)
+        }
+      }
+    }
+    collectionView.reloadData()
   }
   
   func setupViewController() {
@@ -216,12 +256,11 @@ private extension ChildsViewController {
   
   func addConstraints() {
     NSLayoutConstraint.activate([
-      toggleStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-      toggleStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-      toggleStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-      toggleStackView.heightAnchor.constraint(equalToConstant: 24),
-      
-      collectionView.topAnchor.constraint(equalTo: toggleStackView.bottomAnchor, constant: 10),
+      toggleStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.toggleStackViewTopInset),
+      toggleStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.toggleStackViewLeadingInset),
+      toggleStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.toggleStackViewTrailingInset),
+      toggleStackView.heightAnchor.constraint(equalToConstant: Constants.toggleStackViewHeight),
+      collectionView.topAnchor.constraint(equalTo: toggleStackView.bottomAnchor, constant: Constants.collectionViewBottomTopInset),
       collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
       collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
@@ -241,8 +280,36 @@ private extension ChildsViewController {
   func customNavBarTitle() {
     let label = UILabel()
     label.text = TabBarNames.childs
-    label.font = UIFont(name: Fonts.OfficSanExtraBold, size: 21)
+    label.font = UIFont(name: Fonts.OfficSanExtraBold,
+                        size: Constants.customNavBarTitleFontSize
+    )
     label.textColor = .white
     navigationItem.titleView = label
+  }
+  
+  enum Constants {
+    static let currentEventsButtonFontSize: CGFloat = 13
+    static let currentEventsButtonCorner: CGFloat = 4
+    static let finishedEventsButtonFontSize: CGFloat = 13
+    static let finishedEventsButtonCorner: CGFloat = 4
+    static let toggleStackBorderWidth: CGFloat = 0
+    static let toggleStackViewSpacing: CGFloat = 1
+    static let toggleStackViewCorner: CGFloat = 4
+    static let cellSizeWidth: CGFloat = (UIScreen.main.bounds.width - 24)
+    static let cellSizeHeight: CGFloat = 413
+    static let sizeBetweenCells: CGFloat = 8
+    static let sizeBetweenCellsInSameRow: CGFloat = 0
+    static let sectionInsetTop: CGFloat = 8
+    static let sectionInsetLeft: CGFloat = 8
+    static let sectionInsetBottom: CGFloat = 8
+    static let sectionInsetRight: CGFloat = 8
+    static let cellCornerRadius: CGFloat = 5
+    static let zeroDays = 0
+    static let customNavBarTitleFontSize: CGFloat = 21
+    static let toggleStackViewTopInset: CGFloat = 10
+    static let toggleStackViewLeadingInset: CGFloat = 16
+    static let toggleStackViewTrailingInset: CGFloat = -16
+    static let toggleStackViewHeight: CGFloat = 24
+    static let collectionViewBottomTopInset: CGFloat = 10
   }
 }

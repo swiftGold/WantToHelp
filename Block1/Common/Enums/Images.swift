@@ -12,7 +12,7 @@ enum Images {
   static let history = "iconGreyHistory"
   static let profile = "iconGreyProfile"
   static let heart = "heart"
-  static let plate = "plate"
+  static let plate = "plate-2"
   static let logo = "logo"
   static let simbirSoft = "simbirSoft"
   static let tabBarBackButton = "rectangle7"

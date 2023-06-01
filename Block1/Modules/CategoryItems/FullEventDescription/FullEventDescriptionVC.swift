@@ -25,7 +25,9 @@ class FullEventDescriptionVC: UIViewController {
   
   private let customNavBarTitle: UILabel = {
     let label = UILabel()
-    label.font = UIFont(name: Fonts.OfficSanExtraBold, size: 21)
+    label.font = UIFont(name: Fonts.OfficSanExtraBold,
+                        size: Constants.customNavBarTitleFontSize
+    )
     label.textColor = .white
     return label
   }()
@@ -84,28 +86,24 @@ private extension FullEventDescriptionVC {
     NSLayoutConstraint.activate([
       scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
       scrollView.widthAnchor.constraint(equalTo: view.widthAnchor),
-      scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-      scrollView.bottomAnchor.constraint(equalTo: bottomParticipantsView.topAnchor, constant: -32),
-      
+      scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.scrollViewTopInset),
+      scrollView.bottomAnchor.constraint(equalTo: bottomParticipantsView.topAnchor, constant: Constants.scrollViewBottomInset),
       backgroundView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
       backgroundView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
       backgroundView.topAnchor.constraint(equalTo: scrollView.topAnchor),
       backgroundView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-      
       fullEventDescriptionMainView.topAnchor.constraint(equalTo: backgroundView.topAnchor),
-      fullEventDescriptionMainView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -20),
-      fullEventDescriptionMainView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 20),
+      fullEventDescriptionMainView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: Constants.fullEventDescriptionMainViewTrailingInset),
+      fullEventDescriptionMainView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: Constants.fullEventDescriptionMainViewLeadingInset),
       fullEventDescriptionMainView.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor),
-      
       bottomParticipantsView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       bottomParticipantsView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
       bottomParticipantsView.bottomAnchor.constraint(equalTo: bottomButtonsView.topAnchor),
-      bottomParticipantsView.heightAnchor.constraint(equalToConstant: 68),
-      
+      bottomParticipantsView.heightAnchor.constraint(equalToConstant: Constants.bottomParticipantsViewHeight),
       bottomButtonsView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       bottomButtonsView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
       bottomButtonsView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-      bottomButtonsView.heightAnchor.constraint(equalToConstant: 70),
+      bottomButtonsView.heightAnchor.constraint(equalToConstant: Constants.bottomButtonsViewHeight),
     ])
   }
   
@@ -117,5 +115,15 @@ private extension FullEventDescriptionVC {
     navigationController?.navigationBar.standardAppearance = appearance
     navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
     navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+  }
+  
+  enum Constants {
+    static let customNavBarTitleFontSize: CGFloat = 21
+    static let scrollViewTopInset: CGFloat = 20
+    static let scrollViewBottomInset: CGFloat = -32
+    static let fullEventDescriptionMainViewTrailingInset: CGFloat = -20
+    static let fullEventDescriptionMainViewLeadingInset: CGFloat = 20
+    static let bottomParticipantsViewHeight: CGFloat = 68
+    static let bottomButtonsViewHeight: CGFloat = 70
   }
 }

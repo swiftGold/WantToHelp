@@ -24,17 +24,19 @@ final class BottomButtonsView: UIView {
   
   private let shirtLabel: UILabel = {
     let label = UILabel()
-    label.font = UIFont(name: Fonts.SFUIMed, size: 10)
+    label.font = UIFont(name: Fonts.SFUIMed,
+                        size: Constants.shirtLabelFontSize
+    )
     label.text = "Помочь \n вещами"
     label.textAlignment = .center
     label.textColor = .specialSublabelColor
-    label.numberOfLines = 0
+    label.numberOfLines = Constants.shirtLabelInfinityLines
     return label
   }()
   
   private let shirtStackView: UIStackView = {
     let stackView = UIStackView()
-    stackView.spacing = 5
+    stackView.spacing = Constants.shirtStackViewSpacing
     stackView.axis = .vertical
     stackView.distribution = .fill
     stackView.alignment = .center
@@ -50,17 +52,19 @@ final class BottomButtonsView: UIView {
   
   private let handsLabel: UILabel = {
     let label = UILabel()
-    label.font = UIFont(name: Fonts.SFUIMed, size: 10)
+    label.font = UIFont(name: Fonts.SFUIMed,
+                        size: Constants.handsLabelFontSize
+    )
     label.text = "Стать \n волонтером"
     label.textAlignment = .center
     label.textColor = .specialSublabelColor
-    label.numberOfLines = 0
+    label.numberOfLines = Constants.handsLabelInfinityLines
     return label
   }()
   
   private let handsStackView: UIStackView = {
     let stackView = UIStackView()
-    stackView.spacing = 5
+    stackView.spacing = Constants.handsStackViewSpacing
     stackView.axis = .vertical
     stackView.distribution = .fill
     stackView.alignment = .center
@@ -76,17 +80,19 @@ final class BottomButtonsView: UIView {
   
   private let toolsLabel: UILabel = {
     let label = UILabel()
-    label.font = UIFont(name: Fonts.SFUIMed, size: 10)
+    label.font = UIFont(name: Fonts.SFUIMed,
+                        size: Constants.toolsLabelFontSize
+    )
     label.text = "Проф.\n помощь"
     label.textAlignment = .center
     label.textColor = .specialSublabelColor
-    label.numberOfLines = 0
+    label.numberOfLines = Constants.toolsLabelInfinityLines
     return label
   }()
   
   private let toolsStackView: UIStackView = {
     let stackView = UIStackView()
-    stackView.spacing = 5
+    stackView.spacing = Constants.toolsStackViewSpacing
     stackView.axis = .vertical
     stackView.distribution = .fill
     stackView.alignment = .center
@@ -102,17 +108,19 @@ final class BottomButtonsView: UIView {
   
   private let cashLabel: UILabel = {
     let label = UILabel()
-    label.font = UIFont(name: Fonts.SFUIMed, size: 10)
+    label.font = UIFont(name: Fonts.SFUIMed,
+                        size: Constants.cashLabelFontSize
+    )
     label.text = "Помочь \n деньгами"
     label.textAlignment = .center
     label.textColor = .specialSublabelColor
-    label.numberOfLines = 0
+    label.numberOfLines = Constants.cashLabelInfinityLines
     return label
   }()
   
   private let cashStackView: UIStackView = {
     let stackView = UIStackView()
-    stackView.spacing = 5
+    stackView.spacing = Constants.cashStackViewSpacing
     stackView.axis = .vertical
     stackView.distribution = .fill
     stackView.alignment = .center
@@ -121,7 +129,7 @@ final class BottomButtonsView: UIView {
   
   private let bottomIconsStackView: UIStackView = {
     let stackView = UIStackView()
-    stackView.spacing = 0
+    stackView.spacing = Constants.bottomIconsStackViewSpacing
     stackView.distribution = .fillEqually
     return stackView
   }()
@@ -156,7 +164,7 @@ final class BottomButtonsView: UIView {
   
   private let bottomButtonsStackView: UIStackView = {
     let stackView = UIStackView()
-    stackView.spacing = 3
+    stackView.spacing = Constants.bottomButtonsStackViewSpacing
     stackView.distribution = .fillEqually
     return stackView
   }()
@@ -220,26 +228,20 @@ private extension BottomButtonsView {
   func addSubviews() {
     shirtStackView.addArrangedSubview(shirtImageView)
     shirtStackView.addArrangedSubview(shirtLabel)
-    
     handsStackView.addArrangedSubview(handsImageView)
     handsStackView.addArrangedSubview(handsLabel)
-    
     toolsStackView.addArrangedSubview(toolsImageView)
     toolsStackView.addArrangedSubview(toolsLabel)
-    
     cashStackView.addArrangedSubview(cashImageView)
     cashStackView.addArrangedSubview(cashLabel)
-    
     bottomIconsStackView.addArrangedSubview(shirtStackView)
     bottomIconsStackView.addArrangedSubview(handsStackView)
     bottomIconsStackView.addArrangedSubview(toolsStackView)
     bottomIconsStackView.addArrangedSubview(cashStackView)
-    
     bottomButtonsStackView.addArrangedSubview(shirtButton)
     bottomButtonsStackView.addArrangedSubview(handsButton)
     bottomButtonsStackView.addArrangedSubview(toolsButton)
     bottomButtonsStackView.addArrangedSubview(cashButton)
-    
     myAddSubView(bottomButtonsView)
     bottomButtonsView.myAddSubView(bottomIconsStackView)
     bottomButtonsView.myAddSubView(bottomButtonsStackView)
@@ -253,24 +255,39 @@ private extension BottomButtonsView {
       bottomButtonsView.leadingAnchor.constraint(equalTo: leadingAnchor),
       bottomButtonsView.trailingAnchor.constraint(equalTo: trailingAnchor),
       bottomButtonsView.bottomAnchor.constraint(equalTo: bottomAnchor),
-      bottomButtonsView.heightAnchor.constraint(equalToConstant: 70),
-      
+      bottomButtonsView.heightAnchor.constraint(equalToConstant: Constants.bottomButtonsViewHeight),
       bottomIconsStackView.centerYAnchor.constraint(equalTo: bottomButtonsView.centerYAnchor),
       bottomIconsStackView.leadingAnchor.constraint(equalTo: bottomButtonsView.leadingAnchor),
       bottomIconsStackView.trailingAnchor.constraint(equalTo: bottomButtonsView.trailingAnchor),
-      
       bottomButtonsStackView.centerYAnchor.constraint(equalTo: bottomButtonsView.centerYAnchor),
       bottomButtonsStackView.leadingAnchor.constraint(equalTo: bottomButtonsView.leadingAnchor),
       bottomButtonsStackView.trailingAnchor.constraint(equalTo: bottomButtonsView.trailingAnchor),
-      
       separatorImageView1.centerYAnchor.constraint(equalTo: bottomButtonsView.centerYAnchor),
-      separatorImageView1.leadingAnchor.constraint(equalTo: bottomButtonsView.leadingAnchor, constant: UIScreen.main.bounds.width / 4),
-      
+      separatorImageView1.leadingAnchor.constraint(equalTo: bottomButtonsView.leadingAnchor, constant: Constants.separatorImageView1LeadingInset),
       separatorImageView2.centerYAnchor.constraint(equalTo: bottomButtonsView.centerYAnchor),
-      separatorImageView2.trailingAnchor.constraint(equalTo: bottomButtonsView.trailingAnchor, constant: -(UIScreen.main.bounds.width / 4)),
-      
+      separatorImageView2.trailingAnchor.constraint(equalTo: bottomButtonsView.trailingAnchor, constant: Constants.separatorImageView2TrailingInset),
       separatorImageView3.centerYAnchor.constraint(equalTo: bottomButtonsView.centerYAnchor),
       separatorImageView3.centerXAnchor.constraint(equalTo: bottomButtonsView.centerXAnchor)
     ])
+  }
+  
+  enum Constants {
+    static let shirtLabelFontSize: CGFloat = 10
+    static let shirtLabelInfinityLines = 0
+    static let shirtStackViewSpacing: CGFloat = 5
+    static let handsLabelFontSize: CGFloat = 10
+    static let handsLabelInfinityLines = 0
+    static let handsStackViewSpacing: CGFloat = 5
+    static let toolsLabelFontSize: CGFloat = 10
+    static let toolsLabelInfinityLines = 0
+    static let toolsStackViewSpacing: CGFloat = 5
+    static let cashLabelFontSize: CGFloat = 10
+    static let cashLabelInfinityLines = 0
+    static let cashStackViewSpacing: CGFloat = 5
+    static let bottomIconsStackViewSpacing: CGFloat = 0
+    static let bottomButtonsStackViewSpacing: CGFloat = 3
+    static let bottomButtonsViewHeight: CGFloat = 70
+    static let separatorImageView1LeadingInset: CGFloat = UIScreen.main.bounds.width / 4
+    static let separatorImageView2TrailingInset: CGFloat = -(UIScreen.main.bounds.width / 4)
   }
 }

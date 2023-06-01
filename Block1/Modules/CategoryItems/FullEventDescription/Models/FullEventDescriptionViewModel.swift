@@ -27,4 +27,5 @@ struct FullEventDescriptionViewModel {
   let photo5: String
   let participantsCount: Int
   let diaryString: String
+  let isFinished: Bool
 }

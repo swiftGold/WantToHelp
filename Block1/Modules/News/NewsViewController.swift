@@ -29,8 +29,13 @@ private extension NewsViewController {
   func customNavBarTitle() {
     let label = UILabel()
     label.text = TabBarNames.news
-    label.font = UIFont(name: Fonts.OfficSanExtraBold, size: 21)
+    label.font = UIFont(name: Fonts.OfficSanExtraBold,
+                        size: Constants.customNavBarTitleFontSize)
     label.textColor = .white
     navigationItem.titleView = label
+  }
+  
+  enum Constants {
+    static let customNavBarTitleFontSize: CGFloat = 21
   }
 }

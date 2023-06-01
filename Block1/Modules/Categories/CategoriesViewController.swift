@@ -19,13 +19,17 @@ final class CategoriesViewController: UIViewController {
     let collectionView = UICollectionView(frame: .zero,
                                           collectionViewLayout: layout
     )
-    layout.itemSize = CGSize(width: (UIScreen.main.bounds.width - 27) / 2,
-                             height: 160
+    layout.itemSize = CGSize(width: Constants.cellSizeWidth,
+                             height: Constants.cellSizeHeight
     )
-    layout.minimumLineSpacing = 9
-    layout.minimumInteritemSpacing = 0
+    layout.minimumLineSpacing = Constants.sizeBetweenCells
+    layout.minimumInteritemSpacing = Constants.sizeBetweenCellsInSameRow
     layout.scrollDirection = .vertical
-    layout.sectionInset = UIEdgeInsets(top: 9, left: 9, bottom: 9, right: 9)
+    layout.sectionInset = UIEdgeInsets(top: Constants.sectionInsetTop,
+                                       left: Constants.sectionInsetLeft,
+                                       bottom: Constants.sectionInsetBottom,
+                                       right: Constants.sectionInsetRight
+    )
     collectionView.contentInsetAdjustmentBehavior = .always
     collectionView.bounces = false
     collectionView.delegate = self
@@ -39,7 +43,9 @@ final class CategoriesViewController: UIViewController {
   
   private let titleLabel: UILabel = {
     let label = UILabel()
-    label.font = UIFont(name: Fonts.SFUIReg, size: 17)
+    label.font = UIFont(name: Fonts.SFUIReg,
+                        size: Constants.titleLabelFontSize
+    )
     label.text = "Выберите категорию помощи"
     label.textAlignment = .center
     label.textColor = .specialTitleGreyColor
@@ -90,7 +96,6 @@ extension CategoriesViewController: UICollectionViewDelegate {
 // MARK: - UICollectionViewDataSource impl
 extension CategoriesViewController: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//    return categoriesModel.count
     return isPlaceholder ? 10 : categoriesModel.count
   }
   
@@ -106,7 +111,6 @@ extension CategoriesViewController: UICollectionViewDataSource {
     } else {
       cell.configureCell(with: categoriesModel[indexPath.row])
     }
-//    cell.configureCell(with: categoriesModel[indexPath.row])
     return cell
   }
 }
@@ -144,7 +148,9 @@ private extension CategoriesViewController {
   func customNavBarTitle() {
     let label = UILabel()
     label.text = TabBarNames.categories
-    label.font = UIFont(name: Fonts.OfficSanExtraBold, size: 21)
+    label.font = UIFont(name: Fonts.OfficSanExtraBold,
+                        size: Constants.customNavBarTitleFontSize
+    )
     label.textColor = .white
     navigationItem.titleView = label
   }
@@ -162,14 +168,28 @@ private extension CategoriesViewController {
   
   func addConstraints() {
     NSLayoutConstraint.activate([
-      titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+      titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.titleLabelTopInset),
       titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-      
-      collectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
+      collectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: Constants.collectionViewBottomInset),
       collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
       collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
     ])
+  }
+  
+  enum Constants {
+    static let customNavBarTitleFontSize: CGFloat = 21
+    static let cellSizeWidth: CGFloat = (UIScreen.main.bounds.width - 27) / 2
+    static let cellSizeHeight: CGFloat = 160
+    static let sizeBetweenCells: CGFloat = 9
+    static let sizeBetweenCellsInSameRow: CGFloat = 0
+    static let sectionInsetTop: CGFloat = 9
+    static let sectionInsetLeft: CGFloat = 9
+    static let sectionInsetBottom: CGFloat = 9
+    static let sectionInsetRight: CGFloat = 9
+    static let titleLabelFontSize: CGFloat = 17
+    static let titleLabelTopInset: CGFloat = 20
+    static let collectionViewBottomInset: CGFloat = 8
   }
 }

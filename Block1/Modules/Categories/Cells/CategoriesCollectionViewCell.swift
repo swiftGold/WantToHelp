@@ -18,7 +18,9 @@ final class CategoriesCollectionViewCell: UICollectionViewCell {
   
   private let titleLabel: UILabel = {
     let label = UILabel()
-    label.font = UIFont(name: Fonts.OfficSanExtraBold, size: 15)
+    label.font = UIFont(name: Fonts.OfficSanExtraBold,
+                        size: Constants.titleLabelFontSize
+    )
     label.textAlignment = .center
     label.textColor = .specialGreenColor
     return label
@@ -60,10 +62,18 @@ private extension CategoriesCollectionViewCell {
   func setConstraints() {
     NSLayoutConstraint.activate([
       imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-      imageView.bottomAnchor.constraint(equalTo: titleLabel.topAnchor, constant: -32),
-      titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-      titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-      titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -14)
+      imageView.bottomAnchor.constraint(equalTo: titleLabel.topAnchor, constant: Constants.imageViewTopInset),
+      titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.titleLabelLeadingInset),
+      titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: Constants.titleLabelTrailingTopInset),
+      titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: Constants.titleLabelBottomTopInset)
     ])
+  }
+  
+  enum Constants {
+    static let titleLabelFontSize: CGFloat = 15
+    static let imageViewTopInset: CGFloat = -32
+    static let titleLabelLeadingInset: CGFloat = 20
+    static let titleLabelTrailingTopInset: CGFloat = -20
+    static let titleLabelBottomTopInset: CGFloat = -14
   }
 }

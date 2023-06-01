@@ -18,7 +18,8 @@ class SplashViewController: UIViewController {
   
   private let loadLabel: UILabel = {
     let label = UILabel()
-    label.font = UIFont(name: Fonts.SFUIReg, size: 13)
+    label.font = UIFont(name: Fonts.SFUIReg,
+                        size: Constants.loadLabelFontSize)
     label.textAlignment = .center
     label.textColor = .specialTitleGreyColor
     label.text = "Загрузка..."
@@ -71,20 +72,31 @@ private extension SplashViewController {
   
   func addConstraints() {
     NSLayoutConstraint.activate([
-      logoImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 197),
+      logoImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: Constants.logoImageViewTopInset),
       logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-      logoImageView.heightAnchor.constraint(equalToConstant: 74),
-      logoImageView.widthAnchor.constraint(equalToConstant: 247),
-      
-      loadLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -(view.frame.height / 2 - 50)),
-      loadLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-      loadLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-      
-      simbirSoftLogoImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -48),
+      logoImageView.heightAnchor.constraint(equalToConstant: Constants.logoImageViewHeight),
+      logoImageView.widthAnchor.constraint(equalToConstant: Constants.logoImageViewWidth),
+      loadLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Constants.loadLabelBottonInset),
+      loadLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.loadLabelLeadingInset),
+      loadLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.loadLabelTrailingInset),
+      simbirSoftLogoImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Constants.simbirSoftLogoBottomInset),
       simbirSoftLogoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-      simbirSoftLogoImageView.heightAnchor.constraint(equalToConstant: 16),
-      simbirSoftLogoImageView.widthAnchor.constraint(equalToConstant: 116)
+      simbirSoftLogoImageView.heightAnchor.constraint(equalToConstant: Constants.simbirSoftLogoHeight),
+      simbirSoftLogoImageView.widthAnchor.constraint(equalToConstant: Constants.simbirSoftLogoWidth)
     ])
+  }
+  
+  enum Constants {
+    static let loadLabelFontSize: CGFloat = 13
+    static let logoImageViewTopInset: CGFloat = 197
+    static let logoImageViewHeight: CGFloat = 74
+    static let logoImageViewWidth: CGFloat = 247
+    static let loadLabelLeadingInset: CGFloat = 20
+    static let loadLabelTrailingInset: CGFloat = -20
+    static let simbirSoftLogoBottomInset: CGFloat = -48
+    static let simbirSoftLogoHeight: CGFloat = 16
+    static let simbirSoftLogoWidth: CGFloat = 116
+    static let loadLabelBottonInset: CGFloat = -(UIScreen.main.bounds.height / 2 - 50)
   }
 }
 

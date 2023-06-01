@@ -11,10 +11,12 @@ final class FullEventDescriptionMainView: UIView {
   // MARK: - UI
   private let titleLabel: UILabel = {
     let label = UILabel()
-    label.font = UIFont(name: Fonts.OfficSanExtraBold, size: 21)
+    label.font = UIFont(name: Fonts.OfficSanExtraBold,
+                        size: Constants.titleLabelFontSize
+    )
     label.textAlignment = .left
     label.textColor = .specialTitleColor
-    label.numberOfLines = 0
+    label.numberOfLines = Constants.titleLabelInfinityLines
     return label
   }()
   
@@ -26,7 +28,9 @@ final class FullEventDescriptionMainView: UIView {
   
   private let diaryLabel: UILabel = {
     let label = UILabel()
-    label.font = UIFont(name: Fonts.SFUIMed, size: 11)
+    label.font = UIFont(name: Fonts.SFUIMed,
+                        size: Constants.diaryLabelFontSize
+    )
     label.textAlignment = .left
     label.textColor = .specialDiaryLightGreyColor
     return label
@@ -34,7 +38,7 @@ final class FullEventDescriptionMainView: UIView {
   
   private let diaryStackView: UIStackView = {
     let stackView = UIStackView()
-    stackView.spacing = 10
+    stackView.spacing = Constants.diaryStackViewSpacing
     stackView.distribution = .fill
     stackView.alignment = .leading
     return stackView
@@ -42,19 +46,23 @@ final class FullEventDescriptionMainView: UIView {
   
   private let organizationNameLabel: UILabel = {
     let label = UILabel()
-    label.font = UIFont(name: Fonts.SFUIReg, size: 11)
+    label.font = UIFont(name: Fonts.SFUIReg,
+                        size: Constants.organizationNameLabelFontSize
+    )
     label.textAlignment = .left
     label.textColor = .specialTitleGreyColor
-    label.numberOfLines = 0
+    label.numberOfLines = Constants.organizationNameLabelInfinityLines
     return label
   }()
   
   private let adressLabel: UILabel = {
     let label = UILabel()
-    label.font = UIFont(name: Fonts.SFUIReg, size: 15)
+    label.font = UIFont(name: Fonts.SFUIReg,
+                        size: Constants.adressLabelFontSize
+    )
     label.textAlignment = .left
     label.textColor = .specialTitleGreyColor
-    label.numberOfLines = 0
+    label.numberOfLines = Constants.adressLabelInfinityLines
     return label
   }()
   
@@ -66,7 +74,7 @@ final class FullEventDescriptionMainView: UIView {
   
   private let adressStackView: UIStackView = {
     let stackView = UIStackView()
-    stackView.spacing = 10
+    stackView.spacing = Constants.adressStackViewSpacing
     stackView.distribution = .fill
     stackView.alignment = .leading
     return stackView
@@ -74,7 +82,9 @@ final class FullEventDescriptionMainView: UIView {
   
   private let firstPhoneLabel: UILabel = {
     let label = UILabel()
-    label.font = UIFont(name: Fonts.SFUIReg, size: 15)
+    label.font = UIFont(name: Fonts.SFUIReg,
+                        size: Constants.firstPhoneLabelFontSize
+    )
     label.textAlignment = .left
     label.textColor = .specialTitleGreyColor
     return label
@@ -82,7 +92,9 @@ final class FullEventDescriptionMainView: UIView {
   
   private let secondPhoneLabel: UILabel = {
     let label = UILabel()
-    label.font = UIFont(name: Fonts.SFUIReg, size: 15)
+    label.font = UIFont(name: Fonts.SFUIReg,
+                        size: Constants.secondPhoneLabelFontSize
+    )
     label.textAlignment = .left
     label.textColor = .specialTitleGreyColor
     return label
@@ -91,7 +103,7 @@ final class FullEventDescriptionMainView: UIView {
   private let phoneNumbersStackView: UIStackView = {
     let stackView = UIStackView()
     stackView.axis = .vertical
-    stackView.spacing = 3
+    stackView.spacing = Constants.phoneNumbersStackViewSpacing
     stackView.distribution = .fill
     stackView.alignment = .leading
     return stackView
@@ -105,7 +117,7 @@ final class FullEventDescriptionMainView: UIView {
   
   private let phoneStackView: UIStackView = {
     let stackView = UIStackView()
-    stackView.spacing = 10
+    stackView.spacing = Constants.phoneStackViewSpacing
     stackView.distribution = .fill
     stackView.alignment = .leading
     return stackView
@@ -119,7 +131,9 @@ final class FullEventDescriptionMainView: UIView {
   
   private let mailLabel: UILabel = {
     let label = UILabel()
-    label.font = UIFont(name: Fonts.SFUIReg, size: 15)
+    label.font = UIFont(name: Fonts.SFUIReg,
+                        size: Constants.mailLabelFontSize
+    )
     label.text = "У вас есть вопросы?"
     label.textAlignment = .left
     label.textColor = .specialTitleGreyColor
@@ -129,7 +143,9 @@ final class FullEventDescriptionMainView: UIView {
   private lazy var writeUsButton: UIButton = {
     let button = UIButton(type: .system)
     button.setTitle("Напишите нам", for: .normal)
-    button.titleLabel?.font = UIFont(name: Fonts.SFUIReg, size: 15)
+    button.titleLabel?.font = UIFont(name: Fonts.SFUIReg,
+                                     size: Constants.writeUsButtonFontSize
+    )
     button.addTarget(self, action: #selector(writeUsButtonTapped), for: .touchUpInside)
     button.tintColor = .specialNavBarBGColor
     return button
@@ -137,9 +153,9 @@ final class FullEventDescriptionMainView: UIView {
   
   private let mailStackView: UIStackView = {
     let stackView = UIStackView()
-    stackView.spacing = 10
+    stackView.spacing = Constants.mailStackViewSpacing
     stackView.distribution = .fill
-    stackView.alignment = .leading
+    stackView.alignment = .center
     return stackView
   }()
   
@@ -164,31 +180,35 @@ final class FullEventDescriptionMainView: UIView {
   private let smallPhotosStackView: UIStackView = {
     let stackView = UIStackView()
     stackView.axis = .vertical
-    stackView.spacing = 10
+    stackView.spacing = Constants.smallPhotosStackViewSpacing
     stackView.distribution = .fillEqually
     return stackView
   }()
   
   private let photosStackView: UIStackView = {
     let stackView = UIStackView()
-    stackView.spacing = 10
-    stackView.distribution = .fill
+    stackView.spacing = Constants.photosStackViewSpacing
+    stackView.distribution = .fillProportionally
     return stackView
   }()
   
   private let descriptionLabel: UILabel = {
     let label = UILabel()
-    label.font = UIFont(name: Fonts.SFUIReg, size: 15)
+    label.font = UIFont(name: Fonts.SFUIReg,
+                        size: Constants.descriptionLabelFontSize
+    )
     label.textAlignment = .left
     label.textColor = .specialTitleGreyColor
-    label.numberOfLines = 0
+    label.numberOfLines = Constants.descriptionLabelInfinityLines
     return label
   }()
   
   private lazy var routeToSiteButton: UIButton = {
     let button = UIButton(type: .system)
     button.setTitle("Перейти на сайт организаии", for: .normal)
-    button.titleLabel?.font = UIFont(name: Fonts.SFUIReg, size: 15)
+    button.titleLabel?.font = UIFont(name: Fonts.SFUIReg,
+                                     size: Constants.routeToSiteButtonFontSize
+    )
     button.addTarget(self, action: #selector(routeToSiteButtonTapped), for: .touchUpInside)
     button.tintColor = .specialNavBarBGColor
     return button
@@ -196,7 +216,7 @@ final class FullEventDescriptionMainView: UIView {
   
   private let mainStackView: UIStackView = {
     let stackView = UIStackView()
-    stackView.spacing = 10
+    stackView.spacing = Constants.mainStackViewSpacing
     stackView.axis = .vertical
     stackView.alignment = .top
     stackView.distribution = .fillProportionally
@@ -247,26 +267,19 @@ private extension FullEventDescriptionMainView {
   func addSubviews() {
     diaryStackView.addArrangedSubview(diaryImageView)
     diaryStackView.addArrangedSubview(diaryLabel)
-    
     adressStackView.addArrangedSubview(adressImageView)
     adressStackView.addArrangedSubview(adressLabel)
-    
     phoneNumbersStackView.addArrangedSubview(firstPhoneLabel)
     phoneNumbersStackView.addArrangedSubview(secondPhoneLabel)
-    
     phoneStackView.addArrangedSubview(phoneImageView)
     phoneStackView.addArrangedSubview(phoneNumbersStackView)
-    
     mailStackView.addArrangedSubview(mailImageView)
     mailStackView.addArrangedSubview(mailLabel)
     mailStackView.addArrangedSubview(writeUsButton)
-    
     smallPhotosStackView.addArrangedSubview(firstSmallPhotoImageView)
     smallPhotosStackView.addArrangedSubview(secondSmallPhotoImageView)
-    
     photosStackView.addArrangedSubview(bigPhotoImageView)
     photosStackView.addArrangedSubview(smallPhotosStackView)
-    
     mainStackView.addArrangedSubview(titleLabel)
     mainStackView.addArrangedSubview(diaryStackView)
     mainStackView.addArrangedSubview(organizationNameLabel)
@@ -276,7 +289,6 @@ private extension FullEventDescriptionMainView {
     mainStackView.addArrangedSubview(photosStackView)
     mainStackView.addArrangedSubview(descriptionLabel)
     mainStackView.addArrangedSubview(routeToSiteButton)
-    
     myAddSubView(mainStackView)
   }
   
@@ -286,8 +298,39 @@ private extension FullEventDescriptionMainView {
       mainStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
       mainStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
       mainStackView.bottomAnchor.constraint(equalTo: bottomAnchor),
+      bigPhotoImageView.widthAnchor.constraint(equalToConstant: Constants.bigPhotoImageViewWidth),
+      smallPhotosStackView.widthAnchor.constraint(equalToConstant: Constants.smallPhotosStackViewWidth),
+      photosStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
+      photosStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
+      photosStackView.heightAnchor.constraint(equalToConstant: Constants.photosStackViewHeight)
     ])
   }
+  
+  enum Constants {
+    static let titleLabelFontSize: CGFloat = 21
+    static let titleLabelInfinityLines = 0
+    static let diaryLabelFontSize: CGFloat = 11
+    static let diaryStackViewSpacing: CGFloat = 10
+    static let organizationNameLabelFontSize: CGFloat = 11
+    static let organizationNameLabelInfinityLines = 0
+    static let adressLabelFontSize: CGFloat = 15
+    static let adressLabelInfinityLines = 0
+    static let adressStackViewSpacing: CGFloat = 10
+    static let firstPhoneLabelFontSize: CGFloat = 15
+    static let secondPhoneLabelFontSize: CGFloat = 15
+    static let phoneNumbersStackViewSpacing: CGFloat = 3
+    static let phoneStackViewSpacing: CGFloat = 10
+    static let mailLabelFontSize: CGFloat = 15
+    static let writeUsButtonFontSize: CGFloat = 15
+    static let mailStackViewSpacing: CGFloat = 10
+    static let smallPhotosStackViewSpacing: CGFloat = 10
+    static let photosStackViewSpacing: CGFloat = 10
+    static let descriptionLabelFontSize: CGFloat = 15
+    static let routeToSiteButtonFontSize: CGFloat = 15
+    static let descriptionLabelInfinityLines = 0
+    static let mainStackViewSpacing: CGFloat = 10
+    static let bigPhotoImageViewWidth: CGFloat = 222
+    static let smallPhotosStackViewWidth: CGFloat = 103
+    static let photosStackViewHeight: CGFloat = 168
+  }
 }
-
-
