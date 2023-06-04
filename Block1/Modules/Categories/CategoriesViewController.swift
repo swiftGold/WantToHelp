@@ -54,10 +54,7 @@ final class CategoriesViewController: UIViewController {
   
   // MARK: - Variables
   private let jsonService = JSONService()
-  
   private var categoriesModel: [CategoryModel] = []
-  private var isPlaceholder = false
-  
   private let CategoryViewsControllers = [
     ChildsViewController(),
     AdultViewController(),
@@ -72,7 +69,6 @@ final class CategoriesViewController: UIViewController {
     navigationController?.isNavigationBarHidden = false
     setupNavBar()
     setupViewController()
-    showPlaceholders()
     fetchDataFromJson()
   }
   
@@ -96,7 +92,7 @@ extension CategoriesViewController: UICollectionViewDelegate {
 // MARK: - UICollectionViewDataSource impl
 extension CategoriesViewController: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return isPlaceholder ? 10 : categoriesModel.count
+    categoriesModel.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -105,12 +101,7 @@ extension CategoriesViewController: UICollectionViewDataSource {
       for: indexPath) as? CategoriesCollectionViewCell else {
       return UICollectionViewCell()
     }
-    
-    if isPlaceholder {
-        cell.configurePlaceholder()
-    } else {
-      cell.configureCell(with: categoriesModel[indexPath.row])
-    }
+    cell.configureCell(with: categoriesModel[indexPath.row])
     return cell
   }
 }
@@ -132,17 +123,11 @@ private extension CategoriesViewController {
       switch result {
       case .success(let response):
         strongSelf.categoriesModel = response
-        strongSelf.isPlaceholder = false
       case .failure(let error):
         print(error.localizedDescription)
       }
     })
     collectionView.reloadData()
-  }
-  
-  func showPlaceholders() {
-      isPlaceholder = true
-      collectionView.reloadData()
   }
   
   func customNavBarTitle() {

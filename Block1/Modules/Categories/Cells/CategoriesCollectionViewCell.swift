@@ -12,7 +12,6 @@ final class CategoriesCollectionViewCell: UICollectionViewCell {
   // MARK: - UI
   private let imageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.clipsToBounds = true
     return imageView
   }()
   
@@ -39,10 +38,6 @@ final class CategoriesCollectionViewCell: UICollectionViewCell {
   func configureCell(with model: CategoryModel) {
     imageView.loadImage(from: model.image)
     titleLabel.text = model.title
-  }
-  
-  func configurePlaceholder() {
-    imageView.image = UIImage(named: Images.placeHolder)
   }
 }
 
