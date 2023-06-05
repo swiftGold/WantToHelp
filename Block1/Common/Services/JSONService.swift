@@ -9,8 +9,8 @@ import Foundation
 import SwiftyJSON
 
 protocol JSONServiceProtocol {
-//  func fetchCategoriesFromJSON(completion: @escaping (Result<[CategoryModel], Error>) -> Void)
-//  func encode(with model: [CategoryModel]) -> String
+  func fetchCategoriesFromJSON(completion: @escaping (Result<[CategoryModel], Error>) -> Void)
+  func fetchFullEventDescriptionFromJSON(completion: @escaping (Result<[FullEventDescriptionModel], Error>) -> Void)
 }
 
 final class JSONService {

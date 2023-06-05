@@ -8,7 +8,7 @@
 import UIKit
 
 final class MainTabBarController: UITabBarController {
-  //MARK: - UI
+  // MARK: - UI
   private lazy var middleButton: UIButton = {
     let middleButton = UIButton(type: .custom)
     let middleIcon = UIImage(named: Images.heart)?.withRenderingMode(.alwaysTemplate)
@@ -24,6 +24,17 @@ final class MainTabBarController: UITabBarController {
     middleButton.center = CGPoint(x: tabBar.center.x, y: (tabBar.bounds.height - middleButton.bounds.height / Constants.tabBarcoefficient) - Constants.spaceForTabBarImage)
     return middleButton
   }()
+  
+  var moduleBuilder: ModuleBuilderProtocol
+  
+  init(moduleBuilder: ModuleBuilderProtocol) {
+    self.moduleBuilder = moduleBuilder
+    super.init(nibName: nil, bundle: nil)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
   
   // MARK: - Lifecycles
   override func viewDidLoad() {
@@ -81,11 +92,11 @@ private extension MainTabBarController {
   
   func generateTabBar() {
     
-    let newsNavVC = UINavigationController(rootViewController: NewsViewController())
-    let searchNavVC = UINavigationController(rootViewController: SearchViewController())
-    let categoriesNavVC = UINavigationController(rootViewController: CategoriesViewController())
-    let historyNavVC = UINavigationController(rootViewController: HistoryViewController())
-    let profileNavVC = UINavigationController(rootViewController: ProfileViewController())
+    let newsNavVC = UINavigationController(rootViewController: moduleBuilder.buildNewsViewController())
+    let searchNavVC = UINavigationController(rootViewController: moduleBuilder.buildSearchViewController())
+    let categoriesNavVC = UINavigationController(rootViewController: moduleBuilder.buildCategoriesViewController())
+    let historyNavVC = UINavigationController(rootViewController: moduleBuilder.buildHistoryViewController())
+    let profileNavVC = UINavigationController(rootViewController: moduleBuilder.buildProfileViewController())
     
     viewControllers = [
       generateVC(viewConroller: newsNavVC,

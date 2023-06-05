@@ -7,8 +7,13 @@
 
 import UIKit
 
-class ChildsViewController: UIViewController {
-  //MARK: - UI
+protocol ChildsViewControllerProtocol: AnyObject {
+  func routeToVC(to viewController: UIViewController)
+  func showSortedEvents(with sortedViewModels: [ShortEventViewModel])
+}
+
+final class ChildsViewController: CustomVC {
+  // MARK: - UI
   private lazy var barButtonItem = UIBarButtonItem(image: UIImage(named: Images.filter), style: .plain, target: self, action: #selector(didTapBarButton))
   
   private lazy var currentEventsButton: UIButton = {
@@ -76,34 +81,36 @@ class ChildsViewController: UIViewController {
   }()
   
   // MARK: - Variables
-  private var jsonService = JSONService()
-  private let calendarManager = CalendarManager()
-  private var eventViewModels: [ShortEventViewModel] = []
+  var presenter: ChildsPresenterProtocol?
   private var sortedViewModels: [ShortEventViewModel] = []
-  private var fullDescriptionViewModels: [FullEventDescriptionViewModel] = []
   private var sortedDescriptionViewModels: [FullEventDescriptionViewModel] = []
-  private var isCurrent = true
   
   // MARK: - Lifecycles
   override func viewDidLoad() {
     super.viewDidLoad()
     setupViewController()
-    setupNavBar()
-    fetchDataFromJson()
-    isCurrentEvents()
+    setupNavBarWithBackButton(titleName: TabBarNames.childs)
+    navigationItem.rightBarButtonItem = barButtonItem
+    presenter?.viewDidLoad()
   }
   
   // MARK: - Objc methods
   @objc
   private func currentEventsButtonTapped() {
-    isCurrent = true
-    isCurrentEvents()
+    presenter?.didTapToggleButton(isCurrentEvent: true)
+    currentEventsButton.backgroundColor = .specialNavBarBGColor
+    currentEventsButton.tintColor = .white
+    finishedEventsButton.backgroundColor = .clear
+    finishedEventsButton.tintColor = .specialNavBarBGColor
   }
   
   @objc
   private func finishedEventsButtonTapped() {
-    isCurrent = false
-    isCurrentEvents()
+    presenter?.didTapToggleButton(isCurrentEvent: false)
+    currentEventsButton.backgroundColor = .clear
+    currentEventsButton.tintColor = .specialNavBarBGColor
+    finishedEventsButton.backgroundColor = .specialNavBarBGColor
+    finishedEventsButton.tintColor = .white
   }
   
   @objc
@@ -112,15 +119,23 @@ class ChildsViewController: UIViewController {
   }
 }
 
+// MARK: - ChildsViewControllerProtocol impl
+extension ChildsViewController: ChildsViewControllerProtocol {
+  func routeToVC(to viewController: UIViewController) {
+    navigationController?.pushViewController(viewController, animated: true)
+  }
+  
+  func showSortedEvents(with sortedViewModels: [ShortEventViewModel]) {
+    self.sortedViewModels = sortedViewModels
+    collectionView.reloadData()
+  }
+}
+
 // MARK: - UICollectionViewDelegate impl
 extension ChildsViewController: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     let index = indexPath.row
-    let viewModel = sortedDescriptionViewModels[index]
-    let viewController = FullEventDescriptionVC()
-    viewController.configureViewController(with: viewModel)
-    navigationController?.modalPresentationStyle = .fullScreen
-    navigationController?.pushViewController(viewController, animated: true)
+    presenter?.routeToCategoryItem(index: index)
   }
 }
 
@@ -144,103 +159,6 @@ extension ChildsViewController: UICollectionViewDataSource {
 
 // MARK: - Private Methods
 private extension ChildsViewController {
-  func fetchDataFromJson() {
-    jsonService.fetchFullEventDescriptionFromJSON(completion: { [weak self] result in
-      guard let strongSelf = self else { return }
-      switch result {
-      case .success(let response):
-        strongSelf.fullDescriptionViewModels = response.map({ model -> FullEventDescriptionViewModel in
-          let diaryString = strongSelf.calculateDaysToEvent(with: model).0
-          let isFinished = strongSelf.calculateDaysToEvent(with: model).1
-          let viewModel = FullEventDescriptionViewModel(title: model.title,
-                                                        description: model.description,
-                                                        dateStart: model.dateStart,
-                                                        dateFinish: model.dateFinish,
-                                                        organizationName: model.organizationName,
-                                                        adress: model.adress,
-                                                        phone1: model.phone1,
-                                                        phone2: model.phone2,
-                                                        mainImage: model.mainImage,
-                                                        detailImage1: model.detailImage1,
-                                                        detailImage2: model.detailImage2,
-                                                        detailImage3: model.detailImage3,
-                                                        photo1: model.photo1,
-                                                        photo2: model.photo2,
-                                                        photo3: model.photo3,
-                                                        photo4: model.photo4,
-                                                        photo5: model.photo5,
-                                                        participantsCount: model.participantsCount,
-                                                        diaryString: diaryString,
-                                                        isFinished: isFinished
-          )
-          return viewModel
-        })
-      case .failure(let error):
-        print(error.localizedDescription)
-      }
-    })
-    collectionView.reloadData()
-  }
-  
-  func mappingToViewModels(with models: [FullEventDescriptionViewModel]) -> [ShortEventViewModel] {
-    let viewModels = models.map { model in
-      ShortEventViewModel(title: model.title,
-                          description: model.description,
-                          dateStart: model.dateStart,
-                          dateFinish: model.dateFinish,
-                          mainImage: model.mainImage,
-                          diaryString: model.diaryString,
-                          isFinished: model.isFinished
-      )
-    }
-    return viewModels
-  }
-  
-  func calculateDaysToEvent(with model: FullEventDescriptionModel) -> (String, Bool) {
-    let startDateString = calendarManager.fetchStringDateFromTimeStamp(ti: model.dateStart)
-    let finishDateString = calendarManager.fetchStringDateFromTimeStamp(ti: model.dateFinish)
-    let startDate = calendarManager.fetchDateFromTimeStamp(ti: model.dateStart)
-    let currentDate = Date()
-    let howMuchDaysLeft = calendarManager.howMuchdaysLeft(currentDate: currentDate, eventDate: startDate)
-    let eventFinished = calendarManager.fetchFullStringDateFromTimeStamp(ti: model.dateFinish)
-    if howMuchDaysLeft >= Constants.zeroDays {
-      return ("Осталось: \(howMuchDaysLeft) дней (\(startDateString) - \(finishDateString))", false)
-    } else {
-      return ("Завершено: " + "\(eventFinished)".firstCharOnly(), true)
-    }
-  }
-  
-  func isCurrentEvents() {
-    if isCurrent {
-      currentEventsButton.backgroundColor = .specialNavBarBGColor
-      currentEventsButton.tintColor = .white
-      finishedEventsButton.backgroundColor = .clear
-      finishedEventsButton.tintColor = .specialNavBarBGColor
-      
-      fullDescriptionViewModels.forEach { model in
-        if !model.isFinished {
-          sortedDescriptionViewModels.removeAll()
-          sortedDescriptionViewModels.append(model)
-          sortedViewModels = mappingToViewModels(with: sortedDescriptionViewModels)
-        }
-      }
-    } else {
-      currentEventsButton.backgroundColor = .clear
-      currentEventsButton.tintColor = .specialNavBarBGColor
-      finishedEventsButton.backgroundColor = .specialNavBarBGColor
-      finishedEventsButton.tintColor = .white
-      
-      fullDescriptionViewModels.forEach { model in
-        if model.isFinished {
-          sortedDescriptionViewModels.removeAll()
-          sortedDescriptionViewModels.append(model)
-          sortedViewModels = mappingToViewModels(with: sortedDescriptionViewModels)
-        }
-      }
-    }
-    collectionView.reloadData()
-  }
-  
   func setupViewController() {
     view.backgroundColor = .white
     addSubviews()
@@ -267,26 +185,6 @@ private extension ChildsViewController {
     ])
   }
   
-  func setupNavBar() {
-    customNavBarTitle()
-    navigationItem.rightBarButtonItem = barButtonItem
-    let appearance = UINavigationBarAppearance()
-    appearance.backgroundColor = UIColor.specialNavBarBGColor
-    navigationController?.navigationBar.standardAppearance = appearance
-    navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
-    navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-  }
-  
-  func customNavBarTitle() {
-    let label = UILabel()
-    label.text = TabBarNames.childs
-    label.font = UIFont(name: Fonts.OfficSanExtraBold,
-                        size: Constants.customNavBarTitleFontSize
-    )
-    label.textColor = .white
-    navigationItem.titleView = label
-  }
-  
   enum Constants {
     static let currentEventsButtonFontSize: CGFloat = 13
     static let currentEventsButtonCorner: CGFloat = 4
@@ -304,7 +202,6 @@ private extension ChildsViewController {
     static let sectionInsetBottom: CGFloat = 8
     static let sectionInsetRight: CGFloat = 8
     static let cellCornerRadius: CGFloat = 5
-    static let zeroDays = 0
     static let customNavBarTitleFontSize: CGFloat = 21
     static let toggleStackViewTopInset: CGFloat = 10
     static let toggleStackViewLeadingInset: CGFloat = 16

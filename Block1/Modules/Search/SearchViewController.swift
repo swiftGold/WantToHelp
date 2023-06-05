@@ -7,36 +7,24 @@
 
 import UIKit
 
-class SearchViewController: UIViewController {
+protocol SearchViewControllerProtocol: AnyObject {}
+
+final class SearchViewController: CustomVC {
+  // MARK: - UI
+  
+  // MARK: - Variables
+  var presenter: SearchPresenterProtocol?
+  
   // MARK: - Lifecycles
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .systemBackground
-    setupNavBar()
+    setupNavBar(titleName: TabBarNames.search)
   }
 }
 
+// MARK: - ViewControllerProtocol impl
+extension SearchViewController: SearchViewControllerProtocol {}
+
 // MARK: - Private Methods
-private extension SearchViewController {
-  func setupNavBar() {
-    customNavBarTitle()
-    
-    let appearance = UINavigationBarAppearance()
-    appearance.backgroundColor = UIColor.specialNavBarBGColor
-    navigationController?.navigationBar.standardAppearance = appearance
-    navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
-  }
-  
-  func customNavBarTitle() {
-    let label = UILabel()
-    label.text = TabBarNames.news
-    label.font = UIFont(name: Fonts.OfficSanExtraBold,
-                        size: Constants.customNavBarTitleFontSize)
-    label.textColor = .white
-    navigationItem.titleView = label
-  }
-  
-  enum Constants {
-    static let customNavBarTitleFontSize: CGFloat = 21
-  }
-}
+private extension SearchViewController {}

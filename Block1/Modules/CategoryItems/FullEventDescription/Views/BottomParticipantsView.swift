@@ -66,7 +66,7 @@ final class BottomParticipantsView: UIView {
     fatalError("init(coder:) has not been implemented")
   }
   
-  func configureView(with model: FullEventDescriptionViewModel) {
+  func configureView(with model: ParticipantsViewModel) {
     photo1ImageView.loadImage(from: model.photo1)
     photo2ImageView.loadImage(from: model.photo2)
     photo3ImageView.loadImage(from: model.photo3)

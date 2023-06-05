@@ -7,7 +7,14 @@
 
 import UIKit
 
-final class CategoriesViewController: UIViewController {
+
+
+protocol CategoriesViewControllerProtocol: AnyObject {
+  func setupCollectionView(with models: [CategoryModel])
+  func routeToVC(with viewController: UIViewController)
+}
+
+final class CategoriesViewController: CustomVC {
   // MARK: - UI
   private lazy var barButtonItem = UIBarButtonItem(
     image: UIImage(named: Images.tabBarBackButton),
@@ -53,7 +60,7 @@ final class CategoriesViewController: UIViewController {
   }()
   
   // MARK: - Variables
-  private let jsonService = JSONService()
+  var presenter: CategoriesPresenterProtocol?
   private var categoriesModel: [CategoryModel] = []
   private let CategoryViewsControllers = [
     ChildsViewController(),
@@ -67,9 +74,10 @@ final class CategoriesViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     navigationController?.isNavigationBarHidden = false
-    setupNavBar()
+    navigationItem.leftBarButtonItem = barButtonItem
+    setupNavBar(titleName: TabBarNames.categories)
     setupViewController()
-    fetchDataFromJson()
+    presenter?.viewDidLoad()
   }
   
   // MARK: - Objc methods
@@ -79,13 +87,23 @@ final class CategoriesViewController: UIViewController {
   }
 }
 
+// MARK: - CategoriesViewControllerProtocol impl
+extension CategoriesViewController: CategoriesViewControllerProtocol {
+  func routeToVC(with viewController: UIViewController) {
+    navigationController?.pushViewController(viewController, animated: true)
+  }
+  
+  func setupCollectionView(with models: [CategoryModel]) {
+    categoriesModel = models
+    collectionView.reloadData()
+  }
+}
+
 // MARK: - UICollectionViewDelegate impl
 extension CategoriesViewController: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     let index = indexPath.row
-    let viewController = CategoryViewsControllers[index]
-    navigationController?.modalPresentationStyle = .fullScreen
-    navigationController?.pushViewController(viewController, animated: true)
+    presenter?.routeToCategoryItem(index: index)
   }
 }
 
@@ -108,38 +126,6 @@ extension CategoriesViewController: UICollectionViewDataSource {
 
 // MARK: - Private Methods
 private extension CategoriesViewController {
-  func setupNavBar() {
-    customNavBarTitle()
-    navigationItem.leftBarButtonItem = barButtonItem
-    let appearance = UINavigationBarAppearance()
-    appearance.backgroundColor = UIColor.specialNavBarBGColor
-    navigationController?.navigationBar.standardAppearance = appearance
-    navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
-  }
-  
-  func fetchDataFromJson() {
-    jsonService.fetchCategoriesFromJSON(completion: { [weak self] result in
-      guard let strongSelf = self else { return }
-      switch result {
-      case .success(let response):
-        strongSelf.categoriesModel = response
-      case .failure(let error):
-        print(error.localizedDescription)
-      }
-    })
-    collectionView.reloadData()
-  }
-  
-  func customNavBarTitle() {
-    let label = UILabel()
-    label.text = TabBarNames.categories
-    label.font = UIFont(name: Fonts.OfficSanExtraBold,
-                        size: Constants.customNavBarTitleFontSize
-    )
-    label.textColor = .white
-    navigationItem.titleView = label
-  }
-  
   func setupViewController() {
     view.backgroundColor = .white
     addSubviews()

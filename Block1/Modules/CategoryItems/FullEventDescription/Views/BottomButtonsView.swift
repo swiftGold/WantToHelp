@@ -7,6 +7,13 @@
 
 import UIKit
 
+protocol BottomButtonsViewDelegate: AnyObject {
+  func didTapShirtButton()
+  func didTapHandsButton()
+  func didTapToolsButton()
+  func didTapCashButton()
+}
+
 final class BottomButtonsView: UIView {
   // MARK: - UI
   private let bottomButtonsView: UIView = {
@@ -187,6 +194,9 @@ final class BottomButtonsView: UIView {
     return imageView
   }()
   
+  // MARK: - Delegate
+  weak var delegate: BottomButtonsViewDelegate?
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
     setupView()
@@ -199,21 +209,25 @@ final class BottomButtonsView: UIView {
   // MARK: - Objc methods
   @objc
   private func shirtButtonTapped() {
+    delegate?.didTapShirtButton()
     print(#function)
   }
   
   @objc
   private func handsButtonTapped() {
+    delegate?.didTapHandsButton()
     print(#function)
   }
   
   @objc
   private func toolsButtonTapped() {
+    delegate?.didTapToolsButton()
     print(#function)
   }
   
   @objc
   private func cashButtonTapped() {
+    delegate?.didTapCashButton()
     print(#function)
   }
 }

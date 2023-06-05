@@ -8,7 +8,10 @@
 import UIKit
 
 protocol CalendarManagerProtocol {
-
+  func fetchStringDateFromTimeStamp(ti: TimeInterval) -> String
+  func fetchFullStringDateFromTimeStamp(ti: TimeInterval) -> String
+  func fetchDateFromTimeStamp(ti: TimeInterval) -> Date
+  func howMuchdaysLeft(currentDate: Date, eventDate: Date) -> Int
 }
 
 final class CalendarManager {

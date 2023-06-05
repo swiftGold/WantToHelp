@@ -7,7 +7,11 @@
 
 import UIKit
 
-class SplashViewController: UIViewController {
+protocol SplashViewControllerProtocol: AnyObject {
+  func routeToTabBarVIewController(_ viewController: UIViewController)
+}
+
+final class SplashViewController: UIViewController {
   // MARK: - UI
   private let logoImageView: UIImageView = {
     let imageView = UIImageView()
@@ -31,35 +35,37 @@ class SplashViewController: UIViewController {
     imageView.image = UIImage(named: Images.simbirSoft)
     return imageView
   }()
-    
+  
+  // MARK: - Variables
+  var presenter: SplashPresenterProtocol?
+  
   // MARK: - Lifecycles
   override func viewDidLoad() {
     super.viewDidLoad()
     setupViewController()
-    routeAfterLoad()
+    presenter?.present()
     LoadingOverlay.shared.showOverlay(view: self.view)
-    // TODO: - delete after
-//        for family in UIFont.familyNames.sorted() {
-//          let names = UIFont.fontNames(forFamilyName: family)
-//          print("family : \(family) Font names : \(names)")
-//        }
+  }
+}
+
+// MARK: - SplashViewControllerProtocol impl
+extension SplashViewController: SplashViewControllerProtocol {
+  func routeToTabBarVIewController(_ viewController: UIViewController) {
+    viewController.modalPresentationStyle = .fullScreen
+    present(viewController, animated: false)
+  }
+  
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+    LoadingOverlay.shared.hideOverlayView()
+    loadLabel.isHidden = true
   }
 }
 
 // MARK: - Private methods
 private extension SplashViewController {
-  func routeAfterLoad() {
-    DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
-      guard let strongSelf = self else { return }
-      let viewController = MainTabBarController()
-      viewController.modalPresentationStyle = .fullScreen
-      strongSelf.present(viewController, animated: false)
-    }
-  }
-  
   func setupViewController() {
     view.backgroundColor = .specialLightBlueBGColor
-    
     addSubviews()
     addConstraints()
   }
@@ -99,4 +105,3 @@ private extension SplashViewController {
     static let loadLabelBottonInset: CGFloat = -(UIScreen.main.bounds.height / 2 - 50)
   }
 }
-

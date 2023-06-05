@@ -7,9 +7,20 @@
 
 import UIKit
 
-class FullEventDescriptionVC: UIViewController {
-  //MARK: - UI
-  private lazy var barButtonItem = UIBarButtonItem(image: UIImage(named: Images.share), style: .plain, target: self, action: #selector(didTapBarButton))
+protocol FullEventDescriptionVCProtocol: AnyObject {
+  func updateViewController(titleText: String,
+                            with mainViewModel: MainViewModel,
+                            with participantsViewModel: ParticipantsViewModel
+  )
+}
+
+final class FullEventDescriptionVC: CustomVC {
+  // MARK: - UI
+  private lazy var barButtonItem = UIBarButtonItem(image: UIImage(named: Images.share),
+                                                   style: .plain,
+                                                   target: self,
+                                                   action: #selector(didTapBarButton)
+  )
   
   private let scrollView: UIScrollView = {
     let scrollView = UIScrollView()
@@ -32,6 +43,8 @@ class FullEventDescriptionVC: UIViewController {
     return label
   }()
   
+  // MARK: - Variables
+  var presenter: FullEventDescriptionPresenterProtocol?
   private let fullEventDescriptionMainView = FullEventDescriptionMainView()
   private let bottomParticipantsView = BottomParticipantsView()
   private let bottomButtonsView = BottomButtonsView()
@@ -40,7 +53,11 @@ class FullEventDescriptionVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupViewController()
-    setupNavBar()
+    setupNavBarWithoutTitle()
+    navigationItem.titleView = customNavBarTitle
+    navigationItem.rightBarButtonItem = barButtonItem
+    setupDelegates()
+    presenter?.viewDidLoad()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -53,12 +70,6 @@ class FullEventDescriptionVC: UIViewController {
     tabBarController?.tabBar.isHidden = false
   }
   
-  func configureViewController(with model: FullEventDescriptionViewModel) {
-    customNavBarTitle.text = model.title
-    fullEventDescriptionMainView.configureView(with: model)
-    bottomParticipantsView.configureView(with: model)
-  }
-  
   // MARK: - Objc methods
   @objc
   private func didTapBarButton() {
@@ -66,8 +77,55 @@ class FullEventDescriptionVC: UIViewController {
   }
 }
 
+// MARK: - FullEventDescriptionVCProtocol impl
+extension FullEventDescriptionVC: FullEventDescriptionVCProtocol {
+  func updateViewController(titleText: String,
+                            with mainViewModel: MainViewModel,
+                            with participantsViewModel: ParticipantsViewModel
+  ) {
+    customNavBarTitle.text = titleText
+    fullEventDescriptionMainView.configureView(with: mainViewModel)
+    bottomParticipantsView.configureView(with: participantsViewModel)
+  }
+}
+
+// MARK: - BottomButtonsViewDelegate
+extension FullEventDescriptionVC: BottomButtonsViewDelegate {
+  func didTapShirtButton() {
+    presenter?.didTapShirtButton()
+  }
+  
+  func didTapHandsButton() {
+    presenter?.didTapHandsButton()
+  }
+  
+  func didTapToolsButton() {
+    presenter?.didTapToolsButton()
+  }
+  
+  func didTapCashButton() {
+    presenter?.didTapCashButton()
+  }
+}
+
+// MARK: - FullEventDescriptionMainViewDelegate
+extension FullEventDescriptionVC: FullEventDescriptionMainViewDelegate {
+  func didTapWriteUsButton() {
+    presenter?.didTapWriteUsButton()
+  }
+  
+  func didTapRouteToSiteButton() {
+    presenter?.didTapRouteToSiteButton()
+  }
+}
+
 // MARK: - Private Methods
 private extension FullEventDescriptionVC {
+  func setupDelegates() {
+    bottomButtonsView.delegate = self
+    fullEventDescriptionMainView.delegate = self
+  }
+  
   func setupViewController() {
     view.backgroundColor = .white
     addSubviews()
@@ -106,17 +164,7 @@ private extension FullEventDescriptionVC {
       bottomButtonsView.heightAnchor.constraint(equalToConstant: Constants.bottomButtonsViewHeight),
     ])
   }
-  
-  func setupNavBar() {
-    navigationItem.titleView = customNavBarTitle
-    navigationItem.rightBarButtonItem = barButtonItem
-    let appearance = UINavigationBarAppearance()
-    appearance.backgroundColor = UIColor.specialNavBarBGColor
-    navigationController?.navigationBar.standardAppearance = appearance
-    navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
-    navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-  }
-  
+
   enum Constants {
     static let customNavBarTitleFontSize: CGFloat = 21
     static let scrollViewTopInset: CGFloat = 20

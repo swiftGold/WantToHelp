@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol FullEventDescriptionMainViewDelegate: AnyObject {
+  func didTapWriteUsButton()
+  func didTapRouteToSiteButton()
+}
+
 final class FullEventDescriptionMainView: UIView {
   // MARK: - UI
   private let titleLabel: UILabel = {
@@ -188,7 +193,7 @@ final class FullEventDescriptionMainView: UIView {
   private let photosStackView: UIStackView = {
     let stackView = UIStackView()
     stackView.spacing = Constants.photosStackViewSpacing
-    stackView.distribution = .fillProportionally
+    stackView.distribution = .fill
     return stackView
   }()
   
@@ -223,6 +228,9 @@ final class FullEventDescriptionMainView: UIView {
     return stackView
   }()
   
+  // MARK: - Delegate
+  weak var delegate: FullEventDescriptionMainViewDelegate?
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
     setupView()
@@ -232,7 +240,7 @@ final class FullEventDescriptionMainView: UIView {
     fatalError("init(coder:) has not been implemented")
   }
   
-  func configureView(with model: FullEventDescriptionViewModel) {
+  func configureView(with model: MainViewModel) {
     titleLabel.text = model.title
     organizationNameLabel.text = model.organizationName
     adressLabel.text = model.adress
@@ -249,11 +257,13 @@ final class FullEventDescriptionMainView: UIView {
   @objc
   private func writeUsButtonTapped() {
     print(#function)
+    delegate?.didTapWriteUsButton()
   }
   
   @objc
   private func routeToSiteButtonTapped() {
     print(#function)
+    delegate?.didTapRouteToSiteButton()
   }
 }
 
@@ -298,7 +308,6 @@ private extension FullEventDescriptionMainView {
       mainStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
       mainStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
       mainStackView.bottomAnchor.constraint(equalTo: bottomAnchor),
-      bigPhotoImageView.widthAnchor.constraint(equalToConstant: Constants.bigPhotoImageViewWidth),
       smallPhotosStackView.widthAnchor.constraint(equalToConstant: Constants.smallPhotosStackViewWidth),
       photosStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
       photosStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
@@ -329,7 +338,6 @@ private extension FullEventDescriptionMainView {
     static let routeToSiteButtonFontSize: CGFloat = 15
     static let descriptionLabelInfinityLines = 0
     static let mainStackViewSpacing: CGFloat = 10
-    static let bigPhotoImageViewWidth: CGFloat = 222
     static let smallPhotosStackViewWidth: CGFloat = 103
     static let photosStackViewHeight: CGFloat = 168
   }
