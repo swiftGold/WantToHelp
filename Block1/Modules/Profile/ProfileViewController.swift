@@ -7,30 +7,24 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+protocol ProfileViewControllerProtocol: AnyObject {}
+
+class ProfileViewController: CustomVC {
+  // MARK: - UI
+  
+  // MARK: - Variables
+  var presenter: ProfilePresenterProtocol?
+  
   // MARK: - Lifecycles
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .systemBackground
-    setupNavBar()
+    setupNavBar(titleName: TabBarNames.profile)
   }
 }
 
+// MARK: - ViewControllerProtocol impl
+extension ProfileViewController: ProfileViewControllerProtocol {}
+
 // MARK: - Private Methods
-private extension ProfileViewController {
-  func setupNavBar() {
-    customNavBarTitle()
-    let appearance = UINavigationBarAppearance()
-    appearance.backgroundColor = UIColor.specialNavBarBGColor
-    navigationController?.navigationBar.standardAppearance = appearance
-    navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
-  }
-  
-  func customNavBarTitle() {
-    let label = UILabel()
-    label.text = TabBarNames.profile
-    label.font = UIFont(name: Fonts.OfficSanExtraBold, size: 21)
-    label.textColor = .white
-    navigationItem.titleView = label
-  }
-}
+private extension ProfileViewController {}

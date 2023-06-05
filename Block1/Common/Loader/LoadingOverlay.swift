@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class LoadingOverlay {
+final class LoadingOverlay {
   var overlayView = UIView()
   var activityIndicator = UIActivityIndicatorView()
   var bgView = UIView()

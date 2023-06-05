@@ -6,20 +6,20 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class CategoriesCollectionViewCell: UICollectionViewCell {
   // MARK: - UI
   private let imageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.translatesAutoresizingMaskIntoConstraints = false
-    imageView.clipsToBounds = true
     return imageView
   }()
   
   private let titleLabel: UILabel = {
     let label = UILabel()
-    label.translatesAutoresizingMaskIntoConstraints = false
-    label.font = UIFont(name: Fonts.OfficSanExtraBold, size: 15)
+    label.font = UIFont(name: Fonts.OfficSanExtraBold,
+                        size: Constants.titleLabelFontSize
+    )
     label.textAlignment = .center
     label.textColor = .specialGreenColor
     return label
@@ -36,7 +36,7 @@ final class CategoriesCollectionViewCell: UICollectionViewCell {
   
   // MARK: - Methods
   func configureCell(with model: CategoryModel) {
-    imageView.image = UIImage(named: model.image)
+    imageView.loadImage(from: model.image)
     titleLabel.text = model.title
   }
 }
@@ -50,17 +50,25 @@ private extension CategoriesCollectionViewCell {
   }
   
   func addSubviews() {
-    addSubview(imageView)
-    addSubview(titleLabel)
+    myAddSubView(imageView)
+    myAddSubView(titleLabel)
   }
   
   func setConstraints() {
     NSLayoutConstraint.activate([
       imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-      imageView.bottomAnchor.constraint(equalTo: titleLabel.topAnchor, constant: -32),
-      titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-      titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-      titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -14)
+      imageView.bottomAnchor.constraint(equalTo: titleLabel.topAnchor, constant: Constants.imageViewTopInset),
+      titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.titleLabelLeadingInset),
+      titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: Constants.titleLabelTrailingTopInset),
+      titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: Constants.titleLabelBottomTopInset)
     ])
+  }
+  
+  enum Constants {
+    static let titleLabelFontSize: CGFloat = 15
+    static let imageViewTopInset: CGFloat = -32
+    static let titleLabelLeadingInset: CGFloat = 20
+    static let titleLabelTrailingTopInset: CGFloat = -20
+    static let titleLabelBottomTopInset: CGFloat = -14
   }
 }

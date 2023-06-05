@@ -11,5 +11,10 @@ enum TabBarNames {
   static let categories = "Помочь"
   static let history = "История"
   static let profile = "Профиль"
+  static let childs = "Дети"
+  static let adult = "Взрослые"
+  static let elderly = "Пожилые"
+  static let animals = "Животные"
+  static let events = "Мероприятия"
 }
 

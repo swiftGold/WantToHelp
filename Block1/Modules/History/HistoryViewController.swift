@@ -7,30 +7,24 @@
 
 import UIKit
 
-class HistoryViewController: UIViewController {
+protocol HistoryViewControllerProtocol: AnyObject {}
+
+final class HistoryViewController: CustomVC {
+  // MARK: - UI
+  
+  // MARK: - Variables
+  var presenter: HistoryPresenterProtocol?
+  
   // MARK: - Lifecycles
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .systemBackground
-    setupNavBar()
+    setupNavBar(titleName: TabBarNames.history)
   }
 }
 
+// MARK: - ViewControllerProtocol impl
+extension HistoryViewController: HistoryViewControllerProtocol {}
+
 // MARK: - Private Methods
-private extension HistoryViewController {
-  func setupNavBar() {
-    customNavBarTitle()
-    let appearance = UINavigationBarAppearance()
-    appearance.backgroundColor = UIColor.specialNavBarBGColor
-    navigationController?.navigationBar.standardAppearance = appearance
-    navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
-  }
-  
-  func customNavBarTitle() {
-    let label = UILabel()
-    label.text = TabBarNames.history
-    label.font = UIFont(name: Fonts.OfficSanExtraBold, size: 21)
-    label.textColor = .white
-    navigationItem.titleView = label
-  }
-}
+private extension HistoryViewController {}

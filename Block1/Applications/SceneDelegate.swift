@@ -9,13 +9,17 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   var window: UIWindow?
-
+  
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
     guard let windowScene = (scene as? UIWindowScene) else { return }
-    let window = UIWindow(windowScene: windowScene)
-    window.rootViewController = SplashViewController()
-    window.makeKeyAndVisible()
-    self.window = window
+    //    let window = UIWindow(windowScene: windowScene)
+    //    let router = AppRouter(window: window, navigationController: UINavigationController())
+    //    let moduleBuilder: ModuleBuilderProtocol = ModuleBuilder(router: router)
+    //    let vc = MainTabBarController(moduleBuilder: moduleBuilder)
+    //    window.rootViewController = vc
+    //    window.makeKeyAndVisible()
+    //    self.window = window
+    setupWindow(windowScene: windowScene)
   }
   
   func sceneDidDisconnect(_ scene: UIScene) {}
@@ -23,4 +27,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   func sceneWillResignActive(_ scene: UIScene) {}
   func sceneWillEnterForeground(_ scene: UIScene) {}
   func sceneDidEnterBackground(_ scene: UIScene) {}
+}
+
+private extension SceneDelegate {
+  func setupWindow(windowScene: UIWindowScene) {
+    let window = UIWindow(windowScene: windowScene)
+    self.window = window
+    makeRootViewController(window: window)
+    window.makeKeyAndVisible()
+  }
+  
+  func makeRootViewController(window: UIWindow) {
+    let router = AppRouter(window: window, navigationController: UINavigationController())
+    let moduleBuilder: ModuleBuilderProtocol = ModuleBuilder(router: router)
+    let viewController = moduleBuilder.buildSplashViewController()
+    window.rootViewController = viewController
+  }
 }

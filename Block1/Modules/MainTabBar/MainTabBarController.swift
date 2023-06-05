@@ -8,30 +8,33 @@
 import UIKit
 
 final class MainTabBarController: UITabBarController {
-  //MARK: - UI
+  // MARK: - UI
   private lazy var middleButton: UIButton = {
     let middleButton = UIButton(type: .custom)
     let middleIcon = UIImage(named: Images.heart)?.withRenderingMode(.alwaysTemplate)
     middleButton.setImage(middleIcon, for: .normal)
     middleButton.tintColor = .white
     middleButton.backgroundColor = .specialMiddleButtonTabBarColor
-    middleButton.layer.cornerRadius = 21
-    middleButton.frame.size = CGSize(width: 42, height: 42)
+    middleButton.layer.cornerRadius = Constants.middleButtonCornerRadius
+    middleButton.frame.size = CGSize(width: Constants.middleButtonWidthFrameSize,
+                                     height: Constants.middleButtonHeightFrameSize)
     middleButton.addTarget(self, action: #selector(middleButtonTapped), for: .touchUpInside)
     middleButton.addTarget(self, action: #selector(middleButtonDown), for: .touchDown)
     middleButton.addTarget(self, action: #selector(middleButtonUp), for: [.touchUpInside, .touchUpOutside])
-    let space: CGFloat = 4
-    middleButton.center = CGPoint(x: tabBar.center.x, y: (tabBar.bounds.height - middleButton.bounds.height / 1.2) - space)
+    middleButton.center = CGPoint(x: tabBar.center.x, y: (tabBar.bounds.height - middleButton.bounds.height / Constants.tabBarcoefficient) - Constants.spaceForTabBarImage)
     return middleButton
   }()
   
-  private let bgTabBarImageView: UIImageView = {
-    let imageView = UIImageView()
-    imageView.translatesAutoresizingMaskIntoConstraints = false
-    imageView.image = UIImage(named: Images.plate)
-    imageView.contentMode = .scaleToFill
-    return imageView
-  }()
+  var moduleBuilder: ModuleBuilderProtocol
+  
+  init(moduleBuilder: ModuleBuilderProtocol) {
+    self.moduleBuilder = moduleBuilder
+    super.init(nibName: nil, bundle: nil)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
   
   // MARK: - Lifecycles
   override func viewDidLoad() {
@@ -39,28 +42,29 @@ final class MainTabBarController: UITabBarController {
     generateTabBar()
     setTabBarAppearance()
     setupController()
-//    self.selectedIndex = 2
+    self.selectedIndex = Constants.tabBarSelectedItemIndex
     self.delegate = self
   }
   
   // MARK: - Objc methods
   @objc
   func middleButtonTapped(sender: UIButton) {
-    selectedIndex = 2
+    selectedIndex = Constants.tabBarSelectedItemIndex
     sender.backgroundColor = .specialNavBarBGColor
   }
   
   @objc
   func middleButtonDown(sender: UIButton) {
     sender.layer.shadowColor = UIColor.black.cgColor
-    sender.layer.shadowOffset = CGSize(width: 0, height: 2)
-    sender.layer.shadowRadius = 4
-    sender.layer.shadowOpacity = 0.3
+    sender.layer.shadowOffset = CGSize(width: Constants.middleButtonShadowWidth,
+                                       height: Constants.middleButtonShadowHeight)
+    sender.layer.shadowRadius = Constants.middleButtonShadowRadius
+    sender.layer.shadowOpacity = Constants.middleButtonShadowOpacityAfterPush
   }
   
   @objc
   func middleButtonUp(sender: UIButton) {
-    sender.layer.shadowOpacity = 0
+    sender.layer.shadowOpacity = Constants.middleButtonShadowOpacityAfterReturn
   }
 }
 
@@ -80,31 +84,19 @@ private extension MainTabBarController {
   func setupController() {
     view.backgroundColor = .white
     addSubviews()
-    setConstraints()
   }
   
   func addSubviews() {
     tabBar.addSubview(middleButton)
-    tabBar.addSubview(bgTabBarImageView)
-    tabBar.sendSubviewToBack(bgTabBarImageView)
-  }
-  
-  func setConstraints() {
-    NSLayoutConstraint.activate([
-      bgTabBarImageView.heightAnchor.constraint(equalToConstant: 105),
-      bgTabBarImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      bgTabBarImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-      bgTabBarImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-    ])
   }
   
   func generateTabBar() {
     
-    let newsNavVC = UINavigationController(rootViewController: NewsViewController())
-    let searchNavVC = UINavigationController(rootViewController: SearchViewController())
-    let categoriesNavVC = UINavigationController(rootViewController: CategoriesViewController())
-    let historyNavVC = UINavigationController(rootViewController: HistoryViewController())
-    let profileNavVC = UINavigationController(rootViewController: ProfileViewController())
+    let newsNavVC = UINavigationController(rootViewController: moduleBuilder.buildNewsViewController())
+    let searchNavVC = UINavigationController(rootViewController: moduleBuilder.buildSearchViewController())
+    let categoriesNavVC = UINavigationController(rootViewController: moduleBuilder.buildCategoriesViewController())
+    let historyNavVC = UINavigationController(rootViewController: moduleBuilder.buildHistoryViewController())
+    let profileNavVC = UINavigationController(rootViewController: moduleBuilder.buildProfileViewController())
     
     viewControllers = [
       generateVC(viewConroller: newsNavVC,
@@ -144,10 +136,29 @@ private extension MainTabBarController {
     appearance.shadowColor = nil
     tabBar.standardAppearance = appearance
     
-//    let bgView = UIImageView(image: UIImage(named: Images.plate))
-//    // TODO: - доработать отображение на разных экранах
-//    bgView.frame = CGRect(x: 0, y: 50, width: self.tabBar.bounds.width, height: -67)
-//    tabBar.addSubview(bgView)
-//    tabBar.sendSubviewToBack(bgView)
+    let bgView = UIImageView(image: UIImage(named: Images.plate))
+    bgView.frame = CGRect(x: Constants.tabBarBackgroundViewOriginX,
+                          y: Constants.tabBarBackgroundViewOriginY,
+                          width: self.tabBar.bounds.width,
+                          height: Constants.tabBarBackgroundViewFrameHeight)
+    tabBar.addSubview(bgView)
+    tabBar.sendSubviewToBack(bgView)
+  }
+  
+  enum Constants {
+    static let middleButtonCornerRadius: CGFloat = 21
+    static let middleButtonWidthFrameSize: CGFloat = 42
+    static let middleButtonHeightFrameSize: CGFloat = 42
+    static let middleButtonShadowWidth: CGFloat = 0
+    static let middleButtonShadowHeight: CGFloat = 2
+    static let middleButtonShadowRadius: CGFloat = 4
+    static let middleButtonShadowOpacityAfterPush: Float = 0.3
+    static let middleButtonShadowOpacityAfterReturn: Float = 0
+    static let tabBarcoefficient: CGFloat = 1.2
+    static let spaceForTabBarImage: CGFloat = 4
+    static let tabBarSelectedItemIndex = 2
+    static let tabBarBackgroundViewOriginX: CGFloat = 0
+    static let tabBarBackgroundViewOriginY: CGFloat = 50
+    static let tabBarBackgroundViewFrameHeight: CGFloat = -67
   }
 }
