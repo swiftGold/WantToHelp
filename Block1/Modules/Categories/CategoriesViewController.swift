@@ -7,8 +7,6 @@
 
 import UIKit
 
-
-
 protocol CategoriesViewControllerProtocol: AnyObject {
   func setupCollectionView(with models: [CategoryModel])
   func routeToVC(with viewController: UIViewController)
@@ -73,6 +71,7 @@ final class CategoriesViewController: CustomVC {
   // MARK: - LifeCycles
   override func viewDidLoad() {
     super.viewDidLoad()
+    //    LoadingOverlay.shared.showOverlay(view: self.view)
     navigationController?.isNavigationBarHidden = false
     navigationItem.leftBarButtonItem = barButtonItem
     setupNavBar(titleName: TabBarNames.categories)
