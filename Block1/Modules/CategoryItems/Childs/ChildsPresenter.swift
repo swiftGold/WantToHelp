@@ -39,8 +39,16 @@ final class ChildsPresenter {
 
 extension ChildsPresenter: ChildsPresenterProtocol {
   func viewDidLoad() {
-    fetchDataFromJson()
-    didTapToggleButton(isCurrentEvent: true)
+    DispatchQueue.global(qos: .background).async { [weak self] in
+      guard let strongSelf = self else { return }
+      let group = DispatchGroup()
+      group.enter()
+      strongSelf.fetchDataFromJson()
+      group.leave()
+      group.notify(queue: DispatchQueue.main) {
+        strongSelf.self.didTapToggleButton(isCurrentEvent: true)
+      }
+    }
   }
   
   func routeToCategoryItem(index: Int) {
