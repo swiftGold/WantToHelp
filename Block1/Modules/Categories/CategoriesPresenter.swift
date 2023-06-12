@@ -17,16 +17,13 @@ final class CategoriesPresenter {
   private var categoriesModel: [CategoryModel] = []
   private let router: Router
   private let moduleBuilder: ModuleBuilderProtocol
-  private let jsonService: JSONServiceProtocol
   
   init(
     router: Router,
-    moduleBuilder: ModuleBuilderProtocol,
-    jsonService: JSONServiceProtocol
+    moduleBuilder: ModuleBuilderProtocol
   ) {
     self.router = router
     self.moduleBuilder = moduleBuilder
-    self.jsonService = jsonService
   }
 }
 
@@ -50,40 +47,8 @@ extension CategoriesPresenter: CategoriesPresenterProtocol {
   }
   
   func viewDidLoad() {
-    // MARK: - 1
-    //    DispatchQueue.global(qos: .background).async { [weak self] in
-    //      guard let strongSelf = self else { return }
-    //      let group = DispatchGroup()
-    //      group.enter()
-    //      strongSelf.fetchDataFromJson()
-    //      group.leave()
-    //      group.notify(queue: DispatchQueue.main) {
-    //        strongSelf.viewController?.setupCollectionView(with: strongSelf.categoriesModel)
-    //      }
-    //    }
-    
-    // MARK: - 2
-    //    DispatchQueue.global(qos: .background).async {
-    //      self.fetchDataFromJson()
-    //      DispatchQueue.main.async {
-    //        self.viewController?.setupCollectionView(with: self.categoriesModel)
-    //      }
-    //    }
-    
-    // MARK: - 3
-//    let semaphore = DispatchSemaphore(value: 1)
-//    DispatchQueue.global(qos: .background).async {
-//      semaphore.wait()
-//      self.fetchDataFromJson()
-//      semaphore.signal()
-//      DispatchQueue.main.async {
-//        self.viewController?.setupCollectionView(with: self.categoriesModel)
-//      }
-//    }
-    
-    // MARK: - 4
     DispatchQueue.global(qos: .background).sync {
-      self.fetchDataFromJson()
+      self.fetchDataFromCoreData()
     }
     
     DispatchQueue.main.async {
@@ -93,15 +58,10 @@ extension CategoriesPresenter: CategoriesPresenterProtocol {
 }
 
 private extension CategoriesPresenter {
-  func fetchDataFromJson() {
-    jsonService.fetchCategoriesFromJSON(completion: { [weak self] result in
-      guard let strongSelf = self else { return }
-      switch result {
-      case .success(let response):
-        strongSelf.categoriesModel = response
-      case .failure(let error):
-        print(error.localizedDescription)
-      }
-    })
+  func fetchDataFromCoreData() {
+    let coreDataModels = CoreDataManager.instance.fetchCategories()
+    categoriesModel = coreDataModels.map { model in
+      CategoryModel(image: model.image, title: model.title)
+    }
   }
 }

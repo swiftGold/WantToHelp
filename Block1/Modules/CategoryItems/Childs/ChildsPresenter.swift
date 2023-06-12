@@ -16,23 +16,21 @@ protocol ChildsPresenterProtocol {
 final class ChildsPresenter {
   weak var viewController: ChildsViewControllerProtocol?
   private var sortedViewModels: [ShortEventViewModel] = []
+  private var fullEventDescriptionModels: [FullEventDescriptionModel] = []
   private var fullDescriptionViewModels: [FullEventDescriptionViewModel] = []
   private var sortedDescriptionViewModels: [FullEventDescriptionViewModel] = []
   private var isCurrent = true
   private let router: Router
   private let moduleBuilder: ModuleBuilderProtocol
-  private let jsonService: JSONServiceProtocol
   private let calendarManager: CalendarManagerProtocol
   
   init(
     router: Router,
     moduleBuilder: ModuleBuilderProtocol,
-    jsonService: JSONServiceProtocol,
     calendarManager: CalendarManagerProtocol
   ) {
     self.router = router
     self.moduleBuilder = moduleBuilder
-    self.jsonService = jsonService
     self.calendarManager = calendarManager
   }
 }
@@ -43,8 +41,15 @@ extension ChildsPresenter: ChildsPresenterProtocol {
       guard let strongSelf = self else { return }
       let group = DispatchGroup()
       group.enter()
-      strongSelf.fetchDataFromJson()
+      strongSelf.fetchDataFromCoreData()
       group.leave()
+      
+      group.wait()
+      
+      group.enter()
+      strongSelf.mappingToDescriptionViewModel()
+      group.leave()
+      
       group.notify(queue: DispatchQueue.main) {
         strongSelf.self.didTapToggleButton(isCurrentEvent: true)
       }
@@ -80,41 +85,58 @@ extension ChildsPresenter: ChildsPresenterProtocol {
 }
 
 private extension ChildsPresenter {
-  func fetchDataFromJson() {
-    jsonService.fetchFullEventDescriptionFromJSON(completion: { [weak self] result in
-      guard let strongSelf = self else { return }
-      switch result {
-      case .success(let response):
-        strongSelf.fullDescriptionViewModels = response.map({ model -> FullEventDescriptionViewModel in
-          let diaryString = strongSelf.calculateDaysToEvent(with: model).0
-          let isFinished = strongSelf.calculateDaysToEvent(with: model).1
-          let viewModel = FullEventDescriptionViewModel(title: model.title,
-                                                        description: model.description,
-                                                        dateStart: model.dateStart,
-                                                        dateFinish: model.dateFinish,
-                                                        organizationName: model.organizationName,
-                                                        adress: model.adress,
-                                                        phone1: model.phone1,
-                                                        phone2: model.phone2,
-                                                        mainImage: model.mainImage,
-                                                        detailImage1: model.detailImage1,
-                                                        detailImage2: model.detailImage2,
-                                                        detailImage3: model.detailImage3,
-                                                        photo1: model.photo1,
-                                                        photo2: model.photo2,
-                                                        photo3: model.photo3,
-                                                        photo4: model.photo4,
-                                                        photo5: model.photo5,
-                                                        participantsCount: model.participantsCount,
-                                                        diaryString: diaryString,
-                                                        isFinished: isFinished
-          )
-          return viewModel
-        })
-      case .failure(let error):
-        print(error.localizedDescription)
-      }
-    })
+  func fetchDataFromCoreData() {
+    let coreDataModels = CoreDataManager.instance.fetchDescriptions()
+    fullEventDescriptionModels = coreDataModels.map { model -> FullEventDescriptionModel in
+      return FullEventDescriptionModel(title: model.title,
+                                       description: model.descr,
+                                       dateStart: model.dateStart,
+                                       dateFinish: model.dateFinish,
+                                       organizationName: model.organizationName,
+                                       adress: model.adress,
+                                       phone1: model.phone1,
+                                       phone2: model.phone2,
+                                       mainImage: model.mainImage,
+                                       detailImage1: model.detailImage1,
+                                       detailImage2: model.detailImage2,
+                                       detailImage3: model.detailImage3,
+                                       photo1: model.photo1,
+                                       photo2: model.photo2,
+                                       photo3: model.photo3,
+                                       photo4: model.photo4,
+                                       photo5: model.photo5,
+                                       participantsCount: Int(model.participantsCount)
+      )
+    }
+  }
+  
+  func mappingToDescriptionViewModel() {
+    fullDescriptionViewModels = fullEventDescriptionModels.map { model -> FullEventDescriptionViewModel in
+      let diaryString = calculateDaysToEvent(with: model).0
+      let isFinished = calculateDaysToEvent(with: model).1
+      let viewModel = FullEventDescriptionViewModel(title: model.title,
+                                                    description: model.description,
+                                                    dateStart: model.dateStart,
+                                                    dateFinish: model.dateFinish,
+                                                    organizationName: model.organizationName,
+                                                    adress: model.adress,
+                                                    phone1: model.phone1,
+                                                    phone2: model.phone2,
+                                                    mainImage: model.mainImage,
+                                                    detailImage1: model.detailImage1,
+                                                    detailImage2: model.detailImage2,
+                                                    detailImage3: model.detailImage3,
+                                                    photo1: model.photo1,
+                                                    photo2: model.photo2,
+                                                    photo3: model.photo3,
+                                                    photo4: model.photo4,
+                                                    photo5: model.photo5,
+                                                    participantsCount: model.participantsCount,
+                                                    diaryString: diaryString,
+                                                    isFinished: isFinished
+      )
+      return viewModel
+    }
   }
   
   func mappingToViewModels(with models: [FullEventDescriptionViewModel]) -> [ShortEventViewModel] {

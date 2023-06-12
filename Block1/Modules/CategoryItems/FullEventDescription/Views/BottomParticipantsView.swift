@@ -67,11 +67,19 @@ final class BottomParticipantsView: UIView {
   }
   
   func configureView(with model: ParticipantsViewModel) {
-    photo1ImageView.loadImage(from: model.photo1)
-    photo2ImageView.loadImage(from: model.photo2)
-    photo3ImageView.loadImage(from: model.photo3)
-    photo4ImageView.loadImage(from: model.photo4)
-    photo5ImageView.loadImage(from: model.photo5)
+    guard let image1 = model.photo1,
+          let image2 = model.photo2,
+          let image3 = model.photo3,
+          let image4 = model.photo4,
+          let image5 = model.photo5 else {
+      return
+    }
+    
+    photo1ImageView.loadImage(from: image1)
+    photo2ImageView.loadImage(from: image2)
+    photo3ImageView.loadImage(from: image3)
+    photo4ImageView.loadImage(from: image4)
+    photo5ImageView.loadImage(from: image5)
     let participantsCount = model.participantsCount - Constants.numberOfParticipantsInImages
     participantCountLabel.text = "+\(participantsCount)"
   }
@@ -121,4 +129,3 @@ private extension BottomParticipantsView {
     static let participantCountLabelLeadingInset: CGFloat = 10
   }
 }
-

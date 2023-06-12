@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="21G419" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CategoryCoreDataModel" representedClassName="CategoryCoreDataModel" syncable="YES">
+        <attribute name="image" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="DescriptionCoreDataModel" representedClassName="DescriptionCoreDataModel" syncable="YES">
+        <attribute name="adress" optional="YES" attributeType="String"/>
+        <attribute name="dateFinish" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="dateStart" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="descr" optional="YES" attributeType="String"/>
+        <attribute name="detailImage1" optional="YES" attributeType="String"/>
+        <attribute name="detailImage2" optional="YES" attributeType="String"/>
+        <attribute name="detailImage3" optional="YES" attributeType="String"/>
+        <attribute name="mainImage" optional="YES" attributeType="String"/>
+        <attribute name="organizationName" optional="YES" attributeType="String"/>
+        <attribute name="participantsCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="phone1" optional="YES" attributeType="String"/>
+        <attribute name="phone2" optional="YES" attributeType="String"/>
+        <attribute name="photo1" optional="YES" attributeType="String"/>
+        <attribute name="photo2" optional="YES" attributeType="String"/>
+        <attribute name="photo3" optional="YES" attributeType="String"/>
+        <attribute name="photo4" optional="YES" attributeType="String"/>
+        <attribute name="photo5" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+    </entity>
+</model>

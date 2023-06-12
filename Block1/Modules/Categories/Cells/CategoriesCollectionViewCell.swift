@@ -36,7 +36,8 @@ final class CategoriesCollectionViewCell: UICollectionViewCell {
   
   // MARK: - Methods
   func configureCell(with model: CategoryModel) {
-    imageView.loadImage(from: model.image)
+    guard let image = model.image else { return }
+    imageView.loadImage(from: image)
     titleLabel.text = model.title
   }
 }

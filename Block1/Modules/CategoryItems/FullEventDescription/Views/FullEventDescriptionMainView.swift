@@ -246,9 +246,16 @@ final class FullEventDescriptionMainView: UIView {
     adressLabel.text = model.adress
     firstPhoneLabel.text = model.phone1
     secondPhoneLabel.text = model.phone2
-    bigPhotoImageView.loadImage(from: model.detailImage1)
-    firstSmallPhotoImageView.loadImage(from: model.detailImage2)
-    secondSmallPhotoImageView.loadImage(from: model.detailImage3)
+    
+    guard let image1 = model.detailImage1,
+          let image2 = model.detailImage2,
+          let image3 = model.detailImage3 else {
+      return
+    }
+    
+    bigPhotoImageView.loadImage(from: image1)
+    firstSmallPhotoImageView.loadImage(from: image2)
+    secondSmallPhotoImageView.loadImage(from: image3)
     descriptionLabel.text = model.description
     diaryLabel.text = model.diaryString
   }
