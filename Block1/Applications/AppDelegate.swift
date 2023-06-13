@@ -20,7 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     application.statusBarStyle = UIStatusBarStyle.lightContent
     CoreDataManager.instance.deleteAllCategories()
     CoreDataManager.instance.deleteAllDescriptions()
-    DispatchQueue.global(qos: .background).sync {
+    
+    DispatchQueue.global(qos: .background).async(flags: .barrier) {
       self.fetchCategoriesFromJSON()
       self.fetchDescriptionsFromJSON()
     }
