@@ -92,7 +92,8 @@ final class ChildsCollectionViewCell: UICollectionViewCell {
   
   // MARK: - Methods
   func configureCell(with model: ShortEventViewModel) {
-    mainImageView.loadImage(from: model.mainImage)
+    guard let image = model.mainImage else { return }
+    mainImageView.loadImage(from: image)
     titleLabel.text = model.title
     descriptionLabel.text = model.description
     diaryLabel.text = model.diaryString

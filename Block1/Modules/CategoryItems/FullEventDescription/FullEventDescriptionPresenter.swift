@@ -36,7 +36,7 @@ final class FullEventDescriptionPresenter {
 
 extension FullEventDescriptionPresenter: FullEventDescriptionPresenterProtocol {
   func viewDidLoad() {
-    let titleText = model.title
+    guard let titleText = model.title else { return }
     let mainViewModel = convertMainViewModel()
     let participantsViewModel = convertParticipantsModel()
     viewController?.updateViewController(titleText: titleText,

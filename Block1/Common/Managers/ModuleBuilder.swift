@@ -67,11 +67,9 @@ extension ModuleBuilder: ModuleBuilderProtocol {
   }
   
   func buildCategoriesViewController() -> CategoriesViewController {
-    let jsonService = JSONService()
     let viewController = CategoriesViewController()
     let presenter = CategoriesPresenter(router: router,
-                                        moduleBuilder: self,
-                                        jsonService: jsonService
+                                        moduleBuilder: self
     )
     viewController.presenter = presenter
     presenter.viewController = viewController
@@ -100,11 +98,9 @@ extension ModuleBuilder: ModuleBuilderProtocol {
   
   func buildChildViewController() -> ChildsViewController {
     let calendarManager = CalendarManager()
-    let jsonService = JSONService()
     let viewController = ChildsViewController()
     let presenter = ChildsPresenter(router: router,
                                     moduleBuilder: self,
-                                    jsonService: jsonService,
                                     calendarManager: calendarManager
     )
     viewController.presenter = presenter

@@ -8,11 +8,11 @@
 import Foundation
 
 struct ShortEventViewModel {
-  let title: String
-  let description: String
+  let title: String?
+  let description: String?
   let dateStart: Double
   let dateFinish: Double
-  let mainImage: String
-  let diaryString: String
+  let mainImage: String?
+  let diaryString: String?
   let isFinished: Bool
 }
