@@ -72,7 +72,7 @@ private extension AppDelegate {
       }
     })
   }
-
+  
   func createDescriptionsCoreData(with models: [FullEventDescriptionModel]) {
     let context = CoreDataManager.instance.context
     context.perform {

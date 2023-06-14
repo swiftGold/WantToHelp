@@ -8,6 +8,10 @@
 import Foundation
 import CoreData
 
+protocol CoreDataManagerProtocol {
+  
+}
+
 final class CoreDataManager: NSObject {
   static let instance = CoreDataManager()
   private override init() {}

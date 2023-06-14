@@ -9,14 +9,11 @@
 import Foundation
 import CoreData
 
-
 extension CategoryCoreDataModel {
-
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<CategoryCoreDataModel> {
-        return NSFetchRequest<CategoryCoreDataModel>(entityName: "CategoryCoreDataModel")
-    }
-
-    @NSManaged public var title: String?
-    @NSManaged public var image: String?
-
+  @nonobjc public class func fetchRequest() -> NSFetchRequest<CategoryCoreDataModel> {
+    return NSFetchRequest<CategoryCoreDataModel>(entityName: "CategoryCoreDataModel")
+  }
+  
+  @NSManaged public var title: String?
+  @NSManaged public var image: String?
 }
