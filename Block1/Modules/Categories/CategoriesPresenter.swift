@@ -47,7 +47,7 @@ extension CategoriesPresenter: CategoriesPresenterProtocol {
   }
   
   func viewDidLoad() {
-    DispatchQueue.global(qos: .background).sync {
+    Queues.concurrentQueueBarrier.sync {
       self.fetchDataFromCoreData()
     }
     

@@ -36,6 +36,12 @@
 		1E9B65B02A35C01C006380D9 /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1E9B65AE2A35C01C006380D9 /* CoreData.xcdatamodeld */; };
 		1E9B65B62A364429006380D9 /* CategoryCoreDataModel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9B65B42A364429006380D9 /* CategoryCoreDataModel+CoreDataProperties.swift */; };
 		1E9B65B72A364429006380D9 /* CategoryCoreDataModel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9B65B52A364429006380D9 /* CategoryCoreDataModel+CoreDataClass.swift */; };
+		1ED9BA2E2A39F1BF00E0963D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1ED9BA2D2A39F1BF00E0963D /* GoogleService-Info.plist */; };
+		1ED9BA362A3B00F300E0963D /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED9BA352A3B00F300E0963D /* APIService.swift */; };
+		1ED9BA382A3B00F900E0963D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED9BA372A3B00F900E0963D /* NetworkManager.swift */; };
+		1ED9BA3A2A3B00FE00E0963D /* JSONDecoderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED9BA392A3B00FD00E0963D /* JSONDecoderManager.swift */; };
+		1ED9BA3C2A3B1A4A00E0963D /* Queues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED9BA3B2A3B1A4A00E0963D /* Queues.swift */; };
+		1ED9BA3E2A3B583900E0963D /* AlamofireNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED9BA3D2A3B583900E0963D /* AlamofireNetworkManager.swift */; };
 		1EDEC1A62A1F9D6700339FF9 /* sf-ui-text-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1EDEC1A52A1F9D6700339FF9 /* sf-ui-text-regular.ttf */; };
 		1EDEC1AB2A1FA99C00339FF9 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDEC1AA2A1FA99C00339FF9 /* UIColor+Extensions.swift */; };
 		1EDEC1AE2A1FB07200339FF9 /* LoadingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDEC1AD2A1FB07200339FF9 /* LoadingOverlay.swift */; };
@@ -105,6 +111,12 @@
 		1E9B65AF2A35C01C006380D9 /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
 		1E9B65B42A364429006380D9 /* CategoryCoreDataModel+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CategoryCoreDataModel+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1E9B65B52A364429006380D9 /* CategoryCoreDataModel+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CategoryCoreDataModel+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1ED9BA2D2A39F1BF00E0963D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1ED9BA352A3B00F300E0963D /* APIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		1ED9BA372A3B00F900E0963D /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		1ED9BA392A3B00FD00E0963D /* JSONDecoderManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONDecoderManager.swift; sourceTree = "<group>"; };
+		1ED9BA3B2A3B1A4A00E0963D /* Queues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queues.swift; sourceTree = "<group>"; };
+		1ED9BA3D2A3B583900E0963D /* AlamofireNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireNetworkManager.swift; sourceTree = "<group>"; };
 		1EDEC1A52A1F9D6700339FF9 /* sf-ui-text-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sf-ui-text-regular.ttf"; sourceTree = "<group>"; };
 		1EDEC1AA2A1FA99C00339FF9 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		1EDEC1AD2A1FB07200339FF9 /* LoadingOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingOverlay.swift; sourceTree = "<group>"; };
@@ -210,6 +222,7 @@
 				1E4913A82A17A92200ABF6B6 /* SceneDelegate.swift */,
 				1E4913AF2A17A92700ABF6B6 /* Assets.xcassets */,
 				1E4913B12A17A92700ABF6B6 /* LaunchScreen.storyboard */,
+				1ED9BA2D2A39F1BF00E0963D /* GoogleService-Info.plist */,
 				1E4913B42A17A92700ABF6B6 /* Info.plist */,
 			);
 			path = Applications;
@@ -328,6 +341,7 @@
 				1EDEC1CB2A21FDE500339FF9 /* Fonts.swift */,
 				1EDEC2032A23AA4100339FF9 /* TabBarNames.swift */,
 				1EDEC2052A23AB7000339FF9 /* Images.swift */,
+				1ED9BA3B2A3B1A4A00E0963D /* Queues.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -478,6 +492,7 @@
 			isa = PBXGroup;
 			children = (
 				1EDEC22F2A263B7400339FF9 /* JSONService.swift */,
+				1ED9BA352A3B00F300E0963D /* APIService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -509,6 +524,9 @@
 				1EDEC23C2A2767F900339FF9 /* CalendarManager.swift */,
 				1E34F8FB2A2CEECD0065DFE7 /* ModuleBuilder.swift */,
 				1E9B65AC2A35B684006380D9 /* CoreDataManager.swift */,
+				1ED9BA372A3B00F900E0963D /* NetworkManager.swift */,
+				1ED9BA3D2A3B583900E0963D /* AlamofireNetworkManager.swift */,
+				1ED9BA392A3B00FD00E0963D /* JSONDecoderManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -592,6 +610,7 @@
 			files = (
 				1EDEC1D22A22014300339FF9 /* OfficinaSans-ExtraBold.ttf in Resources */,
 				1E4913B32A17A92700ABF6B6 /* LaunchScreen.storyboard in Resources */,
+				1ED9BA2E2A39F1BF00E0963D /* GoogleService-Info.plist in Resources */,
 				1EDEC21B2A24A80300339FF9 /* sf-ui-text-medium.ttf in Resources */,
 				1EDEC22D2A2637E600339FF9 /* Categories.json in Resources */,
 				1EDEC1A62A1F9D6700339FF9 /* sf-ui-text-regular.ttf in Resources */,
@@ -651,11 +670,14 @@
 			files = (
 				1E34F9122A2DCEB90065DFE7 /* MainViewModel.swift in Sources */,
 				1E9B65B72A364429006380D9 /* CategoryCoreDataModel+CoreDataClass.swift in Sources */,
+				1ED9BA3A2A3B00FE00E0963D /* JSONDecoderManager.swift in Sources */,
+				1ED9BA362A3B00F300E0963D /* APIService.swift in Sources */,
 				1EDEC2262A25F94B00339FF9 /* BottomButtonsView.swift in Sources */,
 				1E9B65B62A364429006380D9 /* CategoryCoreDataModel+CoreDataProperties.swift in Sources */,
 				1E34F90A2A2CF7E30065DFE7 /* CustomVC.swift in Sources */,
 				1EDEC23F2A277B3900339FF9 /* String+Extensions.swift in Sources */,
 				1E34F9142A2DCECE0065DFE7 /* ParticipantsViewModel.swift in Sources */,
+				1ED9BA382A3B00F900E0963D /* NetworkManager.swift in Sources */,
 				1E34F8FF2A2CEEE30065DFE7 /* AppRouter.swift in Sources */,
 				1EDEC1B02A1FB17E00339FF9 /* CategoriesViewController.swift in Sources */,
 				1EDEC1F92A22663100339FF9 /* SearchViewController.swift in Sources */,
@@ -692,6 +714,7 @@
 				1EDEC2232A25F37500339FF9 /* UIView + Extensions.swift in Sources */,
 				1E4913A72A17A92200ABF6B6 /* AppDelegate.swift in Sources */,
 				1E4913A92A17A92200ABF6B6 /* SceneDelegate.swift in Sources */,
+				1ED9BA3C2A3B1A4A00E0963D /* Queues.swift in Sources */,
 				1EDEC2002A22670F00339FF9 /* MainTabBarController.swift in Sources */,
 				1EDEC1C02A20A7CF00339FF9 /* CategoriesCollectionViewCell.swift in Sources */,
 				1E34F9032A2CEF940065DFE7 /* CategoriesPresenter.swift in Sources */,
@@ -702,6 +725,7 @@
 				1E34F91A2A2DF3940065DFE7 /* AnimalsPresenter.swift in Sources */,
 				1E34F9102A2DC4850065DFE7 /* FullEventDescriptionPresenter.swift in Sources */,
 				1E34F9072A2CF0140065DFE7 /* ProfilePresenter.swift in Sources */,
+				1ED9BA3E2A3B583900E0963D /* AlamofireNetworkManager.swift in Sources */,
 				1EDEC1AE2A1FB07200339FF9 /* LoadingOverlay.swift in Sources */,
 				1EDEC1AB2A1FA99C00339FF9 /* UIColor+Extensions.swift in Sources */,
 				1EDEC2302A263B7400339FF9 /* JSONService.swift in Sources */,
