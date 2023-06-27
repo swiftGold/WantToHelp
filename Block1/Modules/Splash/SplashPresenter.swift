@@ -34,7 +34,7 @@ extension SplashPresenter: SplashPresenterProtocol {
 
 private extension SplashPresenter {
   func routeAfterLoad() {
-    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
       guard let tabBar = self?.moduleBuilder.buildTabBarController() else { return }
       self?.router.setRoot(tabBar, embedNavBar: false, isNavigationBarHidden: true)
     }

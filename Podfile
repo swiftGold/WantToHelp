@@ -6,6 +6,7 @@ target 'Block1' do
 	pod 'Alamofire'
   pod 'SwiftyJSON'
   pod 'Kingfisher'
-	#pod 'SwiftLint'
+#  pod 'FirebaseDatabase'
+#  pod 'SwiftLint'
 
 end

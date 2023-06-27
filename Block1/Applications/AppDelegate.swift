@@ -18,12 +18,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let navigationBarAppearace = UINavigationBar.appearance()
     navigationBarAppearace.tintColor = .white
     application.statusBarStyle = UIStatusBarStyle.lightContent
+    
+    let jsonDecoderService = JSONDecoderManager()
+    let alamofireNetworkManager = AlamofireNetworkManager(jsonService: jsonDecoderService)
+    let networkManager = NetworkManager(jsonService: jsonDecoderService)
+    let apiService = APIService(networkManager: networkManager, alamofireNetworkManager: alamofireNetworkManager)
+    
     CoreDataManager.instance.deleteAllCategories()
     CoreDataManager.instance.deleteAllDescriptions()
     
-    DispatchQueue.global(qos: .background).async(flags: .barrier) {
-      self.fetchCategoriesFromJSON()
-      self.fetchDescriptionsFromJSON()
+    Queues.concurrentQueueBarrier.async(flags: .barrier) {
+      apiService.fetchCategories { [weak self] result in
+        guard let strongSelf = self else { return }
+        switch result {
+        case .success(let response):
+          strongSelf.createCategoriesCoreData(with: response)
+        case .failure(let error):
+          if let error = error as? CustomError {
+            print(error.message)
+          } else {
+            print(error.localizedDescription)
+          }
+          print("FETCH CATEGORIES FROM JSON FILE")
+          strongSelf.fetchCategoriesFromJSON()
+        }
+      }
+      
+      apiService.fetchEvents { [weak self] result in
+        guard let strongSelf = self else { return }
+        switch result {
+        case .success(let response):
+          strongSelf.createDescriptionsCoreData(with: response)
+        case .failure(let error):
+          if let error = error as? CustomError {
+            print(error.message)
+          } else {
+            print(error.localizedDescription)
+          }
+          print("FETCH EVENTS FROM JSON FILE")
+          strongSelf.fetchDescriptionsFromJSON()
+        }
+      }
     }
     return true
   }
