@@ -13,12 +13,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   private let jsonService = JSONService()
   
-  private var apiService: APIServiceProtocol
-  
-  init(apiService: APIServiceProtocol) {
-    self.apiService = apiService
-  }
-  
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     let navigationBarAppearace = UINavigationBar.appearance()
@@ -34,7 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     CoreDataManager.instance.deleteAllDescriptions()
     
     Queues.concurrentQueueBarrier.async(flags: .barrier) {
-      // MARK: - @escaping method
       apiService.fetchCategories { [weak self] result in
         guard let strongSelf = self else { return }
         switch result {
@@ -80,29 +73,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 // MARK: - Private Methods
 private extension AppDelegate {
-  //    func fetchCategoriesFromFirebase() {
-  //      apiService?.fetchCategories { [weak self] result in
-  //        guard let strongSelf = self else { return }
-  //        switch result {
-  //        case .success(let response):
-  //          strongSelf.createCategoriesCoreData(with: response)
-  //        case .failure(let error):
-  //          print(error.localizedDescription)
-  //        }
-  //      }
-  //    }
-  
-    func fetchCategoriesFromJSON() {
-      jsonService.fetchCategoriesFromJSON(completion: { [weak self] result in
-        guard let strongSelf = self else { return }
-        switch result {
-        case .success(let response):
-          strongSelf.createCategoriesCoreData(with: response)
-        case .failure(let error):
-          print(error.localizedDescription)
-        }
-      })
-    }
+  func fetchCategoriesFromJSON() {
+    jsonService.fetchCategoriesFromJSON(completion: { [weak self] result in
+      guard let strongSelf = self else { return }
+      switch result {
+      case .success(let response):
+        strongSelf.createCategoriesCoreData(with: response)
+      case .failure(let error):
+        print(error.localizedDescription)
+      }
+    })
+  }
   
   func createCategoriesCoreData(with models: [CategoryModel]) {
     let context = CoreDataManager.instance.context
@@ -115,17 +96,17 @@ private extension AppDelegate {
     }
   }
   
-    func fetchDescriptionsFromJSON() {
-      jsonService.fetchFullEventDescriptionFromJSON(completion: { [weak self] result in
-        guard let strongSelf = self else { return }
-        switch result {
-        case .success(let response):
-          strongSelf.createDescriptionsCoreData(with: response)
-        case .failure(let error):
-          print(error.localizedDescription)
-        }
-      })
-    }
+  func fetchDescriptionsFromJSON() {
+    jsonService.fetchFullEventDescriptionFromJSON(completion: { [weak self] result in
+      guard let strongSelf = self else { return }
+      switch result {
+      case .success(let response):
+        strongSelf.createDescriptionsCoreData(with: response)
+      case .failure(let error):
+        print(error.localizedDescription)
+      }
+    })
+  }
   
   func createDescriptionsCoreData(with models: [FullEventDescriptionModel]) {
     let context = CoreDataManager.instance.context

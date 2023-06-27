@@ -24,7 +24,7 @@ final class APIService {
 extension APIService: APIServiceProtocol {
   func fetchCategories(completion: @escaping (Result<[CategoryModel], Error>) -> Void) {
     let urlString = url.categoriesUrl
-    alamofireNetworkManager.request(urlString: urlString, completion: completion)
+    networkManager.request(urlString: urlString, completion: completion)
   }
   
   func fetchEvents(completion: @escaping (Result<[FullEventDescriptionModel], Error>) -> Void) {
