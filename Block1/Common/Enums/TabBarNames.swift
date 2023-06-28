@@ -16,5 +16,7 @@ enum TabBarNames {
   static let elderly = "Пожилые"
   static let animals = "Животные"
   static let events = "Мероприятия"
+  static let auth = "Авторизация"
+  static let reg = "Регистрация"
 }
 

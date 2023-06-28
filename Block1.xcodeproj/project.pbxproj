@@ -7,9 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E04295A2A4AF21F009C1268 /* AuthMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0429592A4AF21F009C1268 /* AuthMainView.swift */; };
 		1E1142F375822E55561F9695 /* Pods_Block1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A634B7E3463693E8FE9E048F /* Pods_Block1.framework */; };
+		1E21B3AD2A4B184500269411 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E21B3AC2A4B184500269411 /* WebViewViewController.swift */; };
+		1E21B3AF2A4B185300269411 /* WebViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E21B3AE2A4B185300269411 /* WebViewPresenter.swift */; };
+		1E21B3B12A4B196A00269411 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E21B3B02A4B196A00269411 /* AlertManager.swift */; };
+		1E21B3B32A4B197600269411 /* LoginVKManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E21B3B22A4B197600269411 /* LoginVKManager.swift */; };
+		1E21B3B52A4B1A2700269411 /* UIAlert+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E21B3B42A4B1A2700269411 /* UIAlert+Extension.swift */; };
+		1E2A203D2A4AC8C900FEF928 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2A203C2A4AC8C900FEF928 /* AuthViewController.swift */; };
+		1E2A203F2A4AC8D200FEF928 /* AuthPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2A203E2A4AC8D200FEF928 /* AuthPresenter.swift */; };
+		1E2A20412A4AC8E400FEF928 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2A20402A4AC8E400FEF928 /* RegistrationViewController.swift */; };
+		1E2A20442A4AC90100FEF928 /* RegistrationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2A20432A4AC90100FEF928 /* RegistrationPresenter.swift */; };
 		1E2BBD0E2A37307E00B74613 /* DescriptionCoreDataModel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2BBD0C2A37307E00B74613 /* DescriptionCoreDataModel+CoreDataClass.swift */; };
 		1E2BBD0F2A37307E00B74613 /* DescriptionCoreDataModel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2BBD0D2A37307E00B74613 /* DescriptionCoreDataModel+CoreDataProperties.swift */; };
+		1E2BE1102A4AFE58007370A0 /* RegistrationMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2BE10F2A4AFE58007370A0 /* RegistrationMainView.swift */; };
 		1E34F8FA2A2CEDCF0065DFE7 /* NewsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E34F8F92A2CEDCF0065DFE7 /* NewsPresenter.swift */; };
 		1E34F8FC2A2CEECD0065DFE7 /* ModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E34F8FB2A2CEECD0065DFE7 /* ModuleBuilder.swift */; };
 		1E34F8FF2A2CEEE30065DFE7 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E34F8FE2A2CEEE30065DFE7 /* AppRouter.swift */; };
@@ -81,8 +92,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1E0429592A4AF21F009C1268 /* AuthMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthMainView.swift; sourceTree = "<group>"; };
+		1E21B3AC2A4B184500269411 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
+		1E21B3AE2A4B185300269411 /* WebViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewPresenter.swift; sourceTree = "<group>"; };
+		1E21B3B02A4B196A00269411 /* AlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
+		1E21B3B22A4B197600269411 /* LoginVKManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVKManager.swift; sourceTree = "<group>"; };
+		1E21B3B42A4B1A2700269411 /* UIAlert+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlert+Extension.swift"; sourceTree = "<group>"; };
+		1E2A203C2A4AC8C900FEF928 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		1E2A203E2A4AC8D200FEF928 /* AuthPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPresenter.swift; sourceTree = "<group>"; };
+		1E2A20402A4AC8E400FEF928 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		1E2A20432A4AC90100FEF928 /* RegistrationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationPresenter.swift; sourceTree = "<group>"; };
 		1E2BBD0C2A37307E00B74613 /* DescriptionCoreDataModel+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DescriptionCoreDataModel+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		1E2BBD0D2A37307E00B74613 /* DescriptionCoreDataModel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DescriptionCoreDataModel+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		1E2BE10F2A4AFE58007370A0 /* RegistrationMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationMainView.swift; sourceTree = "<group>"; };
 		1E34F8F92A2CEDCF0065DFE7 /* NewsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsPresenter.swift; sourceTree = "<group>"; };
 		1E34F8FB2A2CEECD0065DFE7 /* ModuleBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleBuilder.swift; sourceTree = "<group>"; };
 		1E34F8FE2A2CEEE30065DFE7 /* AppRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
@@ -170,6 +192,51 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E0429582A4AF209009C1268 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1E0429592A4AF21F009C1268 /* AuthMainView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		1E21B3AB2A4B182D00269411 /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				1E21B3AC2A4B184500269411 /* WebViewViewController.swift */,
+				1E21B3AE2A4B185300269411 /* WebViewPresenter.swift */,
+			);
+			path = WebView;
+			sourceTree = "<group>";
+		};
+		1E2A203B2A4AC8B700FEF928 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				1E0429582A4AF209009C1268 /* Views */,
+				1E2A203C2A4AC8C900FEF928 /* AuthViewController.swift */,
+				1E2A203E2A4AC8D200FEF928 /* AuthPresenter.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		1E2A20422A4AC8EE00FEF928 /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				1E2BE10E2A4AFE3B007370A0 /* RegistrationMainView */,
+				1E2A20402A4AC8E400FEF928 /* RegistrationViewController.swift */,
+				1E2A20432A4AC90100FEF928 /* RegistrationPresenter.swift */,
+			);
+			path = Registration;
+			sourceTree = "<group>";
+		};
+		1E2BE10E2A4AFE3B007370A0 /* RegistrationMainView */ = {
+			isa = PBXGroup;
+			children = (
+				1E2BE10F2A4AFE58007370A0 /* RegistrationMainView.swift */,
+			);
+			path = RegistrationMainView;
+			sourceTree = "<group>";
+		};
 		1E34F8FD2A2CEED50065DFE7 /* AppRouter */ = {
 			isa = PBXGroup;
 			children = (
@@ -255,6 +322,7 @@
 				1EDEC2222A25F37500339FF9 /* UIView + Extensions.swift */,
 				1EDEC2312A26422400339FF9 /* UIImageView + Extensions.swift */,
 				1EDEC23E2A277B3900339FF9 /* String+Extensions.swift */,
+				1E21B3B42A4B1A2700269411 /* UIAlert+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -270,6 +338,9 @@
 		1EDEC1B12A20999A00339FF9 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				1E21B3AB2A4B182D00269411 /* WebView */,
+				1E2A20422A4AC8EE00FEF928 /* Registration */,
+				1E2A203B2A4AC8B700FEF928 /* Auth */,
 				1EDEC1FE2A2266FC00339FF9 /* MainTabBar */,
 				1EDEC1B22A2099A200339FF9 /* Splash */,
 				1EDEC1EE2A2265C200339FF9 /* News */,
@@ -521,6 +592,8 @@
 		1EDEC23B2A2767E900339FF9 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				1E21B3B02A4B196A00269411 /* AlertManager.swift */,
+				1E21B3B22A4B197600269411 /* LoginVKManager.swift */,
 				1EDEC23C2A2767F900339FF9 /* CalendarManager.swift */,
 				1E34F8FB2A2CEECD0065DFE7 /* ModuleBuilder.swift */,
 				1E9B65AC2A35B684006380D9 /* CoreDataManager.swift */,
@@ -670,13 +743,16 @@
 			files = (
 				1E34F9122A2DCEB90065DFE7 /* MainViewModel.swift in Sources */,
 				1E9B65B72A364429006380D9 /* CategoryCoreDataModel+CoreDataClass.swift in Sources */,
+				1E21B3B12A4B196A00269411 /* AlertManager.swift in Sources */,
 				1ED9BA3A2A3B00FE00E0963D /* JSONDecoderManager.swift in Sources */,
 				1ED9BA362A3B00F300E0963D /* APIService.swift in Sources */,
+				1E2A20412A4AC8E400FEF928 /* RegistrationViewController.swift in Sources */,
 				1EDEC2262A25F94B00339FF9 /* BottomButtonsView.swift in Sources */,
 				1E9B65B62A364429006380D9 /* CategoryCoreDataModel+CoreDataProperties.swift in Sources */,
 				1E34F90A2A2CF7E30065DFE7 /* CustomVC.swift in Sources */,
 				1EDEC23F2A277B3900339FF9 /* String+Extensions.swift in Sources */,
 				1E34F9142A2DCECE0065DFE7 /* ParticipantsViewModel.swift in Sources */,
+				1E21B3B52A4B1A2700269411 /* UIAlert+Extension.swift in Sources */,
 				1ED9BA382A3B00F900E0963D /* NetworkManager.swift in Sources */,
 				1E34F8FF2A2CEEE30065DFE7 /* AppRouter.swift in Sources */,
 				1EDEC1B02A1FB17E00339FF9 /* CategoriesViewController.swift in Sources */,
@@ -686,15 +762,19 @@
 				1EDEC22A2A25FE4E00339FF9 /* FullEventDescriptionMainView.swift in Sources */,
 				1EDEC23D2A2767FA00339FF9 /* CalendarManager.swift in Sources */,
 				1EDEC1C32A20A9E700339FF9 /* CategoryModel.swift in Sources */,
+				1E21B3B32A4B197600269411 /* LoginVKManager.swift in Sources */,
 				1EDEC2282A25FCEB00339FF9 /* BottomParticipantsView.swift in Sources */,
 				1EDEC2132A24A00500339FF9 /* AdultViewController.swift in Sources */,
 				1EDEC2432A27829D00339FF9 /* FullEventDescriptionViewModel.swift in Sources */,
+				1E21B3AD2A4B184500269411 /* WebViewViewController.swift in Sources */,
 				1EDEC23A2A274DFA00339FF9 /* FullEventDescriptionModel.swift in Sources */,
 				1E34F8FC2A2CEECD0065DFE7 /* ModuleBuilder.swift in Sources */,
 				1E34F9162A2DF37D0065DFE7 /* AdultPresenter.swift in Sources */,
+				1E2A20442A4AC90100FEF928 /* RegistrationPresenter.swift in Sources */,
 				1E34F90C2A2CFEBC0065DFE7 /* SplashPresenter.swift in Sources */,
 				1E34F9182A2DF3890065DFE7 /* ElderlyPresenter.swift in Sources */,
 				1EDEC1FB2A22664400339FF9 /* NewsViewController.swift in Sources */,
+				1E21B3AF2A4B185300269411 /* WebViewPresenter.swift in Sources */,
 				1EDEC1CC2A21FDE500339FF9 /* Fonts.swift in Sources */,
 				1E2BBD0F2A37307E00B74613 /* DescriptionCoreDataModel+CoreDataProperties.swift in Sources */,
 				1EDEC2042A23AA4200339FF9 /* TabBarNames.swift in Sources */,
@@ -706,6 +786,7 @@
 				1E34F9052A2CEFE40065DFE7 /* HistoryPresenter.swift in Sources */,
 				1EDEC2172A24A01600339FF9 /* AnimalsViewController.swift in Sources */,
 				1EDEC2322A26422400339FF9 /* UIImageView + Extensions.swift in Sources */,
+				1E04295A2A4AF21F009C1268 /* AuthMainView.swift in Sources */,
 				1EDEC2192A24A01D00339FF9 /* EventsViewController.swift in Sources */,
 				1EDEC20A2A24971200339FF9 /* ChildsViewController.swift in Sources */,
 				1EDEC21E2A24AF5400339FF9 /* ChildsCollectionViewCell.swift in Sources */,
@@ -720,13 +801,16 @@
 				1E34F9032A2CEF940065DFE7 /* CategoriesPresenter.swift in Sources */,
 				1EDEC2062A23AB7000339FF9 /* Images.swift in Sources */,
 				1E9B65B02A35C01C006380D9 /* CoreData.xcdatamodeld in Sources */,
+				1E2A203D2A4AC8C900FEF928 /* AuthViewController.swift in Sources */,
 				1E34F9012A2CEF3E0065DFE7 /* SearchPresenter.swift in Sources */,
 				1E34F91C2A2DF3A00065DFE7 /* EventsPresenter.swift in Sources */,
 				1E34F91A2A2DF3940065DFE7 /* AnimalsPresenter.swift in Sources */,
+				1E2A203F2A4AC8D200FEF928 /* AuthPresenter.swift in Sources */,
 				1E34F9102A2DC4850065DFE7 /* FullEventDescriptionPresenter.swift in Sources */,
 				1E34F9072A2CF0140065DFE7 /* ProfilePresenter.swift in Sources */,
 				1ED9BA3E2A3B583900E0963D /* AlamofireNetworkManager.swift in Sources */,
 				1EDEC1AE2A1FB07200339FF9 /* LoadingOverlay.swift in Sources */,
+				1E2BE1102A4AFE58007370A0 /* RegistrationMainView.swift in Sources */,
 				1EDEC1AB2A1FA99C00339FF9 /* UIColor+Extensions.swift in Sources */,
 				1EDEC2302A263B7400339FF9 /* JSONService.swift in Sources */,
 				1E9B65AD2A35B684006380D9 /* CoreDataManager.swift in Sources */,

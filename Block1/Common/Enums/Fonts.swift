@@ -10,5 +10,3 @@ enum Fonts {
   static let SFUIMed = "SFUIText-Medium"
   static let OfficSanExtraBold = "OfficinaSansExtraBoldC"
 }
-
-

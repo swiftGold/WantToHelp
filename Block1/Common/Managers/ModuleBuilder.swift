@@ -8,6 +8,9 @@
 import Foundation
 
 protocol ModuleBuilderProtocol {
+  func buildWebViewViewController() -> WebViewViewController
+  func buildRegistrationViewController() -> RegistrationViewController
+  func buildAuthViewController() -> AuthViewController
   func buildSplashViewController() -> SplashViewController
   func buildTabBarController() -> MainTabBarController
   func buildNewsViewController() -> NewsViewController
@@ -32,6 +35,41 @@ final class ModuleBuilder {
 }
 
 extension ModuleBuilder: ModuleBuilderProtocol {
+  func buildWebViewViewController() -> WebViewViewController {
+    let viewController = WebViewViewController()
+    let alertManager = AlertManager()
+    let loginVkManager = LoginVKManager()
+    let presenter = WebViewPresenter(router: router,
+                                     moduleBuilder: self,
+                                     loginVKManager: loginVkManager,
+                                     alertManager: alertManager
+    )
+    viewController.presenter = presenter
+    presenter.viewController = viewController
+    
+    return viewController
+  }
+  
+  func buildRegistrationViewController() -> RegistrationViewController {
+    let viewController = RegistrationViewController()
+    let presenter = RegistrationPresenter(router: router,
+                                        moduleBuilder: self
+    )
+    viewController.presenter = presenter
+    presenter.viewController = viewController
+    return viewController
+  }
+  
+  func buildAuthViewController() -> AuthViewController {
+    let viewController = AuthViewController()
+    let presenter = AuthPresenter(router: router,
+                                        moduleBuilder: self
+    )
+    viewController.presenter = presenter
+    presenter.viewController = viewController
+    return viewController
+  }
+  
   func buildSplashViewController() -> SplashViewController {
     let viewController = SplashViewController()
     let presenter = SplashPresenter(router: router,

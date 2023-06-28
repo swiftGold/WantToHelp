@@ -82,7 +82,8 @@ final class CategoriesViewController: CustomVC {
   // MARK: - Objc methods
   @objc
   private func didTapBarButton() {
-    exit(0)
+//    exit(0)
+    presenter?.didTapBackButton()
   }
 }
 
@@ -102,7 +103,7 @@ extension CategoriesViewController: CategoriesViewControllerProtocol {
 extension CategoriesViewController: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     let index = indexPath.row
-    presenter?.routeToCategoryItem(index: index)
+    presenter?.categoryItemDidTap(index: index)
   }
 }
 

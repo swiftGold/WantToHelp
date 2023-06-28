@@ -41,4 +41,8 @@ enum Images {
   static let coins = "coins"
   static let verticalSeparator = "separator2"
   static let placeHolder = "image_PlaceHolder"
+  static let vk = "vk"
+  static let fb = "fb"
+  static let ok = "ok"
+  static let showPassword = "showPassword"
 }

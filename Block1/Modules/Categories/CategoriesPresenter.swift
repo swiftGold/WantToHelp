@@ -9,7 +9,8 @@ import Foundation
 
 protocol CategoriesPresenterProtocol {
   func viewDidLoad()
-  func routeToCategoryItem(index: Int)
+  func categoryItemDidTap(index: Int)
+  func didTapBackButton()
 }
 
 final class CategoriesPresenter {
@@ -28,7 +29,12 @@ final class CategoriesPresenter {
 }
 
 extension CategoriesPresenter: CategoriesPresenterProtocol {
-  func routeToCategoryItem(index: Int) {
+  func didTapBackButton() {
+    let vc = moduleBuilder.buildAuthViewController()
+    viewController?.routeToVC(with: vc)
+  }
+  
+  func categoryItemDidTap(index: Int) {
     let childVC = moduleBuilder.buildChildViewController()
     let adultVC = moduleBuilder.buildAdultViewController()
     let elderlyVC = moduleBuilder.buildElderlyViewController()
