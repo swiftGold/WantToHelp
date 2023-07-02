@@ -8,7 +8,9 @@
 import UIKit
 import WebKit
 
-protocol WebViewViewControllerProtocol: UIViewController {}
+protocol WebViewViewControllerProtocol: UIViewController {
+  func showAlert(with viewController: UIViewController)
+}
 
 final class WebViewViewController: UIViewController {
   // MARK: - UI
@@ -24,7 +26,6 @@ final class WebViewViewController: UIViewController {
   private let webView = WKWebView()
   
   // MARK: - Variables
-  private let alertManager = AlertManager()
   var presenter: WebViewPresenterProtocol?
   
   // MARK: - life cycles
@@ -43,7 +44,11 @@ final class WebViewViewController: UIViewController {
 }
 
 // MARK: - WebViewViewControllerProtocol impl
-extension WebViewViewController: WebViewViewControllerProtocol {}
+extension WebViewViewController: WebViewViewControllerProtocol {
+  func showAlert(with viewController: UIViewController) {
+    present(viewController, animated: true)
+  }
+}
 
 // MARK: - WKNavigationDelegate
 extension WebViewViewController: WKNavigationDelegate {

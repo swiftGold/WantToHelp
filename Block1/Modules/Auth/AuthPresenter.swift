@@ -6,10 +6,11 @@
 //
 
 import Foundation
+import FirebaseAuth
 
 protocol AuthPresenterProtocol {
   func registrationButtonDidTap()
-  func enterButtonDidTap()
+  func enterButtonDidTap(with model: RegistrationModel)
   func vkButtonDidTap()
 }
 
@@ -17,13 +18,16 @@ final class AuthPresenter {
   weak var viewController: AuthViewControllerProtocol?
   private let router: Router
   private let moduleBuilder: ModuleBuilderProtocol
+  private let alertManager: AlertManagerProtocol
   
   init(
     router: Router,
-    moduleBuilder: ModuleBuilderProtocol
+    moduleBuilder: ModuleBuilderProtocol,
+    alertManager: AlertManagerProtocol
   ) {
     self.router = router
     self.moduleBuilder = moduleBuilder
+    self.alertManager = alertManager
   }
 }
 
@@ -33,9 +37,18 @@ extension AuthPresenter: AuthPresenterProtocol {
     viewController?.routeToVkWebViewVC(to: vc)
   }
   
-  func enterButtonDidTap() {
-    let tabBar = moduleBuilder.buildTabBarController()
-    router.setRoot(tabBar, embedNavBar: false, isNavigationBarHidden: true)
+  func enterButtonDidTap(with model: RegistrationModel) {
+    Auth.auth().signIn(withEmail: model.email, password: model.password) {authResult, error in
+      if let e = error {
+        let vc = self.alertManager.showAlertWith(title: "Error",
+                                                 message: e.localizedDescription
+        )
+        self.viewController?.showAlert(with: vc)
+      } else {
+        let tabBar = self.moduleBuilder.buildTabBarController()
+        self.router.setRoot(tabBar, embedNavBar: false, isNavigationBarHidden: true)
+      }
+    }
   }
   
   func registrationButtonDidTap() {

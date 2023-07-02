@@ -47,6 +47,8 @@
 		1E9B65B02A35C01C006380D9 /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1E9B65AE2A35C01C006380D9 /* CoreData.xcdatamodeld */; };
 		1E9B65B62A364429006380D9 /* CategoryCoreDataModel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9B65B42A364429006380D9 /* CategoryCoreDataModel+CoreDataProperties.swift */; };
 		1E9B65B72A364429006380D9 /* CategoryCoreDataModel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9B65B52A364429006380D9 /* CategoryCoreDataModel+CoreDataClass.swift */; };
+		1EAC070B2A515F870088E4AA /* RegistrationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAC070A2A515F870088E4AA /* RegistrationModel.swift */; };
+		1EAC070D2A5190600088E4AA /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAC070C2A5190600088E4AA /* CustomError.swift */; };
 		1ED9BA2E2A39F1BF00E0963D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1ED9BA2D2A39F1BF00E0963D /* GoogleService-Info.plist */; };
 		1ED9BA362A3B00F300E0963D /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED9BA352A3B00F300E0963D /* APIService.swift */; };
 		1ED9BA382A3B00F900E0963D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED9BA372A3B00F900E0963D /* NetworkManager.swift */; };
@@ -133,6 +135,8 @@
 		1E9B65AF2A35C01C006380D9 /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
 		1E9B65B42A364429006380D9 /* CategoryCoreDataModel+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CategoryCoreDataModel+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1E9B65B52A364429006380D9 /* CategoryCoreDataModel+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CategoryCoreDataModel+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1EAC070A2A515F870088E4AA /* RegistrationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationModel.swift; sourceTree = "<group>"; };
+		1EAC070C2A5190600088E4AA /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
 		1ED9BA2D2A39F1BF00E0963D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1ED9BA352A3B00F300E0963D /* APIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		1ED9BA372A3B00F900E0963D /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -222,6 +226,7 @@
 		1E2A20422A4AC8EE00FEF928 /* Registration */ = {
 			isa = PBXGroup;
 			children = (
+				1EAC07092A515F740088E4AA /* Models */,
 				1E2BE10E2A4AFE3B007370A0 /* RegistrationMainView */,
 				1E2A20402A4AC8E400FEF928 /* RegistrationViewController.swift */,
 				1E2A20432A4AC90100FEF928 /* RegistrationPresenter.swift */,
@@ -303,6 +308,14 @@
 			);
 			name = CategoryCoreDataModel;
 			path = ../../..;
+			sourceTree = "<group>";
+		};
+		1EAC07092A515F740088E4AA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1EAC070A2A515F870088E4AA /* RegistrationModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		1EDEC1A12A1F9CF500339FF9 /* Fonts */ = {
@@ -413,6 +426,7 @@
 				1EDEC2032A23AA4100339FF9 /* TabBarNames.swift */,
 				1EDEC2052A23AB7000339FF9 /* Images.swift */,
 				1ED9BA3B2A3B1A4A00E0963D /* Queues.swift */,
+				1EAC070C2A5190600088E4AA /* CustomError.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -745,6 +759,7 @@
 				1E9B65B72A364429006380D9 /* CategoryCoreDataModel+CoreDataClass.swift in Sources */,
 				1E21B3B12A4B196A00269411 /* AlertManager.swift in Sources */,
 				1ED9BA3A2A3B00FE00E0963D /* JSONDecoderManager.swift in Sources */,
+				1EAC070B2A515F870088E4AA /* RegistrationModel.swift in Sources */,
 				1ED9BA362A3B00F300E0963D /* APIService.swift in Sources */,
 				1E2A20412A4AC8E400FEF928 /* RegistrationViewController.swift in Sources */,
 				1EDEC2262A25F94B00339FF9 /* BottomButtonsView.swift in Sources */,
@@ -790,6 +805,7 @@
 				1EDEC2192A24A01D00339FF9 /* EventsViewController.swift in Sources */,
 				1EDEC20A2A24971200339FF9 /* ChildsViewController.swift in Sources */,
 				1EDEC21E2A24AF5400339FF9 /* ChildsCollectionViewCell.swift in Sources */,
+				1EAC070D2A5190600088E4AA /* CustomError.swift in Sources */,
 				1E34F90E2A2D078B0065DFE7 /* ChildsPresenter.swift in Sources */,
 				1E4913AB2A17A92200ABF6B6 /* SplashViewController.swift in Sources */,
 				1EDEC2232A25F37500339FF9 /* UIView + Extensions.swift in Sources */,

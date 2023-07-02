@@ -5,7 +5,7 @@ protocol APIServiceProtocol {
 
 final class APIService {
   enum url {
-    static let categoriesUrl = "https://wanttohelp-cbaa8-default-rtdb.europe-west1.firebasedatabase.app/categories.json"
+    static let categoriesUrl = "https://wanttohelp-cbaa8-default- rtdb.europe-west1.firebasedatabase.app/categories.json"
     static let eventsUrl = "https://wanttohelp-cbaa8-default-rtdb.europe-west1.firebasedatabase.app/events.json"
   }
   

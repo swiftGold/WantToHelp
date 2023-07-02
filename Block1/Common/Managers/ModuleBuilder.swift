@@ -28,16 +28,19 @@ protocol ModuleBuilderProtocol {
 
 final class ModuleBuilder {
   private var router: Router
-  
-  init(router: Router) {
+  private let alertManager: AlertManagerProtocol
+
+  init(router: Router,
+       alertManager: AlertManagerProtocol
+  ) {
     self.router = router
+    self.alertManager = alertManager
   }
 }
 
 extension ModuleBuilder: ModuleBuilderProtocol {
   func buildWebViewViewController() -> WebViewViewController {
     let viewController = WebViewViewController()
-    let alertManager = AlertManager()
     let loginVkManager = LoginVKManager()
     let presenter = WebViewPresenter(router: router,
                                      moduleBuilder: self,
@@ -53,7 +56,8 @@ extension ModuleBuilder: ModuleBuilderProtocol {
   func buildRegistrationViewController() -> RegistrationViewController {
     let viewController = RegistrationViewController()
     let presenter = RegistrationPresenter(router: router,
-                                        moduleBuilder: self
+                                          moduleBuilder: self,
+                                          alertManager: alertManager
     )
     viewController.presenter = presenter
     presenter.viewController = viewController
@@ -63,7 +67,8 @@ extension ModuleBuilder: ModuleBuilderProtocol {
   func buildAuthViewController() -> AuthViewController {
     let viewController = AuthViewController()
     let presenter = AuthPresenter(router: router,
-                                        moduleBuilder: self
+                                  moduleBuilder: self,
+                                  alertManager: alertManager
     )
     viewController.presenter = presenter
     presenter.viewController = viewController

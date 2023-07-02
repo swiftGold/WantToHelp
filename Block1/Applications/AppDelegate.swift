@@ -7,17 +7,21 @@
 
 import UIKit
 import CoreData
+import FirebaseCore
+import FirebaseAuth
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
   
-  private let jsonService = JSONService()
-  
+  private let jsonService = JSONService(jsonDecoderManager: JSONDecoderManager())
+
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     let navigationBarAppearace = UINavigationBar.appearance()
     navigationBarAppearace.tintColor = .white
     application.statusBarStyle = UIStatusBarStyle.lightContent
+    
+    FirebaseApp.configure()
     
     let jsonDecoderService = JSONDecoderManager()
     let alamofireNetworkManager = AlamofireNetworkManager(jsonService: jsonDecoderService)
@@ -80,7 +84,11 @@ private extension AppDelegate {
       case .success(let response):
         strongSelf.createCategoriesCoreData(with: response)
       case .failure(let error):
-        print(error.localizedDescription)
+        if let error = error as? CustomError {
+          print(error.message)
+        } else {
+          print(error.localizedDescription)
+        }
       }
     })
   }
@@ -103,7 +111,11 @@ private extension AppDelegate {
       case .success(let response):
         strongSelf.createDescriptionsCoreData(with: response)
       case .failure(let error):
-        print(error.localizedDescription)
+        if let error = error as? CustomError {
+          print(error.message)
+        } else {
+          print(error.localizedDescription)
+        }
       }
     })
   }

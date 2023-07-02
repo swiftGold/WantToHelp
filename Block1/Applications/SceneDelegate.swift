@@ -20,7 +20,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   func sceneWillResignActive(_ scene: UIScene) {}
   func sceneWillEnterForeground(_ scene: UIScene) {}
   func sceneDidEnterBackground(_ scene: UIScene) {
-//    CoreDataManager.instance.saveContext()
   }
 }
 
@@ -35,7 +34,10 @@ private extension SceneDelegate {
   
   func makeRootViewController(window: UIWindow) {
     let router = AppRouter(window: window, navigationController: UINavigationController())
-    let moduleBuilder: ModuleBuilderProtocol = ModuleBuilder(router: router)
+    let alertManager = AlertManager(router: router)
+    let moduleBuilder: ModuleBuilderProtocol = ModuleBuilder(router: router,
+                                                             alertManager: alertManager
+    )
     let viewController = moduleBuilder.buildSplashViewController()
     window.rootViewController = viewController
   }

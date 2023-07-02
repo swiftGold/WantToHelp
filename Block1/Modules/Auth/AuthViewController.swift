@@ -10,6 +10,7 @@ import UIKit
 protocol AuthViewControllerProtocol: AnyObject {
   func routeToRegistrationVC(to viewController: UIViewController)
   func routeToVkWebViewVC(to viewController: UIViewController)
+  func showAlert(with viewController: UIViewController)
 }
 
 final class AuthViewController: CustomVC {
@@ -30,6 +31,10 @@ final class AuthViewController: CustomVC {
 
 // MARK: - ViewControllerProtocol impl
 extension AuthViewController: AuthViewControllerProtocol {
+  func showAlert(with viewController: UIViewController) {
+    present(viewController, animated: true)
+  }
+  
   func routeToVkWebViewVC(to viewController: UIViewController) {
     navigationController?.pushViewController(viewController, animated: true)
   }
@@ -41,14 +46,14 @@ extension AuthViewController: AuthViewControllerProtocol {
 
 // MARK: - AuthMainViewDelegate impl
 extension AuthViewController: AuthMainViewDelegate {
+  func enterButtonDidTap(with model: RegistrationModel) {
+    presenter?.enterButtonDidTap(with: model)
+  }
+  
   func vkButtonDidTap() {
     presenter?.vkButtonDidTap()
   }
-  
-  func enterButtonDidTap() {
-    presenter?.enterButtonDidTap()
-  }
-  
+
   func registrationButtonDidTap() {
     presenter?.registrationButtonDidTap()
   }

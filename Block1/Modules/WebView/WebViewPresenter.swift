@@ -5,7 +5,7 @@
 //  Created by Сергей Золотухин on 27.06.2023.
 //
 
-import UIKit
+import Foundation
 
 protocol WebViewPresenterProtocol {
     func viewDidLoad()
@@ -40,19 +40,12 @@ extension WebViewPresenter: WebViewPresenterProtocol {
     func viewDidLoad() {}
     
     func didTapCloseButton() {
-        let alert = UIAlertController(
-            title: "Close",
-            message: "Are you sure you want to close?",
-            preferredStyle: .alert
-        )
-        alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
-            let authViewController = self.moduleBuilder.buildAuthViewController()
-            self.router.push(authViewController, animated: true)
-        })
-        alert.addAction(UIAlertAction(title: "Cancel", style: .destructive) { _ in
-            print("cancel")
-        })
-        viewController?.present(alert, animated: true)
+      let vc = moduleBuilder.buildAuthViewController()
+      let ac = alertManager.showAlertWithTwoVariants(title: "Close",
+                                                     message: "Are you sure you want to close?",
+                                                                  vc: vc
+      ) 
+      viewController?.showAlert(with: ac)
     }
     
     func didFetchToken() {

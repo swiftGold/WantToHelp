@@ -19,27 +19,40 @@ final class CalendarManager {
   let dateFormatter = DateFormatter()
 }
 
+enum DateType: String {
+  case LLLL
+  case yyyy
+}
+
 extension CalendarManager: CalendarManagerProtocol {
-  func plusMonth(date: Date) -> Date {
-    return calendar.date(byAdding: .month, value: 1, to: date)!
+  func format(date: Date, dateType: DateType) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = dateType.rawValue
+    return dateFormatter.string(from: date)
   }
   
-  func minusMonth(date: Date) -> Date {
-    return calendar.date(byAdding: .month, value: -1, to: date)!
+  func format(dateString: String, dateType: DateType) -> Date? {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = dateType.rawValue
+    return dateFormatter.date(from: dateString)
+  }
+  
+  func plusMonth(date: Date) -> Date? {
+    return calendar.date(byAdding: .month, value: 1, to: date)
+  }
+  
+  func minusMonth(date: Date) -> Date? {
+    return calendar.date(byAdding: .month, value: -1, to: date)
   }
   
   // название месяца
   func monthString(date: Date) -> String {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "LLLL"
-    return dateFormatter.string(from: date)
+    return format(date: date, dateType: .LLLL)
   }
   
   // название года
   func yearString(date: Date) -> String {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "yyyy"
-    return dateFormatter.string(from: date)
+    return format(date: date, dateType: .yyyy)
   }
   
   // Количество дней в месяце

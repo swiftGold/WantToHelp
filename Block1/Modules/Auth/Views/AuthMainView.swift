@@ -9,7 +9,7 @@ import UIKit
 
 protocol AuthMainViewDelegate: AnyObject {
   func registrationButtonDidTap()
-  func enterButtonDidTap()
+  func enterButtonDidTap(with model: RegistrationModel)
   func vkButtonDidTap()
 }
 
@@ -208,7 +208,12 @@ final class AuthMainView: UIView {
   
   @objc
   private func didTapEnterButton() {
-    delegate?.enterButtonDidTap()
+    guard let email = emailTextField.text,
+          let password = passwordTextField.text else {
+      return
+    }
+    let model = RegistrationModel(email: email, password: password)
+    delegate?.enterButtonDidTap(with: model)
   }
   
   @objc

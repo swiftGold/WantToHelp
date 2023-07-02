@@ -13,7 +13,6 @@ public final class NetworkManager {
 }
 
 extension NetworkManager: Networkable {
-  
   func request<T: Decodable>(urlString: String, completion: @escaping (Result<T, Error>) -> Void) {
     guard let url = URL(string: urlString) else {
       completion(.failure(CustomError.urlError))
@@ -46,28 +45,4 @@ extension NetworkManager: Networkable {
     }
     task.resume()
   }
-}
-
-enum CustomError: Error {
-  case urlError
-  case httpUrlResponseError
-  case dataError
-  case failureRequest(statusCode: Int)
-  
-  var message: String {
-    switch self {
-    case .urlError:
-      return "urlError description"
-    case .httpUrlResponseError:
-      return "httpUrlResponseError description"
-    case .dataError:
-      return "dataError description"
-    case .failureRequest(statusCode: let statusCode):
-      return "failureRequest description - statusCode - \(statusCode)"
-    }
-  }
-}
-
-enum NetworkError: Error {
-  case url
 }

@@ -35,10 +35,6 @@ extension SplashPresenter: SplashPresenterProtocol {
 private extension SplashPresenter {
   func routeAfterLoad() {
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
-        // TODO: - Не удалять, пока не доделал переход на таббар с регистрации
-//      guard let tabBar = self?.moduleBuilder.buildTabBarController() else { return }
-//      self?.router.setRoot(tabBar, embedNavBar: false, isNavigationBarHidden: true)
-      
       guard let authVC = self?.moduleBuilder.buildAuthViewController() else { return }
       self?.router.setRoot(authVC, embedNavBar: true, isNavigationBarHidden: false)
     }

@@ -9,6 +9,7 @@ import UIKit
 
 protocol RegistrationViewControllerProtocol: AnyObject {
   func routeToAuthVC(to viewController: UIViewController)
+  func showAlert(with viewController: UIViewController)
 }
 
 final class RegistrationViewController: CustomVC {
@@ -29,6 +30,10 @@ final class RegistrationViewController: CustomVC {
 
 // MARK: - ViewControllerProtocol impl
 extension RegistrationViewController: RegistrationViewControllerProtocol {
+  func showAlert(with viewController: UIViewController) {
+    present(viewController, animated: true)
+  }
+  
   func routeToAuthVC(to viewController: UIViewController) {
     navigationController?.pushViewController(viewController, animated: true)
   }
@@ -36,8 +41,8 @@ extension RegistrationViewController: RegistrationViewControllerProtocol {
 
 // MARK: - RegistrationMainViewDelegate impl
 extension RegistrationViewController: RegistrationMainViewDelegate {
-  func registrationButtonDidTap() {
-    presenter?.routeToAuthViewController()
+  func registrationButtonDidTap(with model: RegistrationModel) {
+    presenter?.didTapGeristrationButton(with: model)
   }
 }
 

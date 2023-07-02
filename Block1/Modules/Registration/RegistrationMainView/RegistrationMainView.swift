@@ -8,7 +8,7 @@
 import UIKit
 
 protocol RegistrationMainViewDelegate: AnyObject {
-  func registrationButtonDidTap()
+  func registrationButtonDidTap(with model: RegistrationModel)
 }
 
 final class RegistrationMainView: UIView {
@@ -138,7 +138,12 @@ final class RegistrationMainView: UIView {
   
   @objc
   private func didTapRegisterButton() {
-    delegate?.registrationButtonDidTap()
+    guard let email = emailTextField.text,
+          let password = passwordTextField.text else {
+      return
+    }
+    let model = RegistrationModel(email: email, password: password)
+    delegate?.registrationButtonDidTap(with: model)
   }
 }
 
