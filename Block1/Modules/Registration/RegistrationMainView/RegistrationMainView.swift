@@ -129,7 +129,7 @@ final class RegistrationMainView: UIView {
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   // MARK: - Objc methods
   @objc
   private func didTapShowPasswordButton() {

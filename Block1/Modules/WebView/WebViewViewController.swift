@@ -131,13 +131,19 @@ private extension WebViewViewController {
   
   func setConstraints() {
     NSLayoutConstraint.activate([
-      closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-      closeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+      closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.closeButtonTopInset),
+      closeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.closeButtonLeadingInset),
       
-      webView.topAnchor.constraint(equalTo: closeButton.bottomAnchor, constant: 10),
+      webView.topAnchor.constraint(equalTo: closeButton.bottomAnchor, constant: Constants.webViewTopInset),
       webView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       webView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
       webView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
     ])
+  }
+  
+  enum Constants {
+    static let closeButtonTopInset: CGFloat = 10
+    static let closeButtonLeadingInset: CGFloat = 10
+    static let webViewTopInset: CGFloat = 10
   }
 }

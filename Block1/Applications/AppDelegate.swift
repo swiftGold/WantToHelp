@@ -14,55 +14,24 @@ import FirebaseAuth
 class AppDelegate: UIResponder, UIApplicationDelegate {
   
   private let jsonService = JSONService(jsonDecoderManager: JSONDecoderManager())
-
+  private let apiService = APIService(
+    networkManager: NetworkManager(
+      jsonService: JSONDecoderManager()),
+    alamofireNetworkManager: AlamofireNetworkManager(
+      jsonService: JSONDecoderManager()))
+  
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     let navigationBarAppearace = UINavigationBar.appearance()
     navigationBarAppearace.tintColor = .white
     application.statusBarStyle = UIStatusBarStyle.lightContent
-    
     FirebaseApp.configure()
-    
-    let jsonDecoderService = JSONDecoderManager()
-    let alamofireNetworkManager = AlamofireNetworkManager(jsonService: jsonDecoderService)
-    let networkManager = NetworkManager(jsonService: jsonDecoderService)
-    let apiService = APIService(networkManager: networkManager, alamofireNetworkManager: alamofireNetworkManager)
-    
     CoreDataManager.instance.deleteAllCategories()
     CoreDataManager.instance.deleteAllDescriptions()
     
     Queues.concurrentQueueBarrier.async(flags: .barrier) {
-      apiService.fetchCategories { [weak self] result in
-        guard let strongSelf = self else { return }
-        switch result {
-        case .success(let response):
-          strongSelf.createCategoriesCoreData(with: response)
-        case .failure(let error):
-          if let error = error as? CustomError {
-            print(error.message)
-          } else {
-            print(error.localizedDescription)
-          }
-          print("FETCH CATEGORIES FROM JSON FILE")
-          strongSelf.fetchCategoriesFromJSON()
-        }
-      }
-      
-      apiService.fetchEvents { [weak self] result in
-        guard let strongSelf = self else { return }
-        switch result {
-        case .success(let response):
-          strongSelf.createDescriptionsCoreData(with: response)
-        case .failure(let error):
-          if let error = error as? CustomError {
-            print(error.message)
-          } else {
-            print(error.localizedDescription)
-          }
-          print("FETCH EVENTS FROM JSON FILE")
-          strongSelf.fetchDescriptionsFromJSON()
-        }
-      }
+      self.fetchCategories()
+      self.fetchEvents()
     }
     return true
   }
@@ -77,6 +46,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 // MARK: - Private Methods
 private extension AppDelegate {
+  func fetchCategories() {
+    apiService.fetchCategories { [weak self] result in
+      guard let strongSelf = self else { return }
+      switch result {
+      case .success(let response):
+        strongSelf.createCategoriesCoreData(with: response)
+      case .failure(let error):
+        if let error = error as? CustomError {
+          print(error.message)
+        } else {
+          print(error.localizedDescription)
+        }
+        print("FETCH CATEGORIES FROM JSON FILE")
+        strongSelf.fetchCategoriesFromJSON()
+      }
+    }
+  }
+  
+  func fetchEvents() {
+    apiService.fetchEvents { [weak self] result in
+      guard let strongSelf = self else { return }
+      switch result {
+      case .success(let response):
+        strongSelf.createDescriptionsCoreData(with: response)
+      case .failure(let error):
+        if let error = error as? CustomError {
+          print(error.message)
+        } else {
+          print(error.localizedDescription)
+        }
+        print("FETCH EVENTS FROM JSON FILE")
+        strongSelf.fetchDescriptionsFromJSON()
+      }
+    }
+  }
+  
   func fetchCategoriesFromJSON() {
     jsonService.fetchCategoriesFromJSON(completion: { [weak self] result in
       guard let strongSelf = self else { return }
@@ -137,8 +142,8 @@ private extension AppDelegate {
                                                         detailImage1: model.detailImage1,
                                                         detailImage2: model.detailImage2,
                                                         detailImage3: model.detailImage3,
-                                                        photo1: model.phone1,
-                                                        photo2: model.phone2,
+                                                        photo1: model.photo1,
+                                                        photo2: model.photo2,
                                                         photo3: model.photo3,
                                                         photo4: model.photo4,
                                                         photo5: model.photo5,

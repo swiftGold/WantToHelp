@@ -75,6 +75,12 @@ final class BottomParticipantsView: UIView {
       return
     }
     
+    print(image1)
+    print(image2)
+    print(image3)
+    print(image4)
+    print(image5)
+
     photo1ImageView.loadImage(from: image1)
     photo2ImageView.loadImage(from: image2)
     photo3ImageView.loadImage(from: image3)

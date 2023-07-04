@@ -11,6 +11,7 @@ protocol AuthMainViewDelegate: AnyObject {
   func registrationButtonDidTap()
   func enterButtonDidTap(with model: RegistrationModel)
   func vkButtonDidTap()
+  func fbButtonDidTap()
 }
 
 final class AuthMainView: UIView {
@@ -193,7 +194,7 @@ final class AuthMainView: UIView {
   
   @objc
   private func didTapFbButton() {
-    print(#function)
+    delegate?.fbButtonDidTap()
   }
   
   @objc

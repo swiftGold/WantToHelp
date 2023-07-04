@@ -46,6 +46,10 @@ extension AuthViewController: AuthViewControllerProtocol {
 
 // MARK: - AuthMainViewDelegate impl
 extension AuthViewController: AuthMainViewDelegate {
+  func fbButtonDidTap() {
+    presenter?.fbButtonDidTap()
+  }
+  
   func enterButtonDidTap(with model: RegistrationModel) {
     presenter?.enterButtonDidTap(with: model)
   }

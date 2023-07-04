@@ -12,6 +12,7 @@ protocol AuthPresenterProtocol {
   func registrationButtonDidTap()
   func enterButtonDidTap(with model: RegistrationModel)
   func vkButtonDidTap()
+  func fbButtonDidTap()
 }
 
 final class AuthPresenter {
@@ -32,6 +33,11 @@ final class AuthPresenter {
 }
 
 extension AuthPresenter: AuthPresenterProtocol {
+  func fbButtonDidTap() {
+    let tabBar = self.moduleBuilder.buildTabBarController()
+    self.router.setRoot(tabBar, embedNavBar: false, isNavigationBarHidden: true)
+  }
+  
   func vkButtonDidTap() {
     let vc = moduleBuilder.buildWebViewViewController()
     viewController?.routeToVkWebViewVC(to: vc)

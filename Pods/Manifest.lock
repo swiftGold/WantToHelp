@@ -29,12 +29,20 @@ PODS:
   - GTMSessionFetcher/Core (3.1.0)
   - Kingfisher (7.6.2)
   - PromisesObjC (2.2.0)
+  - RxCocoa (6.5.0):
+    - RxRelay (= 6.5.0)
+    - RxSwift (= 6.5.0)
+  - RxRelay (6.5.0):
+    - RxSwift (= 6.5.0)
+  - RxSwift (6.5.0)
 
 DEPENDENCIES:
   - Alamofire
   - FirebaseAuth
   - FirebaseCore
   - Kingfisher
+  - RxCocoa
+  - RxSwift
 
 SPEC REPOS:
   trunk:
@@ -46,6 +54,9 @@ SPEC REPOS:
     - GTMSessionFetcher
     - Kingfisher
     - PromisesObjC
+    - RxCocoa
+    - RxRelay
+    - RxSwift
 
 SPEC CHECKSUMS:
   Alamofire: 4e95d97098eacb88856099c4fc79b526a299e48c
@@ -56,7 +67,10 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: c9e714f7eec91a55641e2bab9f45fd83a219b882
   Kingfisher: 6c5449c6450c5239166510ba04afe374a98afc4f
   PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
+  RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
+  RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
+  RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
 
-PODFILE CHECKSUM: fadd8dc2beeb66736e3b4a3d8fa9d8d77e281e34
+PODFILE CHECKSUM: a0b2228c0165418d8862378aa5028206b1177473
 
 COCOAPODS: 1.12.0
