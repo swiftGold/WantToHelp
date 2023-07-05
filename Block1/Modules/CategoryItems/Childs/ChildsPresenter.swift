@@ -158,12 +158,15 @@ private extension ChildsPresenter {
     let finishDateString = calendarManager.fetchStringDateFromTimeStamp(ti: model.dateFinish)
     let startDate = calendarManager.fetchDateFromTimeStamp(ti: model.dateStart)
     let currentDate = Date()
-    let howMuchDaysLeft = calendarManager.howMuchdaysLeft(currentDate: currentDate, eventDate: startDate)
-    let eventFinished = calendarManager.fetchFullStringDateFromTimeStamp(ti: model.dateFinish)
-    if howMuchDaysLeft >= Constants.zeroDays {
-      return ("Осталось: \(howMuchDaysLeft) дней (\(startDateString) - \(finishDateString))", false)
+    if let howMuchDaysLeft = calendarManager.howMuchdaysLeft(currentDate: currentDate, eventDate: startDate) {
+      let eventFinished = calendarManager.fetchFullStringDateFromTimeStamp(ti: model.dateFinish)
+      if howMuchDaysLeft >= Constants.zeroDays {
+        return ("Осталось: \(howMuchDaysLeft) дней (\(startDateString) - \(finishDateString))", false)
+      } else {
+        return ("Завершено: " + "\(eventFinished)".firstCharOnly(), true)
+      }
     } else {
-      return ("Завершено: " + "\(eventFinished)".firstCharOnly(), true)
+      return ("Ошибка", true)
     }
   }
   

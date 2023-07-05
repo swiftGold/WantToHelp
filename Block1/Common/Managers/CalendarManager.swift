@@ -11,7 +11,7 @@ protocol CalendarManagerProtocol {
   func fetchStringDateFromTimeStamp(ti: TimeInterval) -> String
   func fetchFullStringDateFromTimeStamp(ti: TimeInterval) -> String
   func fetchDateFromTimeStamp(ti: TimeInterval) -> Date
-  func howMuchdaysLeft(currentDate: Date, eventDate: Date) -> Int
+  func howMuchdaysLeft(currentDate: Date, eventDate: Date) -> Int?
 }
 
 final class CalendarManager {
@@ -56,36 +56,43 @@ extension CalendarManager: CalendarManagerProtocol {
   }
   
   // Количество дней в месяце
-  func daysInMonth(date: Date) -> Int {
-    let range = calendar.range(of: .day, in: .month, for: date)!
-    return range.count
+  func daysInMonth(date: Date) -> Int? {
+    let range = calendar.range(of: .day, in: .month, for: date)
+    return range?.count
   }
   
   // номер дня в месяце
-  func dayOfMonth(date: Date) -> Int {
+  func dayOfMonth(date: Date) -> Int? {
     let components = calendar.dateComponents([.day], from: date)
-    return components.day!
+    return components.day
   }
   
   // номер первого дня в месяце (на основе года и месяца)
   func firstOfMonth(date: Date) -> Date? {
     let components = calendar.dateComponents([.year, .month], from: date)
-    let day = calendar.date(from: components)!
-    dateFormatter.timeZone = TimeZone(secondsFromGMT: +3)
-    dateFormatter.dateFormat = "yyyy-MM-dd"
-    let newDate = dateFormatter.string(from: day)
-    let dateDate = dateFormatter.date(from: newDate)
-    return dateDate
+    if let day = calendar.date(from: components) {
+      dateFormatter.timeZone = TimeZone(secondsFromGMT: +3)
+      dateFormatter.dateFormat = "yyyy-MM-dd"
+      let newDate = dateFormatter.string(from: day)
+      let dateDate = dateFormatter.date(from: newDate)
+      return dateDate
+    } else {
+      return Date()
+    }
   }
   
   // номер первого дня месяца в неделе
   func weekDay(date: Date) -> Int {
     let components = calendar.dateComponents([.weekday], from: date)
-    var emptyFields = components.weekday! + 6
-    if emptyFields >= 7 {
-      emptyFields -= 7
+    if let weekDay = components.weekday {
+      var emptyFields = weekDay + 6
+      if emptyFields >= 7 {
+        emptyFields -= 7
+      }
+      return emptyFields
+    } else {
+      return 9999
     }
-    return emptyFields
   }
   
   //Строковое значение номера дня из полной даты с учетом таймзоны
@@ -164,9 +171,9 @@ extension CalendarManager: CalendarManagerProtocol {
   }
   
   //Сколько дней между двумя датами
-  func howMuchdaysLeft(currentDate: Date, eventDate: Date) -> Int {
+  func howMuchdaysLeft(currentDate: Date, eventDate: Date) -> Int? {
     let numberOfDays = calendar.dateComponents([.day], from: currentDate, to: eventDate)
-    return numberOfDays.day!
+    return numberOfDays.day
   }
 }
 

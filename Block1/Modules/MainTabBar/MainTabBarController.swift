@@ -43,6 +43,7 @@ final class MainTabBarController: UITabBarController {
     setTabBarAppearance()
     setupController()
     self.selectedIndex = Constants.tabBarSelectedItemIndex
+    middleButton.backgroundColor = .specialNavBarBGColor
     self.delegate = self
   }
   

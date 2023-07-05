@@ -74,12 +74,6 @@ final class BottomParticipantsView: UIView {
           let image5 = model.photo5 else {
       return
     }
-    
-    print(image1)
-    print(image2)
-    print(image3)
-    print(image4)
-    print(image5)
 
     photo1ImageView.loadImage(from: image1)
     photo2ImageView.loadImage(from: image2)
