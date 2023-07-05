@@ -18,12 +18,8 @@ protocol ModuleBuilderProtocol {
   func buildCategoriesViewController() -> CategoriesViewController
   func buildHistoryViewController() -> HistoryViewController
   func buildProfileViewController() -> ProfileViewController
-  func buildChildViewController() -> ChildsViewController
+  func buildHelpCategoryViewController(with categoryIndex: Int, title: String) -> HelpCategoryViewController
   func buildFullEventDescriptionViewController(with viewModel: FullEventDescriptionViewModel) -> FullEventDescriptionVC
-  func buildAdultViewController() -> AdultViewController
-  func buildElderlyViewController() -> ElderlyViewController
-  func buildAnimalsViewController() -> AnimalsViewController
-  func buildEventsViewController() -> EventsViewController
 }
 
 final class ModuleBuilder {
@@ -139,12 +135,14 @@ extension ModuleBuilder: ModuleBuilderProtocol {
     return viewController
   }
   
-  func buildChildViewController() -> ChildsViewController {
+  func buildHelpCategoryViewController(with categoryIndex: Int, title: String) -> HelpCategoryViewController {
     let calendarManager = CalendarManager()
-    let viewController = ChildsViewController()
-    let presenter = ChildsPresenter(router: router,
+    let viewController = HelpCategoryViewController()
+    let presenter = HelpCategoryPresenter(router: router,
                                     moduleBuilder: self,
-                                    calendarManager: calendarManager
+                                          calendarManager: calendarManager,
+                                          categoryIndex: categoryIndex,
+                                          categoryTitle: title
     )
     viewController.presenter = presenter
     presenter.viewController = viewController
@@ -154,47 +152,8 @@ extension ModuleBuilder: ModuleBuilderProtocol {
   func buildFullEventDescriptionViewController(with viewModel: FullEventDescriptionViewModel) -> FullEventDescriptionVC {
     let viewController = FullEventDescriptionVC()
     let presenter = FullEventDescriptionPresenter(router: router,
-                                                  moduleBuilder: self, model: viewModel
-    )
-    viewController.presenter = presenter
-    presenter.viewController = viewController
-    return viewController
-  }
-  
-  func buildAdultViewController() -> AdultViewController {
-    let viewController = AdultViewController()
-    let presenter = AdultPresenter(router: router,
-                                     moduleBuilder: self
-    )
-    viewController.presenter = presenter
-    presenter.viewController = viewController
-    return viewController
-  }
-  
-  func buildElderlyViewController() -> ElderlyViewController {
-    let viewController = ElderlyViewController()
-    let presenter = ElderlyPresenter(router: router,
-                                     moduleBuilder: self
-    )
-    viewController.presenter = presenter
-    presenter.viewController = viewController
-    return viewController
-  }
-  
-  func buildAnimalsViewController() -> AnimalsViewController {
-    let viewController = AnimalsViewController()
-    let presenter = AnimalsPresenter(router: router,
-                                     moduleBuilder: self
-    )
-    viewController.presenter = presenter
-    presenter.viewController = viewController
-    return viewController
-  }
-  
-  func buildEventsViewController() -> EventsViewController {
-    let viewController = EventsViewController()
-    let presenter = EventsPresenter(router: router,
-                                     moduleBuilder: self
+                                                  moduleBuilder: self,
+                                                  model: viewModel
     )
     viewController.presenter = presenter
     presenter.viewController = viewController

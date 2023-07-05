@@ -1,5 +1,5 @@
 //
-//  ChildsCollectionViewCell.swift
+//  HelpCategoryCollectionViewCell.swift
 //  Block1
 //
 //  Created by Сергей Золотухин on 29.05.2023.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ChildsCollectionViewCell: UICollectionViewCell {
+final class HelpCategoryCollectionViewCell: UICollectionViewCell {
   // MARK: - UI
   private let mainImageView: UIImageView = {
     let imageView = UIImageView()
@@ -101,7 +101,7 @@ final class ChildsCollectionViewCell: UICollectionViewCell {
 }
 
 // MARK: - Private methods
-private extension ChildsCollectionViewCell {
+private extension HelpCategoryCollectionViewCell {
   func setupCell() {
     backgroundColor = .white
     addSubviews()

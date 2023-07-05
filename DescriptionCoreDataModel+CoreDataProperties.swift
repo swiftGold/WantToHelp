@@ -16,6 +16,7 @@ extension DescriptionCoreDataModel {
     }
 
     @NSManaged public var title: String?
+    @NSManaged public var category_id: Int32
     @NSManaged public var descr: String?
     @NSManaged public var dateStart: Double
     @NSManaged public var dateFinish: Double

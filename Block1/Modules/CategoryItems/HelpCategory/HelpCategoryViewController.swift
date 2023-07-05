@@ -1,5 +1,5 @@
 //
-//  ChildsViewController.swift
+//  HelpCategoryViewController.swift
 //  Block1
 //
 //  Created by Сергей Золотухин on 29.05.2023.
@@ -7,12 +7,13 @@
 
 import UIKit
 
-protocol ChildsViewControllerProtocol: AnyObject {
+protocol HelpCategoryViewControllerProtocol: AnyObject {
+  func setTitle(with title: String)
   func routeToVC(to viewController: UIViewController)
   func showSortedEvents(with sortedViewModels: [ShortEventViewModel])
 }
 
-final class ChildsViewController: CustomVC {
+final class HelpCategoryViewController: CustomVC {
   // MARK: - UI
   private lazy var barButtonItem = UIBarButtonItem(image: UIImage(named: Images.filter), style: .plain, target: self, action: #selector(didTapBarButton))
   
@@ -73,25 +74,26 @@ final class ChildsViewController: CustomVC {
     collectionView.delegate = self
     collectionView.dataSource = self
     collectionView.showsVerticalScrollIndicator = false
-    collectionView.register(ChildsCollectionViewCell.self,
-                            forCellWithReuseIdentifier: "ChildsCollectionViewCell"
+    collectionView.register(HelpCategoryCollectionViewCell.self,
+                            forCellWithReuseIdentifier: CellNames.helpCategoryCollectionViewCell
     )
     collectionView.backgroundColor = .specialCollectionViewBGColor
     return collectionView
   }()
   
   // MARK: - Variables
-  var presenter: ChildsPresenterProtocol?
+  var presenter: HelpCategoryPresenterProtocol?
   private var sortedViewModels: [ShortEventViewModel] = []
   private var sortedDescriptionViewModels: [FullEventDescriptionViewModel] = []
+  private var navBarTitle = ""
   
   // MARK: - Lifecycles
   override func viewDidLoad() {
     super.viewDidLoad()
     setupViewController()
-    setupNavBarWithBackButton(titleName: TabBarNames.childs)
     navigationItem.rightBarButtonItem = barButtonItem
     presenter?.viewDidLoad()
+    setupNavBarWithBackButton(titleName: navBarTitle)
   }
   
   // MARK: - Objc methods
@@ -120,7 +122,11 @@ final class ChildsViewController: CustomVC {
 }
 
 // MARK: - ChildsViewControllerProtocol impl
-extension ChildsViewController: ChildsViewControllerProtocol {
+extension HelpCategoryViewController: HelpCategoryViewControllerProtocol {
+  func setTitle(with title: String) {
+    navBarTitle = title
+  }
+  
   func routeToVC(to viewController: UIViewController) {
     navigationController?.pushViewController(viewController, animated: true)
   }
@@ -132,7 +138,7 @@ extension ChildsViewController: ChildsViewControllerProtocol {
 }
 
 // MARK: - UICollectionViewDelegate impl
-extension ChildsViewController: UICollectionViewDelegate {
+extension HelpCategoryViewController: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     let index = indexPath.row
     presenter?.routeToCategoryItem(index: index)
@@ -140,15 +146,15 @@ extension ChildsViewController: UICollectionViewDelegate {
 }
 
 // MARK: - UICollectionViewDataSource impl
-extension ChildsViewController: UICollectionViewDataSource {
+extension HelpCategoryViewController: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return sortedViewModels.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     guard let cell = collectionView.dequeueReusableCell(
-      withReuseIdentifier: "ChildsCollectionViewCell",
-      for: indexPath) as? ChildsCollectionViewCell else {
+      withReuseIdentifier: CellNames.helpCategoryCollectionViewCell,
+      for: indexPath) as? HelpCategoryCollectionViewCell else {
       return UICollectionViewCell()
     }
     cell.layer.cornerRadius = Constants.cellCornerRadius
@@ -158,7 +164,7 @@ extension ChildsViewController: UICollectionViewDataSource {
 }
 
 // MARK: - Private Methods
-private extension ChildsViewController {
+private extension HelpCategoryViewController {
   func setupViewController() {
     view.backgroundColor = .white
     addSubviews()

@@ -1,5 +1,5 @@
 //
-//  ChildsPresenter.swift
+//  HelpCategoryPresenter.swift
 //  Block1
 //
 //  Created by Сергей Золотухин on 04.06.2023.
@@ -7,35 +7,42 @@
 
 import Foundation
 
-protocol ChildsPresenterProtocol {
+protocol HelpCategoryPresenterProtocol {
   func viewDidLoad()
   func routeToCategoryItem(index: Int)
   func didTapToggleButton(isCurrentEvent: Bool)
 }
 
-final class ChildsPresenter {
-  weak var viewController: ChildsViewControllerProtocol?
+final class HelpCategoryPresenter {
+  weak var viewController: HelpCategoryViewControllerProtocol?
   private var sortedViewModels: [ShortEventViewModel] = []
   private var fullEventDescriptionModels: [FullEventDescriptionModel] = []
+  private var filtredFullEventDescriptionModels: [FullEventDescriptionModel] = []
   private var fullDescriptionViewModels: [FullEventDescriptionViewModel] = []
   private var sortedDescriptionViewModels: [FullEventDescriptionViewModel] = []
   private var isCurrent = true
   private let router: Router
   private let moduleBuilder: ModuleBuilderProtocol
   private let calendarManager: CalendarManagerProtocol
+  private var categoryIndex: Int
+  private var categoryTitle: String
   
   init(
     router: Router,
     moduleBuilder: ModuleBuilderProtocol,
-    calendarManager: CalendarManagerProtocol
+    calendarManager: CalendarManagerProtocol,
+    categoryIndex: Int,
+    categoryTitle: String
   ) {
     self.router = router
     self.moduleBuilder = moduleBuilder
     self.calendarManager = calendarManager
+    self.categoryIndex = categoryIndex
+    self.categoryTitle = categoryTitle
   }
 }
 
-extension ChildsPresenter: ChildsPresenterProtocol {
+extension HelpCategoryPresenter: HelpCategoryPresenterProtocol {
   func viewDidLoad() {
     DispatchQueue.global(qos: .background).async { [weak self] in
       guard let strongSelf = self else { return }
@@ -54,6 +61,7 @@ extension ChildsPresenter: ChildsPresenterProtocol {
         strongSelf.self.didTapToggleButton(isCurrentEvent: true)
       }
     }
+    viewController?.setTitle(with: categoryTitle)
   }
   
   func routeToCategoryItem(index: Int) {
@@ -84,11 +92,12 @@ extension ChildsPresenter: ChildsPresenterProtocol {
   }
 }
 
-private extension ChildsPresenter {
+private extension HelpCategoryPresenter {
   func fetchDataFromCoreData() {
     let coreDataModels = CoreDataManager.instance.fetchDescriptions()
     fullEventDescriptionModels = coreDataModels.map { model -> FullEventDescriptionModel in
-      return FullEventDescriptionModel(title: model.title,
+      return FullEventDescriptionModel(category_id: Int(model.category_id),
+                                       title: model.title,
                                        description: model.descr,
                                        dateStart: model.dateStart,
                                        dateFinish: model.dateFinish,
@@ -108,10 +117,20 @@ private extension ChildsPresenter {
                                        participantsCount: Int(model.participantsCount)
       )
     }
+    filterEventsByCategoryIndex(with: fullEventDescriptionModels)
+  }
+  
+  func filterEventsByCategoryIndex(with models: [FullEventDescriptionModel]) {
+    models.forEach { elem in
+      if elem.category_id == categoryIndex {
+        filtredFullEventDescriptionModels.append(elem)
+      }
+    }
   }
   
   func mappingToDescriptionViewModel() {
-    fullDescriptionViewModels = fullEventDescriptionModels.map { model -> FullEventDescriptionViewModel in
+//    fullDescriptionViewModels = fullEventDescriptionModels.map { model -> FullEventDescriptionViewModel in
+    fullDescriptionViewModels = filtredFullEventDescriptionModels.map { model -> FullEventDescriptionViewModel in
       let diaryString = calculateDaysToEvent(with: model).0
       let isFinished = calculateDaysToEvent(with: model).1
       let viewModel = FullEventDescriptionViewModel(title: model.title,

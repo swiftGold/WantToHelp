@@ -8,6 +8,7 @@
 import Foundation
 
 struct FullEventDescriptionModel: Codable {
+  let category_id: Int
   let title: String?
   let description: String?
   let dateStart: Double
