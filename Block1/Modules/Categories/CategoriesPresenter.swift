@@ -36,9 +36,8 @@ extension CategoriesPresenter: CategoriesPresenterProtocol {
   
   func categoryItemDidTap(index: Int) {
     let title = fetchCategoryTitle(with: categoriesModel, index: index)
-    let vc = moduleBuilder.buildHelpCategoryViewController(with: index,
-                                                           title: title
-    )
+    let model = HelpCategoryModel(title: title, id: index)
+    let vc = moduleBuilder.buildHelpCategoryViewController(with: model)
     viewController?.routeToVC(with: vc)
   }
   

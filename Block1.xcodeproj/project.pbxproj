@@ -40,6 +40,7 @@
 		1E4913B02A17A92700ABF6B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E4913AF2A17A92700ABF6B6 /* Assets.xcassets */; };
 		1E4913B32A17A92700ABF6B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E4913B12A17A92700ABF6B6 /* LaunchScreen.storyboard */; };
 		1E9A614B2A55A70400A1BD18 /* CellNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9A614A2A55A70400A1BD18 /* CellNames.swift */; };
+		1E9A614D2A56A0E400A1BD18 /* HelpCategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9A614C2A56A0E400A1BD18 /* HelpCategoryModel.swift */; };
 		1E9B65AD2A35B684006380D9 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9B65AC2A35B684006380D9 /* CoreDataManager.swift */; };
 		1E9B65B02A35C01C006380D9 /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1E9B65AE2A35C01C006380D9 /* CoreData.xcdatamodeld */; };
 		1E9B65B62A364429006380D9 /* CategoryCoreDataModel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9B65B42A364429006380D9 /* CategoryCoreDataModel+CoreDataProperties.swift */; };
@@ -121,6 +122,7 @@
 		1E4913B22A17A92700ABF6B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1E4913B42A17A92700ABF6B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1E9A614A2A55A70400A1BD18 /* CellNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellNames.swift; sourceTree = "<group>"; };
+		1E9A614C2A56A0E400A1BD18 /* HelpCategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpCategoryModel.swift; sourceTree = "<group>"; };
 		1E9B65AC2A35B684006380D9 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		1E9B65AF2A35C01C006380D9 /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
 		1E9B65B42A364429006380D9 /* CategoryCoreDataModel+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CategoryCoreDataModel+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -385,6 +387,7 @@
 			isa = PBXGroup;
 			children = (
 				1EDEC1C22A20A9E700339FF9 /* CategoryModel.swift */,
+				1E9A614C2A56A0E400A1BD18 /* HelpCategoryModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -722,6 +725,7 @@
 				1EDEC1F92A22663100339FF9 /* SearchViewController.swift in Sources */,
 				1EDEC2212A24C74B00339FF9 /* FullEventDescriptionVC.swift in Sources */,
 				1E2BBD0E2A37307E00B74613 /* DescriptionCoreDataModel+CoreDataClass.swift in Sources */,
+				1E9A614D2A56A0E400A1BD18 /* HelpCategoryModel.swift in Sources */,
 				1EDEC22A2A25FE4E00339FF9 /* FullEventDescriptionMainView.swift in Sources */,
 				1EDEC23D2A2767FA00339FF9 /* CalendarManager.swift in Sources */,
 				1EDEC1C32A20A9E700339FF9 /* CategoryModel.swift in Sources */,

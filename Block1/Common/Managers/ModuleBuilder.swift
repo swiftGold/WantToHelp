@@ -18,7 +18,7 @@ protocol ModuleBuilderProtocol {
   func buildCategoriesViewController() -> CategoriesViewController
   func buildHistoryViewController() -> HistoryViewController
   func buildProfileViewController() -> ProfileViewController
-  func buildHelpCategoryViewController(with categoryIndex: Int, title: String) -> HelpCategoryViewController
+  func buildHelpCategoryViewController(with model: HelpCategoryModel) -> HelpCategoryViewController
   func buildFullEventDescriptionViewController(with viewModel: FullEventDescriptionViewModel) -> FullEventDescriptionVC
 }
 
@@ -135,14 +135,13 @@ extension ModuleBuilder: ModuleBuilderProtocol {
     return viewController
   }
   
-  func buildHelpCategoryViewController(with categoryIndex: Int, title: String) -> HelpCategoryViewController {
+  func buildHelpCategoryViewController(with model: HelpCategoryModel) -> HelpCategoryViewController {
     let calendarManager = CalendarManager()
     let viewController = HelpCategoryViewController()
     let presenter = HelpCategoryPresenter(router: router,
-                                    moduleBuilder: self,
+                                          moduleBuilder: self,
                                           calendarManager: calendarManager,
-                                          categoryIndex: categoryIndex,
-                                          categoryTitle: title
+                                          helpCategoryModel: model
     )
     viewController.presenter = presenter
     presenter.viewController = viewController

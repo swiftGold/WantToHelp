@@ -24,21 +24,19 @@ final class HelpCategoryPresenter {
   private let router: Router
   private let moduleBuilder: ModuleBuilderProtocol
   private let calendarManager: CalendarManagerProtocol
-  private var categoryIndex: Int
-  private var categoryTitle: String
+  private var helpCategoryModel: HelpCategoryModel
+  
   
   init(
     router: Router,
     moduleBuilder: ModuleBuilderProtocol,
     calendarManager: CalendarManagerProtocol,
-    categoryIndex: Int,
-    categoryTitle: String
+    helpCategoryModel: HelpCategoryModel
   ) {
     self.router = router
     self.moduleBuilder = moduleBuilder
     self.calendarManager = calendarManager
-    self.categoryIndex = categoryIndex
-    self.categoryTitle = categoryTitle
+    self.helpCategoryModel = helpCategoryModel
   }
 }
 
@@ -61,7 +59,7 @@ extension HelpCategoryPresenter: HelpCategoryPresenterProtocol {
         strongSelf.self.didTapToggleButton(isCurrentEvent: true)
       }
     }
-    viewController?.setTitle(with: categoryTitle)
+    viewController?.setTitle(with: helpCategoryModel.title)
   }
   
   func routeToCategoryItem(index: Int) {
@@ -122,7 +120,7 @@ private extension HelpCategoryPresenter {
   
   func filterEventsByCategoryIndex(with models: [FullEventDescriptionModel]) {
     models.forEach { elem in
-      if elem.category_id == categoryIndex {
+      if elem.category_id == helpCategoryModel.id {
         filtredFullEventDescriptionModels.append(elem)
       }
     }
