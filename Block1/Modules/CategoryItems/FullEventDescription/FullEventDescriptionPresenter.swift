@@ -19,7 +19,7 @@ protocol FullEventDescriptionPresenterProtocol {
 
 final class FullEventDescriptionPresenter {
   weak var viewController: FullEventDescriptionVCProtocol?
-  var model: FullEventDescriptionViewModel
+  private var model: FullEventDescriptionViewModel
   private let router: Router
   private let moduleBuilder: ModuleBuilderProtocol
   

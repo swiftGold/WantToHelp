@@ -41,7 +41,7 @@ final class CategoriesViewController: CustomVC {
     collectionView.dataSource = self
     collectionView.showsVerticalScrollIndicator = false
     collectionView.register(CategoriesCollectionViewCell.self,
-                            forCellWithReuseIdentifier: "CategoriesCollectionViewCell"
+                            forCellWithReuseIdentifier: CellNames.categoriesCollectionViewCell
     )
     return collectionView
   }()
@@ -60,18 +60,10 @@ final class CategoriesViewController: CustomVC {
   // MARK: - Variables
   var presenter: CategoriesPresenterProtocol?
   private var categoriesModel: [CategoryModel] = []
-  private let CategoryViewsControllers = [
-    ChildsViewController(),
-    AdultViewController(),
-    ElderlyViewController(),
-    AnimalsViewController(),
-    EventsViewController()
-  ]
   
   // MARK: - LifeCycles
   override func viewDidLoad() {
     super.viewDidLoad()
-    //    LoadingOverlay.shared.showOverlay(view: self.view)
     navigationController?.isNavigationBarHidden = false
     navigationItem.leftBarButtonItem = barButtonItem
     setupNavBar(titleName: TabBarNames.categories)
@@ -82,7 +74,6 @@ final class CategoriesViewController: CustomVC {
   // MARK: - Objc methods
   @objc
   private func didTapBarButton() {
-//    exit(0)
     presenter?.didTapBackButton()
   }
 }
@@ -115,7 +106,7 @@ extension CategoriesViewController: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     guard let cell = collectionView.dequeueReusableCell(
-      withReuseIdentifier: "CategoriesCollectionViewCell",
+      withReuseIdentifier: CellNames.categoriesCollectionViewCell,
       for: indexPath) as? CategoriesCollectionViewCell else {
       return UICollectionViewCell()
     }

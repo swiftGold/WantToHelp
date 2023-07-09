@@ -48,8 +48,9 @@ final class CoreDataManager: NSObject {
     return entityDescription
   }
   
-  public func createCategory(title: String?, image: String?) {
+  public func createCategory(id: Int, title: String?, image: String?) {
     let categoryCoreDataModel = CategoryCoreDataModel()
+    categoryCoreDataModel.id = Int32(id)
     categoryCoreDataModel.title = title
     categoryCoreDataModel.image = image
     saveContext()
@@ -74,7 +75,8 @@ final class CoreDataManager: NSObject {
     return []
   }
   
-  public func createDescriptionModel(title: String?,
+  public func createDescriptionModel(category_id: Int32,
+                                     title: String?,
                                      descr: String?,
                                      dateStart: Double,
                                      dateFinish: Double,
@@ -94,6 +96,7 @@ final class CoreDataManager: NSObject {
                                      participantsCount: Int32
   ) {
     let categoryCoreDataModel = DescriptionCoreDataModel()
+    categoryCoreDataModel.category_id = category_id
     categoryCoreDataModel.title = title
     categoryCoreDataModel.descr = descr
     categoryCoreDataModel.dateStart = dateStart

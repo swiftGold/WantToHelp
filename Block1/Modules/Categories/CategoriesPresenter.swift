@@ -35,20 +35,9 @@ extension CategoriesPresenter: CategoriesPresenterProtocol {
   }
   
   func categoryItemDidTap(index: Int) {
-    let childVC = moduleBuilder.buildChildViewController()
-    let adultVC = moduleBuilder.buildAdultViewController()
-    let elderlyVC = moduleBuilder.buildElderlyViewController()
-    let animalsVC = moduleBuilder.buildAnimalsViewController()
-    let eventsVC = moduleBuilder.buildEventsViewController()
-    
-    let categoryViewsControllers = [
-      childVC,
-      adultVC,
-      elderlyVC,
-      animalsVC,
-      eventsVC
-    ]
-    let vc = categoryViewsControllers[index]
+    let title = fetchCategoryTitle(with: categoriesModel, index: index)
+    let model = HelpCategoryModel(title: title, id: index)
+    let vc = moduleBuilder.buildHelpCategoryViewController(with: model)
     viewController?.routeToVC(with: vc)
   }
   
@@ -67,7 +56,18 @@ private extension CategoriesPresenter {
   func fetchDataFromCoreData() {
     let coreDataModels = CoreDataManager.instance.fetchCategories()
     categoriesModel = coreDataModels.map { model in
-      CategoryModel(image: model.image, title: model.title)
+      CategoryModel(id: Int(model.id), image: model.image, title: model.title)
     }
+  }
+  
+  func fetchCategoryTitle(with models: [CategoryModel], index: Int) -> String {
+    var returnedString = ""
+    models.forEach { elem in
+      if elem.id == index {
+        guard let title = elem.title else { return }
+        returnedString = title
+      }
+    }
+    return returnedString
   }
 }

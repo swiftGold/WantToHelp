@@ -1,21 +1,26 @@
 [
   {
+    "id": 0,
     "title": "Дети",
     "image": "https://i.yapx.cc/WGE9X.png"
   },
   {
+    "id": 1,
     "title": "Взрослые",
     "image": "https://i.yapx.cc/WGE9U.png"
   },
   {
+    "id": 2,
     "title": "Пожилые",
     "image": "https://i.yapx.cc/WGE9Y.png"
   },
   {
+    "id": 3,
     "title": "Животные",
     "image": "https://i.yapx.cc/WGE9V.png"
   },
   {
+    "id": 4,
     "title": "Мероприятия",
     "image": "https://i.yapx.cc/WGE9W.png"
   }

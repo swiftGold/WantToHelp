@@ -102,7 +102,7 @@ final class RegistrationViewController: CustomVC {
     button.titleLabel?.font = UIFont(name: Fonts.SFUIMed,
                                      size: Constants.enterButtonFontSize
     )
-//    button.addTarget(self, action: #selector(didTapRegisterButton), for: .touchUpInside)
+    button.addTarget(self, action: #selector(didTapRegisterButton), for: .touchUpInside)
     button.layer.cornerRadius = Constants.enterButtonCorner
     button.backgroundColor = .specialNavBarBGColor
     button.tintColor = .white
@@ -131,7 +131,7 @@ final class RegistrationViewController: CustomVC {
   // MARK: - Lifecycles
   override func viewDidLoad() {
     super.viewDidLoad()
-    rxButtonAction()
+//    rxButtonAction()
     setupViewController()
     setupNavBarWithBackButton(titleName: TabBarNames.reg)
   }
@@ -142,15 +142,15 @@ final class RegistrationViewController: CustomVC {
     print(#function)
   }
   
-//  @objc
-//  private func didTapRegisterButton() {
-//    guard let email = emailTextField.text,
-//          let password = passwordTextField.text else {
-//      return
-//    }
-//    let model = RegistrationModel(email: email, password: password)
-//    presenter?.didTapGeristrationButton(with: model)
-//  }
+  @objc
+  private func didTapRegisterButton() {
+    guard let email = emailTextField.text,
+          let password = passwordTextField.text else {
+      return
+    }
+    let model = RegistrationModel(email: email, password: password)
+    presenter?.didTapGeristrationButton(with: model)
+  }
 }
 
 // MARK: - ViewControllerProtocol impl
@@ -255,80 +255,3 @@ private extension RegistrationViewController {
     static let enterButtonHeight: CGFloat = 50
   }
 }
-
-
-
-
-
-// MARK: - reserve copy
-//import UIKit
-//
-//protocol RegistrationViewControllerProtocol: AnyObject {
-//  func routeToAuthVC(to viewController: UIViewController)
-//  func showAlert(with viewController: UIViewController)
-//}
-//
-//final class RegistrationViewController: CustomVC {
-//  // MARK: - UI
-//  private let mainView = RegistrationMainView()
-//
-//  // MARK: - Variables
-//  var presenter: RegistrationPresenterProtocol?
-//
-//  // MARK: - Lifecycles
-//  override func viewDidLoad() {
-//    super.viewDidLoad()
-//    setupDelegates()
-//    setupViewController()
-//    setupNavBarWithBackButton(titleName: TabBarNames.reg)
-//  }
-//}
-//
-//// MARK: - ViewControllerProtocol impl
-//extension RegistrationViewController: RegistrationViewControllerProtocol {
-//  func showAlert(with viewController: UIViewController) {
-//    present(viewController, animated: true)
-//  }
-//
-//  func routeToAuthVC(to viewController: UIViewController) {
-//    navigationController?.pushViewController(viewController, animated: true)
-//  }
-//}
-//
-//// MARK: - RegistrationMainViewDelegate impl
-//extension RegistrationViewController: RegistrationMainViewDelegate {
-//  func registrationButtonDidTap(with model: RegistrationModel) {
-//    presenter?.didTapGeristrationButton(with: model)
-//  }
-//}
-//
-//// MARK: - Private Methods
-//private extension RegistrationViewController {
-//  func setupDelegates() {
-//    mainView.delegate = self
-//  }
-//
-//  func setupViewController() {
-//    view.backgroundColor = .white
-//    addSubviews()
-//    addConstraints()
-//  }
-//
-//  func addSubviews() {
-//    view.myAddSubView(mainView)
-//  }
-//
-//  func addConstraints() {
-//    NSLayoutConstraint.activate([
-//      mainView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-//      mainView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.mainViewInsetLeft),
-//      mainView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.mainViewInsetRight),
-//      mainView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-//    ])
-//  }
-//
-//  enum Constants {
-//    static let mainViewInsetLeft: CGFloat = 20
-//    static let mainViewInsetRight: CGFloat = -20
-//  }
-//}

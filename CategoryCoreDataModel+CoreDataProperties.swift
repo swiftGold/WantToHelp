@@ -14,6 +14,7 @@ extension CategoryCoreDataModel {
     return NSFetchRequest<CategoryCoreDataModel>(entityName: "CategoryCoreDataModel")
   }
   
+  @NSManaged public var id: Int32
   @NSManaged public var title: String?
   @NSManaged public var image: String?
 }

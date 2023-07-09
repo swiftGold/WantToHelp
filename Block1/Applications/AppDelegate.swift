@@ -102,7 +102,8 @@ private extension AppDelegate {
     let context = CoreDataManager.instance.context
     context.perform {
       models.forEach { model in
-        CoreDataManager.instance.createCategory(title: model.title,
+        CoreDataManager.instance.createCategory(id: model.id,
+                                                title: model.title,
                                                 image: model.image
         )
       }
@@ -129,7 +130,8 @@ private extension AppDelegate {
     let context = CoreDataManager.instance.context
     context.perform {
       models.forEach { model in
-        CoreDataManager.instance.createDescriptionModel(title: model.title,
+        CoreDataManager.instance.createDescriptionModel(category_id: Int32(model.category_id),
+                                                        title: model.title,
                                                         descr: model.description,
                                                         dateStart: model.dateStart,
                                                         dateFinish: model.dateFinish,
