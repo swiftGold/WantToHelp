@@ -15,4 +15,12 @@ extension UIViewController {
     })
     present(alert, animated: true)
   }
+  
+  func callStatusAlert(status: String, message: String) {
+    let alert = UIAlertController(title: status, message: message, preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "Ok", style: .default) { action in
+      self.dismiss(animated: true)
+    })
+    present(alert, animated: true)
+  }
 }

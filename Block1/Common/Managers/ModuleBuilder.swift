@@ -9,17 +9,20 @@ import Foundation
 
 protocol ModuleBuilderProtocol {
   func buildWebViewViewController() -> WebViewViewController
-  func buildRegistrationViewController() -> RegistrationViewController
-  func buildAuthViewController() -> AuthViewController
+//  func buildRegistrationViewController() -> RegistrationViewController
+//  func buildAuthViewController() -> AuthViewController
   func buildSplashViewController() -> SplashViewController
-  func buildTabBarController() -> MainTabBarController
-  func buildNewsViewController() -> NewsViewController
-  func buildSearchViewController() -> SearchViewController
-  func buildCategoriesViewController() -> CategoriesViewController
-  func buildHistoryViewController() -> HistoryViewController
-  func buildProfileViewController() -> ProfileViewController
-  func buildHelpCategoryViewController(with model: HelpCategoryModel) -> HelpCategoryViewController
+//  func buildTabBarController() -> MainTabBarController
+//  func buildNewsViewController() -> NewsViewController
+//  func buildSearchViewController() -> SearchViewController
+//  func buildCategoriesViewController() -> CategoriesViewController
+//  func buildHistoryViewController() -> HistoryViewController
+//  func buildProfileViewController() -> ProfileViewController
+//  func buildHelpCategoryViewController(with model: HelpCategoryModel) -> HelpCategoryViewController
   func buildFullEventDescriptionViewController(with viewModel: FullEventDescriptionViewModel) -> FullEventDescriptionVC
+  
+  func buildRegistrationMVVMVC() -> RegistrationViewController
+  func buildAuthMVVMVC() -> AuthViewController
 }
 
 final class ModuleBuilder {
@@ -49,27 +52,27 @@ extension ModuleBuilder: ModuleBuilderProtocol {
     return viewController
   }
   
-  func buildRegistrationViewController() -> RegistrationViewController {
-    let viewController = RegistrationViewController()
-    let presenter = RegistrationPresenter(router: router,
-                                          moduleBuilder: self,
-                                          alertManager: alertManager
-    )
-    viewController.presenter = presenter
-    presenter.viewController = viewController
-    return viewController
-  }
+//  func buildRegistrationViewController() -> RegistrationViewController {
+//    let viewController = RegistrationViewController()
+//    let presenter = RegistrationPresenter(router: router,
+//                                          moduleBuilder: self,
+//                                          alertManager: alertManager
+//    )
+//    viewController.presenter = presenter
+//    presenter.viewController = viewController
+//    return viewController
+//  }
   
-  func buildAuthViewController() -> AuthViewController {
-    let viewController = AuthViewController()
-    let presenter = AuthPresenter(router: router,
-                                  moduleBuilder: self,
-                                  alertManager: alertManager
-    )
-    viewController.presenter = presenter
-    presenter.viewController = viewController
-    return viewController
-  }
+//  func buildAuthViewController() -> AuthViewController {
+//    let viewController = AuthViewController()
+//    let presenter = AuthPresenter(router: router,
+//                                  moduleBuilder: self,
+//                                  alertManager: alertManager
+//    )
+//    viewController.presenter = presenter
+//    presenter.viewController = viewController
+//    return viewController
+//  }
   
   func buildSplashViewController() -> SplashViewController {
     let viewController = SplashViewController()
@@ -81,72 +84,72 @@ extension ModuleBuilder: ModuleBuilderProtocol {
     return viewController
   }
   
-  func buildTabBarController() -> MainTabBarController {
-    MainTabBarController(moduleBuilder: self)
-  }
+//  func buildTabBarController() -> MainTabBarController {
+//    MainTabBarController(moduleBuilder: self)
+//  }
   
-  func buildNewsViewController() -> NewsViewController {
-    let viewController = NewsViewController()
-    let presenter = NewsPresenter(router: router,
-                                  moduleBuilder: self
-    )
-    viewController.presenter = presenter
-    presenter.viewController = viewController
-    return viewController
-  }
+//  func buildNewsViewController() -> NewsViewController {
+//    let viewController = NewsViewController()
+//    let presenter = NewsPresenter(router: router,
+//                                  moduleBuilder: self
+//    )
+//    viewController.presenter = presenter
+//    presenter.viewController = viewController
+//    return viewController
+//  }
+//
+//  func buildSearchViewController() -> SearchViewController {
+//    let viewController = SearchViewController()
+//    let presenter = SearchPresenter(router: router,
+//                                    moduleBuilder: self
+//    )
+//    viewController.presenter = presenter
+//    presenter.viewController = viewController
+//    return viewController
+//  }
   
-  func buildSearchViewController() -> SearchViewController {
-    let viewController = SearchViewController()
-    let presenter = SearchPresenter(router: router,
-                                    moduleBuilder: self
-    )
-    viewController.presenter = presenter
-    presenter.viewController = viewController
-    return viewController
-  }
+//  func buildCategoriesViewController() -> CategoriesViewController {
+//    let viewController = CategoriesViewController()
+//    let presenter = CategoriesPresenter(router: router,
+//                                        moduleBuilder: self
+//    )
+//    viewController.presenter = presenter
+//    presenter.viewController = viewController
+//    return viewController
+//  }
   
-  func buildCategoriesViewController() -> CategoriesViewController {
-    let viewController = CategoriesViewController()
-    let presenter = CategoriesPresenter(router: router,
-                                        moduleBuilder: self
-    )
-    viewController.presenter = presenter
-    presenter.viewController = viewController
-    return viewController
-  }
+//  func buildHistoryViewController() -> HistoryViewController {
+//    let viewController = HistoryViewController()
+//    let presenter = HistoryPresenter(router: router,
+//                                     moduleBuilder: self
+//    )
+//    viewController.presenter = presenter
+//    presenter.viewController = viewController
+//    return viewController
+//  }
+//
+//  func buildProfileViewController() -> ProfileViewController {
+//    let viewController = ProfileViewController()
+//    let presenter = ProfilePresenter(router: router,
+//                                     moduleBuilder: self
+//    )
+//    viewController.presenter = presenter
+//    presenter.viewController = viewController
+//    return viewController
+//  }
   
-  func buildHistoryViewController() -> HistoryViewController {
-    let viewController = HistoryViewController()
-    let presenter = HistoryPresenter(router: router,
-                                     moduleBuilder: self
-    )
-    viewController.presenter = presenter
-    presenter.viewController = viewController
-    return viewController
-  }
-  
-  func buildProfileViewController() -> ProfileViewController {
-    let viewController = ProfileViewController()
-    let presenter = ProfilePresenter(router: router,
-                                     moduleBuilder: self
-    )
-    viewController.presenter = presenter
-    presenter.viewController = viewController
-    return viewController
-  }
-  
-  func buildHelpCategoryViewController(with model: HelpCategoryModel) -> HelpCategoryViewController {
-    let calendarManager = CalendarManager()
-    let viewController = HelpCategoryViewController()
-    let presenter = HelpCategoryPresenter(router: router,
-                                          moduleBuilder: self,
-                                          calendarManager: calendarManager,
-                                          helpCategoryModel: model
-    )
-    viewController.presenter = presenter
-    presenter.viewController = viewController
-    return viewController
-  }
+//  func buildHelpCategoryViewController(with model: HelpCategoryModel) -> HelpCategoryViewController {
+//    let calendarManager = CalendarManager()
+//    let viewController = HelpCategoryViewController()
+//    let presenter = HelpCategoryPresenter(router: router,
+//                                          moduleBuilder: self,
+//                                          calendarManager: calendarManager,
+//                                          helpCategoryModel: model
+//    )
+//    viewController.presenter = presenter
+//    presenter.viewController = viewController
+//    return viewController
+//  }
   
   func buildFullEventDescriptionViewController(with viewModel: FullEventDescriptionViewModel) -> FullEventDescriptionVC {
     let viewController = FullEventDescriptionVC()
@@ -156,6 +159,31 @@ extension ModuleBuilder: ModuleBuilderProtocol {
     )
     viewController.presenter = presenter
     presenter.viewController = viewController
+    return viewController
+  }
+  
+  
+  
+  
+  
+  func buildRegistrationMVVMVC() -> RegistrationViewController {
+    let viewController = RegistrationViewController()
+    let viewModel = RegistrationViewModel()
+    viewController.viewModel = viewModel
+    return viewController
+  }
+  
+  func buildAuthMVVMVC() -> AuthViewController {
+    let viewController = AuthViewController()
+    let viewModel = AuthViewModel()
+    viewController.viewModel = viewModel
+    return viewController
+  }
+  
+  func buildCategoriesMVVMVC() -> CategoriesViewController {
+    let viewController = CategoriesViewController()
+    let viewModel = CategoriesViewModel()
+    viewController.viewModel = viewModel
     return viewController
   }
 }

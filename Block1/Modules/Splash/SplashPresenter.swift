@@ -35,7 +35,7 @@ extension SplashPresenter: SplashPresenterProtocol {
 private extension SplashPresenter {
   func routeAfterLoad() {
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
-      guard let authVC = self?.moduleBuilder.buildAuthViewController() else { return }
+      guard let authVC = self?.moduleBuilder.buildAuthMVVMVC() else { return }
       self?.router.setRoot(authVC, embedNavBar: true, isNavigationBarHidden: false)
     }
   }

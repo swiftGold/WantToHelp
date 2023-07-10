@@ -40,7 +40,8 @@ extension WebViewPresenter: WebViewPresenterProtocol {
   func viewDidLoad() {}
   
   func didTapCloseButton() {
-    let vc = moduleBuilder.buildAuthViewController()
+//    let vc = moduleBuilder.buildAuthViewController()
+    let vc = moduleBuilder.buildAuthMVVMVC()
     let ac = alertManager.showAlertWithTwoVariants(title: "Close",
                                                    message: "Are you sure you want to close?",
                                                    vc: vc
@@ -49,7 +50,7 @@ extension WebViewPresenter: WebViewPresenterProtocol {
   }
   
   func didFetchToken() {
-    let mainViewController = moduleBuilder.buildTabBarController()
-    router.push(mainViewController, animated: true)
+//    let mainViewController = moduleBuilder.buildTabBarController()
+//    router.push(mainViewController, animated: true)
   }
 }
