@@ -9,7 +9,6 @@ import UIKit
 
 protocol AuthMainViewDelegate: AnyObject {
   func registrationButtonDidTap()
-  func enterButtonDidTap(with model: RegistrationModel)
   func vkButtonDidTap()
   func fbButtonDidTap()
 }
@@ -44,10 +43,9 @@ final class AuthMainView: UIView {
     return button
   }()
   
-  private lazy var okButton: UIButton = {
+  lazy var okButton: UIButton = {
     let button = UIButton(type: .system)
     let image = UIImage(named: Images.ok)?.withRenderingMode(.alwaysOriginal)
-    button.addTarget(self, action: #selector(didTapOkButton), for: .touchUpInside)
     button.setImage(image, for: .normal)
     return button
   }()
@@ -82,7 +80,7 @@ final class AuthMainView: UIView {
     return label
   }()
   
-  private lazy var emailTextField: UITextField = {
+  lazy var emailTextField: UITextField = {
     let textField = UITextField()
     textField.attributedPlaceholder = NSAttributedString(
       string: "Введите e-mail",
@@ -112,7 +110,7 @@ final class AuthMainView: UIView {
     return label
   }()
   
-  private lazy var passwordTextField: UITextField = {
+  lazy var passwordTextField: UITextField = {
     let textField = UITextField()
     textField.attributedPlaceholder = NSAttributedString(
       string: "Введите пароль",
@@ -139,13 +137,12 @@ final class AuthMainView: UIView {
     return button
   }()
   
-  private lazy var enterButton: UIButton = {
+  lazy var enterButton: UIButton = {
     let button = UIButton(type: .system)
     button.setTitle("ВОЙТИ", for: .normal)
     button.titleLabel?.font = UIFont(name: Fonts.SFUIMed,
                                      size: Constants.enterButtonFontSize
     )
-    button.addTarget(self, action: #selector(didTapEnterButton), for: .touchUpInside)
     button.layer.cornerRadius = Constants.enterButtonCorner
     button.backgroundColor = .specialNavBarBGColor
     button.tintColor = .white
@@ -198,23 +195,8 @@ final class AuthMainView: UIView {
   }
   
   @objc
-  private func didTapOkButton() {
-    print(#function)
-  }
-  
-  @objc
   private func didTapShowPasswordButton() {
     print(#function)
-  }
-  
-  @objc
-  private func didTapEnterButton() {
-    guard let email = emailTextField.text,
-          let password = passwordTextField.text else {
-      return
-    }
-    let model = RegistrationModel(email: email, password: password)
-    delegate?.enterButtonDidTap(with: model)
   }
   
   @objc
