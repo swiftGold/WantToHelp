@@ -9,11 +9,17 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+protocol AuthRouterInput: AnyObject {
+  func routeToMainTabBarVC()
+  func routeToRegistrationVC()
+}
+
 final class AuthViewController: CustomVC {
   // MARK: - UI
   private let mainView = AuthMainView()
   
   // MARK: - Variables
+  var router: AuthRouterInput?
   var viewModel = AuthViewModel()
   let disposeBag = DisposeBag()
   
@@ -30,18 +36,13 @@ final class AuthViewController: CustomVC {
 // MARK: - AuthMainViewDelegate impl
 extension AuthViewController: AuthMainViewDelegate {
   func fbButtonDidTap() {
-    let vc = MainTabBarController()
-    vc.modalPresentationStyle = .fullScreen
-    self.present(vc, animated: false)
+    router?.routeToMainTabBarVC()
   }
   
   func vkButtonDidTap() {}
   
   func registrationButtonDidTap() {
-    let vc = RegistrationViewController()
-    let viewModel = RegistrationViewModel()
-    vc.viewModel = viewModel
-    self.navigationController?.pushViewController(vc, animated: true)
+    router?.routeToRegistrationVC()
   }
 }
 
@@ -63,9 +64,7 @@ private extension AuthViewController {
       .subscribe(onNext: { [weak self] success in
         if success {
           print("Login successful")
-          let vc = MainTabBarController()
-          vc.modalPresentationStyle = .fullScreen
-          self?.present(vc, animated: false)
+          self?.router?.routeToMainTabBarVC()
         }
       })
       .disposed(by: disposeBag)
@@ -73,33 +72,33 @@ private extension AuthViewController {
     mainView.okButton.rx.tap
       .bind(to: viewModel.didTapOkButton)
       .disposed(by: disposeBag)
-}
-
-func setupDelegates() {
-  mainView.delegate = self
-}
-
-func setupViewController() {
-  view.backgroundColor = .white
-  addSubviews()
-  addConstraints()
-}
-
-func addSubviews() {
-  view.myAddSubView(mainView)
-}
-
-func addConstraints() {
-  NSLayoutConstraint.activate([
-    mainView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-    mainView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.mainViewInsetLeft),
-    mainView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.mainViewInsetRight),
-    mainView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-  ])
-}
-
-enum Constants {
-  static let mainViewInsetLeft: CGFloat = 20
-  static let mainViewInsetRight: CGFloat = -20
-}
+  }
+  
+  func setupDelegates() {
+    mainView.delegate = self
+  }
+  
+  func setupViewController() {
+    view.backgroundColor = .white
+    addSubviews()
+    addConstraints()
+  }
+  
+  func addSubviews() {
+    view.myAddSubView(mainView)
+  }
+  
+  func addConstraints() {
+    NSLayoutConstraint.activate([
+      mainView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+      mainView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.mainViewInsetLeft),
+      mainView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.mainViewInsetRight),
+      mainView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+    ])
+  }
+  
+  enum Constants {
+    static let mainViewInsetLeft: CGFloat = 20
+    static let mainViewInsetRight: CGFloat = -20
+  }
 }

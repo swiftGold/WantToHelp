@@ -9,6 +9,10 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+protocol RegistrationRouterInput {
+  func routeToAuthVC()
+}
+
 final class RegistrationViewController: CustomVC {
   // MARK: - UI
   private let titleLabel: UILabel = {
@@ -117,6 +121,7 @@ final class RegistrationViewController: CustomVC {
   
   // MARK: - Variables
   var viewModel = RegistrationViewModel()
+  var router: RegistrationRouterInput?
   private let disposeBag = DisposeBag()
   
   // MARK: - Lifecycles
@@ -152,25 +157,11 @@ private extension RegistrationViewController {
       }
       .subscribe(onNext: { [weak self] success in
         if success {
-          let vc = AuthViewController()
-          let viewModel = AuthViewModel()
-          vc.viewModel = viewModel
-          self?.navigationController?.pushViewController(vc, animated: true)
+          self?.router?.routeToAuthVC()
         }
       })
       .disposed(by: disposeBag)
   }
-//
-//  func callSuccessAlert(status: String, message: String) {
-//    let alert = UIAlertController(title: status, message: message, preferredStyle: .alert)
-//    alert.addAction(UIAlertAction(title: "Ok", style: .default) { action in
-//      let vc = AuthViewController()
-//      let viewModel = AuthViewModel()
-//      vc.viewModel = viewModel
-//      self.navigationController?.pushViewController(vc, animated: true)
-//    })
-//    present(alert, animated: true)
-//  }
   
   func setupViewController() {
     view.backgroundColor = .white
@@ -254,9 +245,3 @@ private extension RegistrationViewController {
     static let containerTrailingInset: CGFloat = -20
   }
 }
-
-
-
-//    let input = RegistrationViewModel.Input(loginText: emailTextField.rx.text.orEmpty.asObservable(),
-//                                            PasswordText: passwordTextField.rx.text.orEmpty.asObservable(),
-//                                            registerButtonTap: registerButton.rx.tap.asObservable())

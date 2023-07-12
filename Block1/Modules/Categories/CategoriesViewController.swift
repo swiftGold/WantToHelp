@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol CategoriesRouterInput: AnyObject {
+  func routeToHelpCategory()
+}
+
 final class CategoriesViewController: CustomVC {
   // MARK: - UI
   private lazy var barButtonItem = UIBarButtonItem(
@@ -54,6 +58,7 @@ final class CategoriesViewController: CustomVC {
   
   // MARK: - Variables
   var viewModel = CategoriesViewModel()
+  var router: CategoriesRouterInput?
   private var categoryTitle = ""
   
   // MARK: - LifeCycles
@@ -78,12 +83,28 @@ extension CategoriesViewController: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     let index = indexPath.row
     viewModel.fetchCategoryTitle(with: index)
+//
+//    let vc = HelpCategoryViewController()
+//    let viewModel = HelpCategoryViewModel()
+//    vc.viewModel = viewModel
+//
+//    navigationController?.pushViewController(vc, animated: false)
     
-    let vc = HelpCategoryViewController()
-    let viewModel = HelpCategoryViewModel()
-    vc.viewModel = viewModel
+    if router != nil {
+      print("ne nil")
+    } else {
+      print("nil")
+    }
     
-    navigationController?.pushViewController(vc, animated: false)
+    router?.routeToHelpCategory()
+    
+    if router != nil {
+      print("ne nil")
+    } else {
+      print("nil")
+    }
+    
+    print("CATEGORY! \(index)")
   }
 }
 

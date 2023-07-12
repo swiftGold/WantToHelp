@@ -22,7 +22,7 @@ protocol ModuleBuilderProtocol {
   func buildFullEventDescriptionViewController(with viewModel: FullEventDescriptionViewModel) -> FullEventDescriptionVC
   
   func buildRegistrationMVVMVC() -> RegistrationViewController
-  func buildAuthMVVMVC() -> AuthViewController
+//  func buildAuthMVVMVC() -> AuthViewController
 }
 
 final class ModuleBuilder {
@@ -173,13 +173,13 @@ extension ModuleBuilder: ModuleBuilderProtocol {
     return viewController
   }
   
-  func buildAuthMVVMVC() -> AuthViewController {
-    let viewController = AuthViewController()
-    let viewModel = AuthViewModel()
-    viewController.viewModel = viewModel
-    return viewController
-  }
-  
+//  func buildAuthMVVMVC() -> AuthViewController {
+//    let viewController = AuthViewController()
+//    let viewModel = AuthViewModel()
+//    viewController.viewModel = viewModel
+//    return viewController
+//  }
+//
   func buildCategoriesMVVMVC() -> CategoriesViewController {
     let viewController = CategoriesViewController()
     let viewModel = CategoriesViewModel()

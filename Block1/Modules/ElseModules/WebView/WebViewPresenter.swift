@@ -41,12 +41,12 @@ extension WebViewPresenter: WebViewPresenterProtocol {
   
   func didTapCloseButton() {
 //    let vc = moduleBuilder.buildAuthViewController()
-    let vc = moduleBuilder.buildAuthMVVMVC()
-    let ac = alertManager.showAlertWithTwoVariants(title: "Close",
-                                                   message: "Are you sure you want to close?",
-                                                   vc: vc
-    )
-    viewController?.showAlert(with: ac)
+//    let vc = moduleBuilder.buildAuthMVVMVC()
+//    let ac = alertManager.showAlertWithTwoVariants(title: "Close",
+//                                                   message: "Are you sure you want to close?",
+//                                                   vc: vc
+//    )
+//    viewController?.showAlert(with: ac)
   }
   
   func didFetchToken() {

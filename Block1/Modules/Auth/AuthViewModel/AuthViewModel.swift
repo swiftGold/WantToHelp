@@ -13,21 +13,20 @@ class AuthViewModel {
   let emailText = BehaviorSubject<String>(value: "")
   let passwordText = BehaviorSubject<String>(value: "")
   let didTapOkButton = PublishSubject<Void>()
+//  let coordinator: AuthCoordinator
   
-//  let router: Router
-//  init(router: Router) {
-//    self.router = router
+//  init(coordinator: AuthCoordinator) {
+//    self.coordinator = coordinator
 //    routeToTabBarVC()
 //  }
-//  
+//
 //  private func routeToTabBarVC() {
 //    didTapOkButton
 //      .subscribe(onNext: { [weak self] in
-//        self?.router.navigateToTabBarVC()
+//        self?.coordinator.routeToMainTabBarVC()
 //      })
 //      .disposed(by: DisposeBag())
 //  }
-  
   
   func loginUser() -> Observable<Bool> {
     return Observable.create { observer in

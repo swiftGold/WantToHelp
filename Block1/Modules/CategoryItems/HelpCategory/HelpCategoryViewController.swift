@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol HelpCategoryRouterInput {
+  func routeToFullEventDescriptionVC()
+}
+
 final class HelpCategoryViewController: CustomVC {
   // MARK: - UI
   private lazy var barButtonItem = UIBarButtonItem(image: UIImage(named: Images.filter), style: .plain, target: self, action: #selector(didTapBarButton))
@@ -77,6 +81,7 @@ final class HelpCategoryViewController: CustomVC {
   
   // MARK: - Variables
   var viewModel = HelpCategoryViewModel()
+  var router: HelpCategoryRouterInput?
   
   private var sortedViewModels: [ShortEventViewModel] = []
   private var sortedDescriptionViewModels: [FullEventDescriptionViewModel] = []

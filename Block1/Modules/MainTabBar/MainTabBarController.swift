@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol MainTabBarInputRouter {
+  func routeCategoriesVC()
+}
+
 final class MainTabBarController: UITabBarController {
   // MARK: - UI
   private lazy var middleButton: UIButton = {
@@ -24,6 +28,9 @@ final class MainTabBarController: UITabBarController {
     middleButton.center = CGPoint(x: tabBar.center.x, y: (tabBar.bounds.height - middleButton.bounds.height / Constants.tabBarcoefficient) - Constants.spaceForTabBarImage)
     return middleButton
   }()
+  
+  // MARK: - Variables
+  var router: MainTabBarInputRouter?
 
   // MARK: - Lifecycles
   override func viewDidLoad() {
@@ -61,6 +68,7 @@ final class MainTabBarController: UITabBarController {
 // MARK: - UITabBarControllerDelegate impl
 extension MainTabBarController: UITabBarControllerDelegate {
   override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+    print("\(item)")
     if tabBarItem.title != TabBarNames.categories {
       middleButton.backgroundColor = .specialMiddleButtonTabBarColor
     } else {
@@ -85,7 +93,7 @@ private extension MainTabBarController {
     let viewModel = CategoriesViewModel()
     vc.viewModel = viewModel
     let categoriesNavVC = UINavigationController(rootViewController: vc)
-    
+        
     let newsNavVC = UINavigationController(rootViewController: NewsViewController())
     let searchNavVC = UINavigationController(rootViewController: SearchViewController())
     let historyNavVC = UINavigationController(rootViewController: HistoryViewController())
