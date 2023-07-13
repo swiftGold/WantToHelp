@@ -582,9 +582,9 @@
 		1EDEC2082A2496F100339FF9 /* HelpCategory */ = {
 			isa = PBXGroup;
 			children = (
-				1EDEC2352A274C8E00339FF9 /* Models */,
 				1EDEC2092A24971200339FF9 /* HelpCategoryViewController.swift */,
 				1E9A61A92A5AEE5B00A1BD18 /* HelpCategoryViewModel */,
+				1EDEC2352A274C8E00339FF9 /* Models */,
 				1E34F90D2A2D078B0065DFE7 /* HelpCategoryPresenter.swift */,
 				1EDEC21C2A24AF3C00339FF9 /* Cells */,
 			);

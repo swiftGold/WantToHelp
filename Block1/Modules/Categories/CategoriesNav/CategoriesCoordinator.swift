@@ -27,7 +27,7 @@ final class CategoriesCoordinator: BaseCoordinator & CoordinatorOutput {
 }
 
 extension CategoriesCoordinator: CategoriesRouterInput {
-  func routeToHelpCategory() {
+  func routeToHelpCategory(with model: HelpCategoryModel) {
     let helpCategoryViewController = diContainer.makeHelpCategoryViewController(router: self)
     router.push(helpCategoryViewController, animated: false)
   }

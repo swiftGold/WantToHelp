@@ -8,7 +8,7 @@
 import UIKit
 
 protocol CategoriesRouterInput: AnyObject {
-  func routeToHelpCategory()
+  func routeToHelpCategory(with model: HelpCategoryModel)
 }
 
 final class CategoriesViewController: CustomVC {
@@ -69,6 +69,7 @@ final class CategoriesViewController: CustomVC {
     setupNavBar(titleName: TabBarNames.categories)
     setupViewController()
     showCategories()
+    bindViewModel()
   }
   
   // MARK: - Objc methods
@@ -83,28 +84,16 @@ extension CategoriesViewController: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     let index = indexPath.row
     viewModel.fetchCategoryTitle(with: index)
+    let model = HelpCategoryModel(title: viewModel.helpCategoryTitle.value,
+                                  id: index
+    )
 //
 //    let vc = HelpCategoryViewController()
 //    let viewModel = HelpCategoryViewModel()
 //    vc.viewModel = viewModel
 //
 //    navigationController?.pushViewController(vc, animated: false)
-    
-    if router != nil {
-      print("ne nil")
-    } else {
-      print("nil")
-    }
-    
-    router?.routeToHelpCategory()
-    
-    if router != nil {
-      print("ne nil")
-    } else {
-      print("nil")
-    }
-    
-    print("CATEGORY! \(index)")
+    router?.routeToHelpCategory(with: model)
   }
 }
 
@@ -128,7 +117,7 @@ extension CategoriesViewController: UICollectionViewDataSource {
 
 // MARK: - Private Methods
 private extension CategoriesViewController {
-  func bind() {
+  func bindViewModel() {
     viewModel.categoriesModel.bind { [weak self] _ in
       DispatchQueue.main.async {
         self?.collectionView.reloadData()

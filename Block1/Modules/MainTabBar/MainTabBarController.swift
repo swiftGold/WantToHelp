@@ -48,6 +48,8 @@ final class MainTabBarController: UITabBarController {
   func middleButtonTapped(sender: UIButton) {
     selectedIndex = Constants.tabBarSelectedItemIndex
     sender.backgroundColor = .specialNavBarBGColor
+    // TODO: - delete
+    router?.routeCategoriesVC()
   }
   
   @objc
