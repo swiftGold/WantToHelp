@@ -8,22 +8,27 @@
 final class AppDIContainer {
   // TODO: - vozmojno ubrat' networkable pozje
   private let networkService: Networkable
+  private let calendarManager: CalendarManagerProtocol
   
-  init(networkService: Networkable
+  init(networkService: Networkable,
+       calendarManager: CalendarManagerProtocol
   ) {
     self.networkService = networkService
+    self.calendarManager = calendarManager
   }
   
   convenience init() {
     let jsonService = JSONDecoderManager()
+    let calendarManager = CalendarManager()
     let networkService = NetworkManager(jsonService: jsonService)
     
-    self.init(networkService: networkService)
+    self.init(networkService: networkService,
+              calendarManager: calendarManager)
   }
 }
 
 extension AppDIContainer {
-  func makeAuthCoordinator(router: Router1) -> CoordinatorOutput {
+  func makeAuthCoordinator(router: Router) -> CoordinatorOutput {
     let dependencies = AuthModuleDependencies(authNetworkService: networkService)
     let diContainer = AuthDIContainer(dependencies: dependencies)
     let authCoordinator = AuthCoordinator(router: router,
@@ -32,7 +37,7 @@ extension AppDIContainer {
     return authCoordinator
   }
   
-  func makeTabBarCoordinator(router: Router1) -> CoordinatorOutput {
+  func makeTabBarCoordinator(router: Router) -> CoordinatorOutput {
     let dependencies = MainTabBarModuleDependencies(mainTabBarNetworkService: networkService)
     let diContrainer = MainTabBarDIContainer(dependencies: dependencies)
     let mainTabBarCoordinator = MainTabBarCoordinator(router: router,
@@ -41,8 +46,10 @@ extension AppDIContainer {
     return mainTabBarCoordinator
   }
   
-  func makeCategoryCoordinator(router: Router1) -> CoordinatorOutput {
-    let dependencies = CategoriesModuleDependencies(categoriesNetworkService: networkService)
+  func makeCategoryCoordinator(router: Router) -> CoordinatorOutput {
+    let dependencies = CategoriesModuleDependencies(categoriesNetworkService: networkService,
+                                                    calendarManager: calendarManager
+    )
     let diContrainer = CategoriesDIContainer(dependencies: dependencies)
     let CategoriesCoordinator = CategoriesCoordinator(router: router,
                                                 diContainer: diContrainer

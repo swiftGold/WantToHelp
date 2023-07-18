@@ -7,11 +7,8 @@
 
 import UIKit
 
-protocol FullEventDescriptionVCProtocol: AnyObject {
-  func updateViewController(titleText: String,
-                            with mainViewModel: MainViewModel,
-                            with participantsViewModel: ParticipantsViewModel
-  )
+protocol FullEventDescriptionVCRouterInput {
+  
 }
 
 final class FullEventDescriptionVC: CustomVC {
@@ -34,30 +31,24 @@ final class FullEventDescriptionVC: CustomVC {
     return backgroundView
   }()
   
-  private let customNavBarTitle: UILabel = {
-    let label = UILabel()
-    label.font = UIFont(name: Fonts.OfficSanExtraBold,
-                        size: Constants.customNavBarTitleFontSize
-    )
-    label.textColor = .white
-    return label
-  }()
-  
   // MARK: - Variables
-  var presenter: FullEventDescriptionPresenterProtocol?
+  var viewModel: FullEventDescriptionViewModel?
+  var router: FullEventDescriptionVCRouterInput?
+  
   private let fullEventDescriptionMainView = FullEventDescriptionMainView()
   private let bottomParticipantsView = BottomParticipantsView()
   private let bottomButtonsView = BottomButtonsView()
+  private var navBarTitle = ""
   
   // MARK: - Lifecycles
   override func viewDidLoad() {
     super.viewDidLoad()
     setupViewController()
-    setupNavBarWithoutTitle()
-    navigationItem.titleView = customNavBarTitle
     navigationItem.rightBarButtonItem = barButtonItem
     setupDelegates()
-    presenter?.viewDidLoad()
+    viewModel?.viewDidLoad()
+    bindViewModel()
+    setupNavBar(titleName: navBarTitle)
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -77,50 +68,53 @@ final class FullEventDescriptionVC: CustomVC {
   }
 }
 
-// MARK: - FullEventDescriptionVCProtocol impl
-extension FullEventDescriptionVC: FullEventDescriptionVCProtocol {
-  func updateViewController(titleText: String,
-                            with mainViewModel: MainViewModel,
-                            with participantsViewModel: ParticipantsViewModel
-  ) {
-    customNavBarTitle.text = titleText
-    fullEventDescriptionMainView.configureView(with: mainViewModel)
-    bottomParticipantsView.configureView(with: participantsViewModel)
-  }
-}
-
 // MARK: - BottomButtonsViewDelegate
 extension FullEventDescriptionVC: BottomButtonsViewDelegate {
-  func didTapShirtButton() {
-    presenter?.didTapShirtButton()
-  }
+  func didTapShirtButton() {}
   
-  func didTapHandsButton() {
-    presenter?.didTapHandsButton()
-  }
+  func didTapHandsButton() {}
   
-  func didTapToolsButton() {
-    presenter?.didTapToolsButton()
-  }
+  func didTapToolsButton() {}
   
-  func didTapCashButton() {
-    presenter?.didTapCashButton()
-  }
+  func didTapCashButton() {}
 }
 
 // MARK: - FullEventDescriptionMainViewDelegate
 extension FullEventDescriptionVC: FullEventDescriptionMainViewDelegate {
-  func didTapWriteUsButton() {
-    presenter?.didTapWriteUsButton()
-  }
+  func didTapWriteUsButton() {}
   
-  func didTapRouteToSiteButton() {
-    presenter?.didTapRouteToSiteButton()
-  }
+  func didTapRouteToSiteButton() {}
 }
 
 // MARK: - Private Methods
 private extension FullEventDescriptionVC {
+  func bindViewModel() {
+    setTitle()
+    setMainView()
+    setParticipantsView()
+  }
+  
+  func setTitle() {
+    viewModel?.eventTitle.bind { title in
+      print(title)
+      self.navBarTitle = title
+    }
+  }
+  
+  func setMainView() {
+    viewModel?.mainViewModel.bind { [weak self] model in
+      guard let model = model else { return }
+      self?.fullEventDescriptionMainView.configureView(with: model)
+    }
+  }
+  
+  func setParticipantsView() {
+    viewModel?.participantsViewModel.bind { [weak self] model in
+      guard let model = model else { return }
+      self?.bottomParticipantsView.configureView(with: model)
+    }
+  }
+  
   func setupDelegates() {
     bottomButtonsView.delegate = self
     fullEventDescriptionMainView.delegate = self
@@ -164,7 +158,7 @@ private extension FullEventDescriptionVC {
       bottomButtonsView.heightAnchor.constraint(equalToConstant: Constants.bottomButtonsViewHeight),
     ])
   }
-
+  
   enum Constants {
     static let customNavBarTitleFontSize: CGFloat = 21
     static let scrollViewTopInset: CGFloat = 20

@@ -7,14 +7,12 @@
 
 import UIKit
 
-protocol ProfileViewControllerProtocol: AnyObject {}
-
 class ProfileViewController: CustomVC {
   // MARK: - UI
   
   // MARK: - Variables
-  var presenter: ProfilePresenterProtocol?
-  
+  var viewModel: ProfileViewModel?
+
   // MARK: - Lifecycles
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -22,9 +20,6 @@ class ProfileViewController: CustomVC {
     setupNavBar(titleName: TabBarNames.profile)
   }
 }
-
-// MARK: - ViewControllerProtocol impl
-extension ProfileViewController: ProfileViewControllerProtocol {}
 
 // MARK: - Private Methods
 private extension ProfileViewController {}

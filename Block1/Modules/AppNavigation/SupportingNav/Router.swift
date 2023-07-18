@@ -7,8 +7,7 @@
 
 import UIKit
 
-protocol Router1: AnyObject {
-//  func setRoot(_ viewController: UIViewController)
+protocol Router: AnyObject {
   func setRoot(_ viewController: UIViewController,
                embedNavBar: Bool,
                isNavigationBarHidden: Bool

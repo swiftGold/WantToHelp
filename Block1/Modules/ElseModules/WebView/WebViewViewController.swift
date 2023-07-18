@@ -26,7 +26,7 @@ final class WebViewViewController: UIViewController {
   private let webView = WKWebView()
   
   // MARK: - Variables
-  var presenter: WebViewPresenterProtocol?
+  var viewModel: WebViewModel?
   
   // MARK: - life cycles
   override func viewDidLoad() {
@@ -38,9 +38,7 @@ final class WebViewViewController: UIViewController {
   
   // MARK: - Objc methods
   @objc
-  private func didTapCloseButton() {
-    presenter?.didTapCloseButton()
-  }
+  private func didTapCloseButton() {}
 }
 
 // MARK: - WebViewViewControllerProtocol impl
@@ -87,7 +85,7 @@ extension WebViewViewController: WKNavigationDelegate {
     }
     decisionHandler(.cancel)
     
-    presenter?.didFetchToken()
+//    presenter?.didFetchToken()
   }
 }
 

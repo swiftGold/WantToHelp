@@ -10,10 +10,10 @@ import UIKit
 final class CategoriesCoordinator: BaseCoordinator & CoordinatorOutput {
   var onFinish: (() -> Void)?
   
-  private let router: Router1
+  private let router: Router
   private let diContainer: CategoriesDIContainer
   
-  init(router: Router1,
+  init(router: Router,
        diContainer: CategoriesDIContainer
   ) {
     self.router = router
@@ -34,7 +34,10 @@ extension CategoriesCoordinator: CategoriesRouterInput {
 }
 
 extension CategoriesCoordinator: HelpCategoryRouterInput {
-  func routeToFullEventDescriptionVC() {
-    
+  func routeToFullEventDescriptionVC(with model: FullEventModel) {
+    let fullEventDescriptionViewController = diContainer.makeEventDescriptionViewController(router: self, model: model)
+    router.push(fullEventDescriptionViewController, animated: false)
   }
 }
+
+extension CategoriesCoordinator: FullEventDescriptionVCRouterInput {}

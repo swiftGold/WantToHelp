@@ -7,13 +7,11 @@
 
 import UIKit
 
-protocol NewsViewControllerProtocol: AnyObject {}
-
 final class NewsViewController: CustomVC {
   // MARK: - UI
   
   // MARK: - Variables
-  var presenter: NewsPresenterProtocol?
+  var viewModel: NewsViewModel?
   
   // MARK: - Lifecycles
   override func viewDidLoad() {
@@ -22,9 +20,6 @@ final class NewsViewController: CustomVC {
     setupNavBar(titleName: TabBarNames.news)
   }
 }
-
-// MARK: - ViewControllerProtocol impl
-extension NewsViewController: NewsViewControllerProtocol {}
 
 // MARK: - Private Methods
 private extension NewsViewController {}

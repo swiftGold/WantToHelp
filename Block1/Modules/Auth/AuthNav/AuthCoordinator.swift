@@ -11,10 +11,10 @@ import RxSwift
 final class AuthCoordinator: BaseCoordinator & CoordinatorOutput {
   var onFinish: (() -> Void)?
   
-  private let router: Router1
+  private let router: Router
   private let diContainer: AuthDIContainer
   
-  init(router: Router1,
+  init(router: Router,
        diContainer: AuthDIContainer
   ) {
     self.router = router

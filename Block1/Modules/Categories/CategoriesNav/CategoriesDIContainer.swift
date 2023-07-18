@@ -9,6 +9,7 @@ import UIKit
 
 struct CategoriesModuleDependencies {
   let categoriesNetworkService: Networkable
+  let calendarManager: CalendarManagerProtocol
 }
 
 final class CategoriesDIContainer {
@@ -30,7 +31,17 @@ extension CategoriesDIContainer {
   
   func makeHelpCategoryViewController(router: HelpCategoryRouterInput, model: HelpCategoryModel) -> UIViewController {
     let viewController = HelpCategoryViewController()
-    let viewModel = HelpCategoryViewModel(categoryModel: model)
+    let viewModel = HelpCategoryViewModel(categoryModel: model,
+                                          calendarManager: dependencies.calendarManager
+    )
+    viewController.viewModel = viewModel
+    viewController.router = router
+    return viewController
+  }
+  
+  func makeEventDescriptionViewController(router: FullEventDescriptionVCRouterInput, model: FullEventModel) -> UIViewController {
+    let viewController = FullEventDescriptionVC()
+    let viewModel = FullEventDescriptionViewModel(model: model)
     viewController.viewModel = viewModel
     viewController.router = router
     return viewController

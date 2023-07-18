@@ -1,11 +1,11 @@
 //
-//  FullEventDescriptionViewModel.swift
+//  FullEventModel.swift
 //  Block1
 //
 //  Created by Сергей Золотухин on 31.05.2023.
 //
 
-struct FullEventDescriptionViewModel {
+struct FullEventModel {
   let title: String?
   let description: String?
   let dateStart: Double

@@ -7,14 +7,12 @@
 
 import UIKit
 
-protocol SearchViewControllerProtocol: AnyObject {}
-
 final class SearchViewController: CustomVC {
   // MARK: - UI
   
   // MARK: - Variables
-  var presenter: SearchPresenterProtocol?
-  
+  var viewModel: SearchViewModel?
+
   // MARK: - Lifecycles
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -22,9 +20,6 @@ final class SearchViewController: CustomVC {
     setupNavBar(titleName: TabBarNames.search)
   }
 }
-
-// MARK: - ViewControllerProtocol impl
-extension SearchViewController: SearchViewControllerProtocol {}
 
 // MARK: - Private Methods
 private extension SearchViewController {}

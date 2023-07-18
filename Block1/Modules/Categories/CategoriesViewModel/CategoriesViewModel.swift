@@ -19,7 +19,6 @@ class CategoriesViewModel {
   
   func fetchCategoryTitle(with index: Int) {
     let title = fetchCategoryTitle(with: categoriesModel.value, index: index)
-//    let model = HelpCategoryModel(title: title, id: index)
     helpCategoryTitle.value = title
   }
 }

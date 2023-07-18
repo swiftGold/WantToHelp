@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol SplashViewControllerProtocol: AnyObject {
-  func routeToTabBarVIewController(_ viewController: UIViewController)
-}
-
 final class SplashViewController: UIViewController {
   // MARK: - UI
   private let logoImageView: UIImageView = {
@@ -37,22 +33,13 @@ final class SplashViewController: UIViewController {
   }()
   
   // MARK: - Variables
-  var presenter: SplashPresenterProtocol?
+  var viewModel: SplashViewModel?
   
   // MARK: - Lifecycles
   override func viewDidLoad() {
     super.viewDidLoad()
     setupViewController()
-    presenter?.present()
     LoadingOverlay.shared.showOverlay(view: self.view)
-  }
-}
-
-// MARK: - SplashViewControllerProtocol impl
-extension SplashViewController: SplashViewControllerProtocol {
-  func routeToTabBarVIewController(_ viewController: UIViewController) {
-    viewController.modalPresentationStyle = .fullScreen
-    present(viewController, animated: false)
   }
   
   override func viewDidDisappear(_ animated: Bool) {

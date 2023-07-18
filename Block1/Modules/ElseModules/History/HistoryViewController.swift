@@ -7,14 +7,12 @@
 
 import UIKit
 
-protocol HistoryViewControllerProtocol: AnyObject {}
-
 final class HistoryViewController: CustomVC {
   // MARK: - UI
   
   // MARK: - Variables
-  var presenter: HistoryPresenterProtocol?
-  
+  var viewModel: HistoryViewModel?
+
   // MARK: - Lifecycles
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -22,9 +20,6 @@ final class HistoryViewController: CustomVC {
     setupNavBar(titleName: TabBarNames.history)
   }
 }
-
-// MARK: - ViewControllerProtocol impl
-extension HistoryViewController: HistoryViewControllerProtocol {}
 
 // MARK: - Private Methods
 private extension HistoryViewController {}

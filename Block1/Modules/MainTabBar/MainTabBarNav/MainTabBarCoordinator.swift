@@ -10,7 +10,7 @@ import UIKit
 final class MainTabBarCoordinator: BaseCoordinator & CoordinatorOutput {
   var onFinish: (() -> Void)?
   
-  private let router: Router1
+  private let router: Router
   private let diContainer: MainTabBarDIContainer
   private var vc: UIViewController?
   
@@ -18,7 +18,7 @@ final class MainTabBarCoordinator: BaseCoordinator & CoordinatorOutput {
     return vc
   }
   
-  init(router: Router1,
+  init(router: Router,
        diContainer: MainTabBarDIContainer
   ) {
     self.router = router

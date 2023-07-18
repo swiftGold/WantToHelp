@@ -10,7 +10,7 @@ import UIKit
 final class AppCoordinator: BaseCoordinator {
   private let window: UIWindow
   private let diContainder: AppDIContainer
-  private var router: Router1?
+  private var router: Router?
   
   init(window: UIWindow,
        navigationController: UINavigationController = UINavigationController(),
