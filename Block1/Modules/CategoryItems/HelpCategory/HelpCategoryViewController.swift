@@ -80,19 +80,8 @@ final class HelpCategoryViewController: CustomVC {
   }()
   
   // MARK: - Variables
-  var viewModel = HelpCategoryViewModel()
+  var viewModel: HelpCategoryViewModel?
   var router: HelpCategoryRouterInput?
-  
-//  var helpCategoryModel: HelpCategoryModel
-//  
-//  init(helpCategoryModel: HelpCategoryModel) {
-//    self.helpCategoryModel = helpCategoryModel
-//    super.init(nibName: nil, bundle: nil)
-//  }
-  
-//  required init?(coder: NSCoder) {
-//    fatalError("init(coder:) has not been implemented")
-//  }
   
   private var sortedViewModels: [ShortEventViewModel] = []
   private var sortedDescriptionViewModels: [FullEventDescriptionViewModel] = []
@@ -105,6 +94,7 @@ final class HelpCategoryViewController: CustomVC {
     navigationItem.rightBarButtonItem = barButtonItem
 //    presenter?.viewDidLoad()
     setupNavBarWithBackButton(titleName: navBarTitle)
+    viewModel?.printModel()
   }
   
   // MARK: - Objc methods

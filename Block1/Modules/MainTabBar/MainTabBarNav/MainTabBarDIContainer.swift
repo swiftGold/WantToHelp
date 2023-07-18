@@ -20,7 +20,7 @@ final class MainTabBarDIContainer {
 }
 
 extension MainTabBarDIContainer {
-  func makeMainTabBarController(router: MainTabBarInputRouter) -> UIViewController {
+  func makeMainTabBarController(router: MainTabBarInputRouter) -> UIViewController? {
     let viewController = MainTabBarController()
     viewController.router = router
     return viewController

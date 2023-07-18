@@ -87,12 +87,7 @@ extension CategoriesViewController: UICollectionViewDelegate {
     let model = HelpCategoryModel(title: viewModel.helpCategoryTitle.value,
                                   id: index
     )
-//
-//    let vc = HelpCategoryViewController()
-//    let viewModel = HelpCategoryViewModel()
-//    vc.viewModel = viewModel
-//
-//    navigationController?.pushViewController(vc, animated: false)
+    print(model)
     router?.routeToHelpCategory(with: model)
   }
 }

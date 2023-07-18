@@ -28,9 +28,9 @@ extension CategoriesDIContainer {
     return viewController
   }
   
-  func makeHelpCategoryViewController(router: HelpCategoryRouterInput) -> UIViewController {
+  func makeHelpCategoryViewController(router: HelpCategoryRouterInput, model: HelpCategoryModel) -> UIViewController {
     let viewController = HelpCategoryViewController()
-    let viewModel = HelpCategoryViewModel()
+    let viewModel = HelpCategoryViewModel(categoryModel: model)
     viewController.viewModel = viewModel
     viewController.router = router
     return viewController

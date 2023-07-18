@@ -31,7 +31,32 @@ final class MainTabBarController: UITabBarController {
   
   // MARK: - Variables
   var router: MainTabBarInputRouter?
-
+//  private var flowNewsCoordinator: MainTabBarCoordinator?
+//  private var flowSearchCoordinator: MainTabBarCoordinator?
+//  private var flowCategoriesCoordinator: MainTabBarCoordinator?
+//  private var flowHistoryCoordinator: MainTabBarCoordinator?
+//  private var flowProfileCoordinator: MainTabBarCoordinator?
+//
+//  init(
+//    flowNewsCoordinator: MainTabBarCoordinator,
+//    flowSearchCoordinator: MainTabBarCoordinator,
+//    flowCategoriesCoordinator: MainTabBarCoordinator,
+//    flowHistoryCoordinator: MainTabBarCoordinator,
+//    flowProfileCoordinator: MainTabBarCoordinator
+//  )
+//  {
+//    super.init(nibName: nil, bundle: nil)
+//    self.flowNewsCoordinator = flowNewsCoordinator
+//    self.flowSearchCoordinator = flowSearchCoordinator
+//    self.flowCategoriesCoordinator = flowCategoriesCoordinator
+//    self.flowHistoryCoordinator = flowHistoryCoordinator
+//    self.flowProfileCoordinator = flowProfileCoordinator
+//  }
+  
+//  required init?(coder: NSCoder) {
+//    fatalError("init(coder:) has not been implemented")
+//  }
+  
   // MARK: - Lifecycles
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -48,8 +73,6 @@ final class MainTabBarController: UITabBarController {
   func middleButtonTapped(sender: UIButton) {
     selectedIndex = Constants.tabBarSelectedItemIndex
     sender.backgroundColor = .specialNavBarBGColor
-    // TODO: - delete
-    router?.routeCategoriesVC()
   }
   
   @objc
@@ -95,6 +118,7 @@ private extension MainTabBarController {
     let viewModel = CategoriesViewModel()
     vc.viewModel = viewModel
     let categoriesNavVC = UINavigationController(rootViewController: vc)
+    
         
     let newsNavVC = UINavigationController(rootViewController: NewsViewController())
     let searchNavVC = UINavigationController(rootViewController: SearchViewController())

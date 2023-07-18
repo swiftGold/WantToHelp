@@ -12,6 +12,11 @@ final class MainTabBarCoordinator: BaseCoordinator & CoordinatorOutput {
   
   private let router: Router1
   private let diContainer: MainTabBarDIContainer
+  private var vc: UIViewController?
+  
+  func initScene() -> UIViewController? {
+    return vc
+  }
   
   init(router: Router1,
        diContainer: MainTabBarDIContainer
@@ -21,7 +26,9 @@ final class MainTabBarCoordinator: BaseCoordinator & CoordinatorOutput {
   }
   
   override func start() {
-    let mainTabBarViewController = diContainer.makeMainTabBarController(router: self)
+    guard let mainTabBarViewController = diContainer.makeMainTabBarController(router: self) else { return }
+    // TODO: - razobrat'
+//    vc = mainTabBarViewController
     router.setRoot(mainTabBarViewController, embedNavBar: true, isNavigationBarHidden: true)
   }
 }

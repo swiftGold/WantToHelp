@@ -8,5 +8,12 @@
 import Foundation
 
 class HelpCategoryViewModel {
+  private let categoryModel: HelpCategoryModel
+  init(categoryModel: HelpCategoryModel) {
+    self.categoryModel = categoryModel
+  }
   
+  func printModel() {
+    print(categoryModel)
+  }
 }

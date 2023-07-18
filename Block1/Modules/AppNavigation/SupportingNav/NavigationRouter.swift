@@ -16,10 +16,6 @@ final class NavigationRouter {
 }
 
 extension NavigationRouter: Router1 {
-  //  func setRoot(_ viewController: UIViewController) {
-  //    navigationController.viewControllers = [viewController]
-  //  }
-  
   func setRoot(_ viewController: UIViewController, embedNavBar: Bool, isNavigationBarHidden: Bool) {
     if embedNavBar {
       navigationController.isNavigationBarHidden = isNavigationBarHidden
